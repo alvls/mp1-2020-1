@@ -1,0 +1,9 @@
+﻿  Source.cpp
+C:\Users\Денис\mp1-2020-1\Bychkov_DA\task1\Source.cpp(22,15): warning C4244:  =: преобразование "__int64" в "unsigned int", возможна потеря данных
+C:\Users\Денис\mp1-2020-1\Bychkov_DA\task1\Source.cpp(27,13): warning C4244:  =: преобразование "const __int64" в "unsigned int", возможна потеря данных
+C:\Users\Денис\mp1-2020-1\Bychkov_DA\task1\Source.cpp(147): warning C4715:  operator<<: значение возвращается не при всех путях выполнения
+C:\Users\Денис\mp1-2020-1\Bychkov_DA\task1\Source.cpp(64): warning C4715:  Longint::operator+: значение возвращается не при всех путях выполнения
+C:\Users\Денис\mp1-2020-1\Bychkov_DA\task1\Source.cpp(100): warning C4715:  Longint::operator-: значение возвращается не при всех путях выполнения
+C:\Users\Денис\mp1-2020-1\Bychkov_DA\task1\Source.cpp(128): warning C4715:  Longint::operator/: значение возвращается не при всех путях выполнения
+C:\Users\Денис\mp1-2020-1\Bychkov_DA\task1\Source.cpp(114): warning C4715:  Longint::operator*: значение возвращается не при всех путях выполнения
+  task1.vcxproj -> C:\Users\Денис\mp1-2020-1\Bychkov_DA\x64\Debug\task1.exe
