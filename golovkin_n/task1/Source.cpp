@@ -190,7 +190,7 @@ public:
 			char conf;
 			getchar();
 			conf = getchar();
-			if ((conf == 'y') || (conf == 'y'))
+			if ((conf == 'Y') || (conf == 'y'))
 				break;
 		}
 		system("pause");
