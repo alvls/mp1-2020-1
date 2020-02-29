@@ -1,0 +1,2 @@
+﻿  Source.cpp
+D:\mp1-2020-1\bykov_ia\task2\Source.cpp(97): warning C4305: 'initializing': truncation from 'double' to 'float'
