@@ -148,9 +148,9 @@ ostream& operator << (ostream& out, const Longint& f) // out
 
 void main()
 {
-	Longint a1(-9000000);
-	cout <<"a1 = "  << a1;
-	Longint b1(333);
+	Longint a1(10000000000);
+	cout << "a1 = " << a1;
+	Longint b1(10000000000);
 	cout << "b1 = " << b1;
 	Longint p1 = a1 + b1;
 	cout << "a1 + b1 = " << p1;
