@@ -1,7 +1,6 @@
 ﻿#include <iostream>
 #include <clocale> 
-using namespace std;
-class dynamarr
+using namespace std; class dynamarr
 {
 private:
 	int *din_arr;
@@ -10,14 +9,14 @@ public:
 	dynamarr()
 	{
 		size = 0;
-		din_arr = new int[0];
+		din_arr = nullptr;
 	}
 	dynamarr(int n) : size(n)
 	{
 		din_arr = new int[size];
 		for (int i = 0; i < size; i++)
 		{
-			din_arr[i] = i;
+			din_arr[i] = 0;
 		}
 	}
 	dynamarr(const dynamarr &mass)// копирования данных массива
@@ -51,7 +50,7 @@ public:
 	{
 		return din_arr[number];
 	}
-	int minEl()
+	int minel()
 	{
 		int min = din_arr[0];
 		for (int i = 0; i < (size - 1); i++)
@@ -80,12 +79,12 @@ public:
 			return Check;
 		}
 	}
-	dynamarr Subarr(int size, int arraysize) // создание подмассива с нечетными элементами
+	dynamarr Subarr() // создание подмассива с нечетными элементами
 	{
 		int i, j = 0, m = 0;
-		dynamarr subarr(size);
+		dynamarr subarr(size / 2);
 		double n;
-		for (i = 0; i < arraysize; i++)
+		for (i = 0; i < size; i++)
 		{
 			n = i % 2;
 			if (n != 0)
@@ -97,11 +96,12 @@ public:
 		}
 		return subarr;
 	}
-	void Print(int size)
+	void Print()
 	{
 		for (int i = 0; i < size; i++)
 		{
 			cout << " " << i << " элемент - " << din_arr[i] << endl;
+
 		}
 	}
 	~dynamarr()
@@ -143,7 +143,7 @@ int main(void)
 			cout << "\nЭлемент под номером " << num << " - это  " << mass.getelement(num);
 			break;
 		case 3:
-			cout << "Минимальный элемент: " << mass.minEl() << endl;
+			cout << "Минимальный элемент: " << mass.minel() << endl;
 			break;
 		case 4:
 			if (mass.SortCheck() == 1)
@@ -153,11 +153,9 @@ int main(void)
 			break;
 		case 5:
 			dynamarr mas;
-			mas = mass;
-			int nsize = floor(n / 2);
-			mas = mas.Subarr(nsize, n);
+			mas = mass.Subarr();
 			cout << "Полученый подмассив :" << endl;
-			mas.Print(nsize);
+			mas.Print();
 			break;
 		}
 		cout << " Хотите закончить работу?/n1-да,0-нет" << endl;
