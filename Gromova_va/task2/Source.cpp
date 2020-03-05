@@ -62,24 +62,24 @@ public:
 		}
 		return min;
 	}
-	bool SortCheck()//проверка на упорядоченность элементов в массиве;
+	bool sortcheck()//проверка на упорядоченность элементов в массиве;
 	{
 		int i;
-		bool Check = 0;
+		bool check = 0;
 		for (i = 0; i < size - 1; i++)
 		{
 			if (din_arr[i] > din_arr[i + 1])
 			{
-				return Check;
+				return check;
 			}
 		}
 		if (i == size - 1)
 		{
-			Check = 1;
-			return Check;
+			check = 1;
+			return check;
 		}
 	}
-	dynamarr Subarr() // создание подмассива с нечетными элементами
+	dynamarr ssubarr() // создание подмассива с нечетными элементами
 	{
 		int i, j = 0, m = 0;
 		dynamarr subarr(size / 2);
@@ -96,7 +96,7 @@ public:
 		}
 		return subarr;
 	}
-	void Print()
+	void print()
 	{
 		for (int i = 0; i < size; i++)
 		{
@@ -146,16 +146,16 @@ int main(void)
 			cout << "Минимальный элемент: " << mass.minel() << endl;
 			break;
 		case 4:
-			if (mass.SortCheck() == 1)
+			if (mass.sortcheck() == 1)
 				cout << "Упорядочен." << endl;
 			else
 				cout << "Не упорядочен." << endl;
 			break;
 		case 5:
 			dynamarr mas;
-			mas = mass.Subarr();
+			mas = mass.ssubarr();
 			cout << "Полученый подмассив :" << endl;
-			mas.Print();
+			mas.print();
 			break;
 		}
 		cout << " Хотите закончить работу?/n1-да,0-нет" << endl;
