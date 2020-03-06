@@ -1,0 +1,8 @@
+﻿  Source.cpp
+E:\каво\mp1-2020-1\samburova_mi\task2\Source.cpp(1,10): warning C4067: непредвиденные лексемы за директивой препроцессора, требуется newline
+E:\каво\mp1-2020-1\samburova_mi\task2\Source.cpp(2,10): warning C4067: непредвиденные лексемы за директивой препроцессора, требуется newline
+E:\каво\mp1-2020-1\samburova_mi\task2\Source.cpp(24,21): warning C4018: <: несоответствие типов со знаком и без знака
+E:\каво\mp1-2020-1\samburova_mi\task2\Source.cpp(43,21): warning C4018: <: несоответствие типов со знаком и без знака
+E:\каво\mp1-2020-1\samburova_mi\task2\Source.cpp(71,21): warning C4018: <: несоответствие типов со знаком и без знака
+E:\каво\mp1-2020-1\samburova_mi\task2\Source.cpp(142,21): warning C4018: <: несоответствие типов со знаком и без знака
+  task2.vcxproj -> E:\каво\mp1-2020-1\samburova_mi\x64\Debug\task2.exe
