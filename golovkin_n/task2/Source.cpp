@@ -3,7 +3,7 @@
 using namespace std;
 class Matrix
 {
-	int x;
+	int n;
 	int matrix[8][8];
 public:
 	Matrix(int size = 0)
@@ -12,27 +12,25 @@ public:
 	}
 	void setSize(int size)
 	{
-		x = size;
-		for (int i = 1; i < x + 1; i++)
+		n = size;
+		for (int i = 0; i < n; i++)
 		{
-			for (int j = 1; j < x + 1; j++)
+			for (int j = 0; j < n; j++)
 			{
 				matrix[i][j] = 0;
 			}
 		}
 	}
-	int outputSize()
+	int getSize()
 	{
-		cout << x;
-		return x;
+		return n;
 	}
 	void setElement(int i, int j, int value)
 	{
 		matrix[i][j] = value;
 	}
-	int outputElement(int i, int j)
+	int getElement(int i, int j)
 	{
-		cout << matrix[i][j];
 		return matrix[i][j];
 	}
 	bool DigPreobladanie()
@@ -40,12 +38,12 @@ public:
 		int i, j;
 		int sum = 0;
 		bool flag = false;
-		for (i = 1; i < x + 1; i++)
+		for (i = 0; i < n; i++)
 		{
-			for (j = 1; j < x + 1; j++)
+			for (j = 0; j < n; j++)
 			{
 				if (i!=j)
-				sum = abs(matrix[i][j]);
+				sum += (matrix[i][j]);
 			}
 			if (matrix[i][i] < sum)
 				return false;
@@ -57,17 +55,17 @@ public:
 	Matrix operator+(const Matrix& other)
 	{
 		int i, j;
-		if (x != other.x)
+		if (n != other.n)
 		{
 			cout << "Razmer matrix ne sovpadaet" << endl;
 			return *this;
 		}
 		else
 		{
-			Matrix sum(x);
-			for (i = 1; i < x + 1; i++)
+			Matrix sum(n);
+			for (i = 0; i < n; i++)
 			{
-				for (j = 1; j < x + 1; j++)
+				for (j = 0; j < n; j++)
 				{
 					sum.matrix[i][j] = matrix[i][j] + other.matrix[i][j];
 				}
@@ -78,9 +76,10 @@ public:
 	Matrix& operator=(const Matrix& other)
 	{
 		int i, j;
-		for ( i = 1; i < other.x + 1; i++)
+		n = other.n;
+		for ( i = 0; i < other.n; i++)
 		{
-			for ( j = 1; j < other.x + 1; j++)
+			for ( j = 0; j < other.n; j++)
 			{
 				matrix[i][j] = other.matrix[i][j];
 			}
@@ -90,7 +89,7 @@ public:
 };
 void main()
 {
-	int count,size,i,j,value,flag=1;
+	int count,size,i,j,value,flag=1,tmp;
 	bool otvet;
 	Matrix a,b,c;
 	cout << "vibiraite rezim" << endl;
@@ -100,6 +99,7 @@ void main()
 	cout << "4 - Yznat' element po indeksam" << endl;
 	cout << "5 - Yznat' obladaet li matrica diogonal'nim preobladaniem" << endl;
 	cout << "6 - vicheslit' symmy dvyh matric odnogo razmera" << endl;
+	cout << "7 - Zakonchit'" << endl;
 	while (true)
 	{
 		cin >> count;
@@ -112,7 +112,8 @@ void main()
 				a.setSize(size);
 				break;
 			case 2:
-				a.outputSize();
+				tmp = a.getSize();
+				cout << tmp;
 				break;
 			case 3:
 				cout << " viberite stroky: ";
@@ -121,14 +122,15 @@ void main()
 				cin >> j;
 				cout << " viberite znachenie: ";
 				cin >> value;
-				a.setElement(i, j, value);
+				a.setElement(i - 1, j - 1, value);
 				break;
 			case 4:
 				cout << " viberite stroky: ";
 				cin >> i;
 				cout << " viberite stolbec: ";
 				cin >> j;
-				a.outputElement(i, j);
+				tmp = a.getElement(i - 1, j - 1);
+				cout << tmp;
 				break;
 			case 5:
 				otvet = a.DigPreobladanie();
@@ -161,18 +163,14 @@ void main()
 					cin >> i;
 					cout << " viberite stolbec: ";
 					cin >> j;
-					c.outputElement(i, j);
+					c.getElement(i, j);
 					cout << "esli hotite esche viberete 1, esli net, 0";
 					cin >> flag;
 				}
 				break;
+			case 7:
+				return;
 		}
-		cout << "End? y/n" << endl;
-		char conf;
-		getchar();
-		conf = getchar();
-		if ((conf == 'Y') || (conf == 'y'))
-			break;
 	}
 	system("pause");
 }
