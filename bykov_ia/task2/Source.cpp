@@ -9,17 +9,12 @@ class Polynomial {
 		float *coefficients;
 	public:
 		Polynomial(int _power, float *_coefficients) {
-			try {
-				if (_power < 0 || _power > 12)
-					throw "IncorrectPower";
-				power = _power;
-				coefficients = new float[power + 1];
-				for (int i = 0; i <= power; i++)
-					coefficients[i] = _coefficients[i];
-			}
-			catch(char *s) {
-				printf("%s\n", s);
-			}
+			if (_power < 0 || _power > 12)
+				throw "IncorrectPower";
+			power = _power;
+			coefficients = new float[power + 1];
+			for (int i = 0; i <= power; i++)
+				coefficients[i] = _coefficients[i];
 		}
 
 		~Polynomial() {
@@ -31,15 +26,9 @@ class Polynomial {
 		}
 
 		float getCoefficient(int num) {
-			try {
-				if (num < 0 || num > power)
-					throw "IncorrectNumberCoefficient";
-				return coefficients[num];
-			}
-			catch(char* s) {
-				printf("%s\n", s);
-				return -1;
-			}
+			if (num < 0 || num > power)
+				throw "IncorrectNumberCoefficient";
+			return coefficients[num];
 		}
 
 		float getValue(float x) {
@@ -83,6 +72,7 @@ class Polynomial {
 			if (this == &pol)
 				return *this;
 
+			if (coefficients) delete[] coefficients;
 
 			power = pol.power;
 			coefficients = new float[power + 1];
@@ -91,23 +81,35 @@ class Polynomial {
 
 			return *this;
 		}
+
+		Polynomial (const Polynomial& pol) {
+			power = pol.power;
+			coefficients = new float[power + 1];
+			for (int i = 0; i <= power; i++)
+				coefficients[i] = pol.coefficients[i];
+		}
 };
 
 int main() {
-	float arr[3] = { 1., 2., 0.9 };
-	Polynomial a(2, arr);
-	Polynomial b = a;
-	b.print();
-	cout << endl;
+	try {
+		float arr[3] = { 1., 2., 0.9 };
+		Polynomial a(2, arr);
+		Polynomial b = a;
+		b.print();
+		cout << endl;
 
-	Polynomial incorrect(-1, arr);
+		Polynomial incorrect(-1, arr);
 
-	cout << a.getPower() << endl;
-	cout << a.getCoefficient(2) << endl;
-	cout << a.getCoefficient(4) << endl;
+		cout << a.getPower() << endl;
+		cout << a.getCoefficient(2) << endl;
+		cout << a.getCoefficient(4) << endl;
 
-	a.print();
-	cout << endl;
-	a.getDerivative().print();
-	return 0;
+		a.print();
+		cout << endl;
+		a.getDerivative().print();
+		return 0;
+	}
+	catch (char* s) {
+		printf("%s", s);
+	}
 }
