@@ -55,7 +55,7 @@ public:
 	}
 	void print_limits()
 	{
-		std::cout << "Current limits are [" << limit_1 << "; " << limit_2 << "]" << std::endl;
+		std::cout << "Current tab lenght is [" << limit_1 << "; " << limit_2 << "]" << std::endl;
 	}
 	void do_tab()
 	{
@@ -77,11 +77,12 @@ public:
 	}
 	void save_tab(std::string path)
 	{ 
+
 		std::ofstream out;
 		out.open(path);
 		if (out.is_open())
 		{
-			for (int i = 0; i < points + 2; i++)
+			for (int i = 0; i < points + 1; i++)
 				out << values[i] << std::endl;
 			out << func(limit_2) << std::endl;
 		}
@@ -169,9 +170,10 @@ int main()
 			Tabulator.show_tab();
 			break;
 		case 8:
-			std::cout << "Enter the path where you want to save the data" << std::endl;
+			std::cout << "Enter the path where you want to save the data (only english names!)" << std::endl;
 			std::cin >> file;
 			Tabulator.save_tab(file);
+			std::cout << "Saved!" << std::endl;
 			break;
 		case 9:
 			return 0;
