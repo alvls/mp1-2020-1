@@ -7,7 +7,6 @@
 #include "memory.h"
 #include "Menu.h"
 
-
 Menu::Menu()
 {
 	last_act = -1;
@@ -35,12 +34,9 @@ Menu::Menu(const Menu &menu1)
 }
 
 Menu::~Menu()
-{
-	last_act = -1;
-	count_act = 0;
-}
+{}
 
-void Menu::outPut(int x, int y)//вывод меню в определённой позиции консоли
+void Menu::outPut(int x, int y)
 {
 	HANDLE Console = GetStdHandle(STD_OUTPUT_HANDLE);
 	if (!Console)
@@ -60,7 +56,7 @@ void Menu::outPut(int x, int y)//вывод меню в определённой позиции консоли
 	}
 }
 
-int Menu::getNumber_act()//обеспечить выбор пользователя
+int Menu::getNumber_act()
 {
 	std::cin >> last_act;
 	while ((last_act < 0) || (last_act > count_act - 1))
@@ -71,7 +67,7 @@ int Menu::getNumber_act()//обеспечить выбор пользователя
 	return last_act;
 }
 
-int Menu::getLast_act()//узнать номер последнего выбранного действия
+int Menu::getLast_act()
 {
 	if (last_act != -1)
 		return last_act;
@@ -79,24 +75,18 @@ int Menu::getLast_act()//узнать номер последнего выбранного действия
 		return -1;
 }
 
-
-/*void Menu::getLact_act(int _last_act)
-{
-	last_act = _last_act;
-}*/
-
-void Menu::setCount_act(int _count_act)//задать число команд в меню
+void Menu::setCount_act(int _count_act)
 {
 	count_act = _count_act;
 	act_menu.resize(_count_act);
 }
 
-int Menu::getCount_act()//узнать число команд в меню
+int Menu::getCount_act()
 {
 	return count_act;
 }
 
-void Menu::setName_act(int number, std::string name)//задать пункт меню по его номеру
+void Menu::setName_act(int number, std::string name)
 {
 	act_menu[number] = name;
 }

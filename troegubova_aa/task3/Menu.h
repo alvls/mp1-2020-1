@@ -22,6 +22,5 @@ public:
 	void setName_act(int number, std::string name);
 	void outPut(int x, int y);
 	int getNumber_act();
-	//void getLact_act(int _last_act);
 	int getLast_act();
 };

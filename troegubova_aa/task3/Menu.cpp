@@ -5,7 +5,8 @@
 #include <iostream>
 #include "Menu.h"
 
-void error(std::string message, int errorcode) {
+void error(std::string message, int errorcode)
+{
 	std::cout << std::endl << message;
 	system("pause>nul");
 	exit(errorcode);
@@ -21,7 +22,7 @@ int Control(int left_border, int right_border, int num)
 	return num;
 }
 
-void SetCount_Act(Menu menu1)//задать число команд в меню
+void SetCount_Act(Menu menu1)
 {
 	std::cout << "Enter the numder of commands in the menu:";
 	int act;
@@ -43,28 +44,25 @@ void SetName_Act(Menu menu3)
 	menu3.setName_act(num, name);
 }
 
-void GetCount_Act(Menu menu2)//узнать число команд в меню
+void GetCount_Act(Menu menu2)
 {
 	std::cout << "The number of commands in the menu:" << menu2.getCount_act() << std::endl;
 }
 
-void OutPut(Menu menu2)
+Menu OutPut(Menu menu2)
 {
 	int x, y, item;
 	std::cout << "Enter the coordinates:";
 	std::cin >> x >> y;
 	menu2.outPut(x, y);
 	item = menu2.getNumber_act();
-	//menu2.getLact_act(item);
+	return menu2;
 }
 
 void GetLast_Act(Menu menu2)
 {
-	std::cout << menu2.getLast_act();
+	std::cout << "The number of the last selected menu item('-1' means the user has not selected a menu item before):" << menu2.getLast_act() << std::endl;
 }
-
-
-
 
 int main()
 {
@@ -82,28 +80,36 @@ int main()
 	file.close();
 
 	Menu menu1, menu2(act_menu), menu3(15);
-	void(*Act_1[3])(Menu menu2) = { GetCount_Act, OutPut, GetLast_Act };
-
 	int i, item;
 	while (true)
 	{
 		system("cls");
-		std::cout << "1)set the number of commands in the menu\n2)set menu item name\n3)find out the number of commands in the menu\n4)display the menu on the screen with the subsequent selection of one of the menu items\n5)display the number of the last selected menu item\n";
+		std::cout << "1)set the number of commands in the menu\n2)set menu item name\n3)display the number of the last selected menu item\n4)find out the number of commands in the menu\n5)display the menu on the screen with the subsequent selection of one of the menu items\n";
 		std::cin >> item;
 		Control(1, 5, item);
-		if (item == 1)
-			SetCount_Act(menu1);
-		else
+		switch (item)
 		{
-			if (item == 2)
-				SetName_Act(menu3);
-			else
-				Act_1[item - 3](menu2);
+		case 1:
+			SetCount_Act(menu1);
+			break;
+		case 2:
+			SetName_Act(menu3);
+			break;
+		case 3:
+			GetLast_Act(menu2);
+			break;
+		case 4:
+			GetCount_Act(menu2);
+			break;
+		case 5:
+			menu2 = OutPut(menu2);
+			break;
+		default:
+			break;
 		}
 		std::cout << "To continue the program?\n1)yes\n2)no\n";
 		std::cin >> i;
 		if (i != 1)break;
 	}
-
 	system("pause");
 }
