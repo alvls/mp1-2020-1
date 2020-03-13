@@ -11,7 +11,9 @@ int main(void)
 
 	Dictionary Sl;
 	Sl.Read_form_file("Словарь.txt");
-
+	
+	Sl.Output();
+	
 	string r, e;
 	int w;
 	while(true)
@@ -26,6 +28,7 @@ int main(void)
 		if (r == "нет")
 			break;
 	}
+
 	Sl.Output();
 
 	string a, b;

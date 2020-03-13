@@ -95,6 +95,10 @@ void Dictionary::Read_form_file(string name)
 {
 	FILE* in;
    	errno_t err = fopen_s(&in, name.c_str(), "r");
+	if (in == NULL)
+	{
+		return;
+	}
 	char r[100], e[100];
 	n = 0;
 	while (fgets(r, 100, in))
