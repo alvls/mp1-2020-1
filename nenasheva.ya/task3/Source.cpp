@@ -1,4 +1,4 @@
-#include <Windows.h>
+п»ї#include <Windows.h>
 #include <stdlib.h>
 #include <iostream>
 #include "Dictionary.h"
@@ -10,48 +10,48 @@ int main(void)
 	SetConsoleOutputCP(1251);
 
 	Dictionary Sl;
-	Sl.Read_form_file("Словарь.txt");
+	Sl.Read_form_file("РЎР»РѕРІР°СЂСЊ.txt");
 
 	string r, e;
 	int w;
 	while(true)
 	{
-		cout << "Введите слово: ";
+		cout << "Р’РІРµРґРёС‚Рµ СЃР»РѕРІРѕ: ";
 		cin >> r;
-		cout << "Введите его перевод: ";
+		cout << "Р’РІРµРґРёС‚Рµ РµРіРѕ РїРµСЂРµРІРѕРґ: ";
 		cin >> e;
 		Sl.Add_word(r, e);
-		cout << "Хотите добавить ещё слово? (да/нет)" << endl;
+		cout << "РҐРѕС‚РёС‚Рµ РґРѕР±Р°РІРёС‚СЊ РµС‰С‘ СЃР»РѕРІРѕ? (РґР°/РЅРµС‚)" << endl;
 		cin >> r;
-		if (r == "нет")
+		if (r == "РЅРµС‚")
 			break;
 	}
 	Sl.Output();
 
 	string a, b;
-	cout << "Введите слово для замены: ";
+	cout << "Р’РІРµРґРёС‚Рµ СЃР»РѕРІРѕ РґР»СЏ Р·Р°РјРµРЅС‹: ";
 	cin >> a;
-	cout << "Введите перевод для замены: ";
+	cout << "Р’РІРµРґРёС‚Рµ РїРµСЂРµРІРѕРґ РґР»СЏ Р·Р°РјРµРЅС‹: ";
 	cin >> b;
 	if (Sl.Change(a, b))
 	{
-		cout << "Новый словарь: " << endl;
+		cout << "РќРѕРІС‹Р№ СЃР»РѕРІР°СЂСЊ: " << endl;
 		Sl.Output();
 	}
 	else
-		cout << "Такого слова нет" << endl;
+		cout << "РўР°РєРѕРіРѕ СЃР»РѕРІР° РЅРµС‚" << endl;
 
-	cout << "В словаре " << Sl.Get_count() << " " << "слов(а)" << endl;
+	cout << "Р’ СЃР»РѕРІР°СЂРµ " << Sl.Get_count() << " " << "СЃР»РѕРІ(Р°)" << endl;
 	string q;
-	cout << "Введите слово для перевода: ";
+	cout << "Р’РІРµРґРёС‚Рµ СЃР»РѕРІРѕ РґР»СЏ РїРµСЂРµРІРѕРґР°: ";
 	cin >> q;
 	if (Sl.Check_word(q))
-		cout << "Такое слово есть" << endl;      
-	else cout << "Такого слова нет" << endl;
+		cout << "РўР°РєРѕРµ СЃР»РѕРІРѕ РµСЃС‚СЊ" << endl;      
+	else cout << "РўР°РєРѕРіРѕ СЃР»РѕРІР° РЅРµС‚" << endl;
 	string p = Sl.Get_en(q);
 	cout << p << endl;
 
-	Sl.Saved_to_file("Словарь.txt");
+	Sl.Saved_to_file("РЎР»РѕРІР°СЂСЊ.txt");
 
 	system("pause");
 	return 0;
