@@ -1,4 +1,4 @@
-#include <iostream>
+п»ї#include <iostream>
 #include <clocale> 
 #include <string>
 #include <windows.h>
@@ -50,7 +50,7 @@ public:
 		rus_word[wordCount] = str.rus_word[wordCount];
 		eng_word[wordCount] = str.eng_word[wordCount];
 	}
-	TranslatorDictionary& operator=(const TranslatorDictionary &str)//оператор присваивания
+	TranslatorDictionary& operator=(const TranslatorDictionary &str)//РѕРїРµСЂР°С‚РѕСЂ РїСЂРёСЃРІР°РёРІР°РЅРёСЏ
 	{
 		if (this == &str)
 		{
@@ -81,24 +81,24 @@ public:
 			wordCount = i;
 		}
 	}
-	void AddWord(string english_word, string russian_word)//функция для того, чтобы добавить в словарь слово и его перевод
+	void AddWord(string english_word, string russian_word)//С„СѓРЅРєС†РёСЏ РґР»СЏ С‚РѕРіРѕ, С‡С‚РѕР±С‹ РґРѕР±Р°РІРёС‚СЊ РІ СЃР»РѕРІР°СЂСЊ СЃР»РѕРІРѕ Рё РµРіРѕ РїРµСЂРµРІРѕРґ
 	{
 
 		eng_word[wordCount] = english_word;
 		rus_word[wordCount] = russian_word;
 		wordCount++;
 	}
-	void SetWord(string englword, string russword, int num)//функция, для измененения перевода слова
+	void SetWord(string englword, string russword, int num)//С„СѓРЅРєС†РёСЏ, РґР»СЏ РёР·РјРµРЅРµРЅРµРЅРёСЏ РїРµСЂРµРІРѕРґР° СЃР»РѕРІР°
 	{
 		for (int i = 0; i < wordCount; i++)
 		{
 			if (englword == eng_word[i])
 			{
-				if (num == 1) // замена самого слова
+				if (num == 1) // Р·Р°РјРµРЅР° СЃР°РјРѕРіРѕ СЃР»РѕРІР°
 				{
 					rus_word[i] = russword;
 				}
-				if (num == 2) // замена перевода
+				if (num == 2) // Р·Р°РјРµРЅР° РїРµСЂРµРІРѕРґР°
 				{
 					eng_word[i] = russword;
 				}
@@ -106,29 +106,29 @@ public:
 			}
 		}
 	}
-	void GetWord(string str)//функция,которая переводит слово
+	void GetWord(string str)//С„СѓРЅРєС†РёСЏ,РєРѕС‚РѕСЂР°СЏ РїРµСЂРµРІРѕРґРёС‚ СЃР»РѕРІРѕ
 	{
 		for (int i = 0; i < wordCount; i++)
 		{
 			if (eng_word[i] == str)
 			{
 				int j = i;
-				cout << " Перевод слова: " << str << " - " << rus_word[j] << endl;
+				cout << " РџРµСЂРµРІРѕРґ СЃР»РѕРІР°: " << str << " - " << rus_word[j] << endl;
 			}
 		}
 	}
-	void NumberofWords()//функция для подсчёта слов в словаре;
+	void NumberofWords()//С„СѓРЅРєС†РёСЏ РґР»СЏ РїРѕРґСЃС‡С‘С‚Р° СЃР»РѕРІ РІ СЃР»РѕРІР°СЂРµ;
 	{
-		cout << "Число слов в словаре :" << wordCount << endl;
+		cout << "Р§РёСЃР»Рѕ СЃР»РѕРІ РІ СЃР»РѕРІР°СЂРµ :" << wordCount << endl;
 	}
-	void PrintDictionary()//функция для вывода слов из файла
+	void PrintDictionary()//С„СѓРЅРєС†РёСЏ РґР»СЏ РІС‹РІРѕРґР° СЃР»РѕРІ РёР· С„Р°Р№Р»Р°
 	{
 		for (int i = 0; i < wordCount; i++)
 		{
 			cout << eng_word[i] << " - " << rus_word[i] << endl;
 		}
 	}
-	void FilePrintDict()//функция для сохранения слов в файл;
+	void FilePrintDict()//С„СѓРЅРєС†РёСЏ РґР»СЏ СЃРѕС…СЂР°РЅРµРЅРёСЏ СЃР»РѕРІ РІ С„Р°Р№Р»;
 	{
 		ofstream file;
 		file.open("Dictionary.txt");
@@ -141,7 +141,7 @@ public:
 		}
 		file.close();
 	}
-	bool CheckWord(string str)//функция для проверки слова на наличие
+	bool CheckWord(string str)//С„СѓРЅРєС†РёСЏ РґР»СЏ РїСЂРѕРІРµСЂРєРё СЃР»РѕРІР° РЅР° РЅР°Р»РёС‡РёРµ
 	{
 		for (int i = 0; i < wordCount; i++)
 		{
@@ -172,45 +172,45 @@ int main(void)
 	SetConsoleOutputCP(1251);
 	do
 	{
-		cout << "Что вы хотите сделать:\n 1 - добавить слово в словарь.\n 2 - изменить перевод.\n 3 - узнать перевод слова.\n 4 - проверить наличие.\n 5 - узнать количество слов в словаре.\n 6 - вывести словарь на экран.\n 7 - сохранить в словарь." << endl;
+		cout << "Р§С‚Рѕ РІС‹ С…РѕС‚РёС‚Рµ СЃРґРµР»Р°С‚СЊ:\n 1 - РґРѕР±Р°РІРёС‚СЊ СЃР»РѕРІРѕ РІ СЃР»РѕРІР°СЂСЊ.\n 2 - РёР·РјРµРЅРёС‚СЊ РїРµСЂРµРІРѕРґ.\n 3 - СѓР·РЅР°С‚СЊ РїРµСЂРµРІРѕРґ СЃР»РѕРІР°.\n 4 - РїСЂРѕРІРµСЂРёС‚СЊ РЅР°Р»РёС‡РёРµ.\n 5 - СѓР·РЅР°С‚СЊ РєРѕР»РёС‡РµСЃС‚РІРѕ СЃР»РѕРІ РІ СЃР»РѕРІР°СЂРµ.\n 6 - РІС‹РІРµСЃС‚Рё СЃР»РѕРІР°СЂСЊ РЅР° СЌРєСЂР°РЅ.\n 7 - СЃРѕС…СЂР°РЅРёС‚СЊ РІ СЃР»РѕРІР°СЂСЊ." << endl;
 		cin >> choice;
 		while ((choice < 1) || (choice > 7))
 		{
-			cout << "Что вы хотите сделать:\n 1 - добавить слово в словарь.\n 2 - изменить перевод.\n 3 - узнать перевод слова.\n 4 - проверить наличие.\n 5 - узнать количество слов в словаре.\n 6 - вывести словарь на экран.\n 7 - сохранить в словарь." << endl;
+			cout << "Р§С‚Рѕ РІС‹ С…РѕС‚РёС‚Рµ СЃРґРµР»Р°С‚СЊ:\n 1 - РґРѕР±Р°РІРёС‚СЊ СЃР»РѕРІРѕ РІ СЃР»РѕРІР°СЂСЊ.\n 2 - РёР·РјРµРЅРёС‚СЊ РїРµСЂРµРІРѕРґ.\n 3 - СѓР·РЅР°С‚СЊ РїРµСЂРµРІРѕРґ СЃР»РѕРІР°.\n 4 - РїСЂРѕРІРµСЂРёС‚СЊ РЅР°Р»РёС‡РёРµ.\n 5 - СѓР·РЅР°С‚СЊ РєРѕР»РёС‡РµСЃС‚РІРѕ СЃР»РѕРІ РІ СЃР»РѕРІР°СЂРµ.\n 6 - РІС‹РІРµСЃС‚Рё СЃР»РѕРІР°СЂСЊ РЅР° СЌРєСЂР°РЅ.\n 7 - СЃРѕС…СЂР°РЅРёС‚СЊ РІ СЃР»РѕРІР°СЂСЊ." << endl;
 			cin >> choice;
 		}
 		switch (choice)
 		{
 		case 1:
 		{
-			cout << "Введите слово:" << endl;
+			cout << "Р’РІРµРґРёС‚Рµ СЃР»РѕРІРѕ:" << endl;
 			cin >> engl_word;
-			cout << "Введите перевод данного слова :" << endl;
+			cout << "Р’РІРµРґРёС‚Рµ РїРµСЂРµРІРѕРґ РґР°РЅРЅРѕРіРѕ СЃР»РѕРІР° :" << endl;
 			cin >> rus_word;
 			vybor.AddWord(engl_word, rus_word);
 			break;
 		}
 		case 2:
 		{
-			cout << "Введите слово, которое хотите изменить:" << endl;
+			cout << "Р’РІРµРґРёС‚Рµ СЃР»РѕРІРѕ, РєРѕС‚РѕСЂРѕРµ С…РѕС‚РёС‚Рµ РёР·РјРµРЅРёС‚СЊ:" << endl;
 			cin >> engl_word;
 			if (vybor.CheckWord(engl_word))
 			{
-				cout << "Что вы хотите сделать с ним?\n1 - изменить перевод слова.\n2 - изменить само слово." << endl;
+				cout << "Р§С‚Рѕ РІС‹ С…РѕС‚РёС‚Рµ СЃРґРµР»Р°С‚СЊ СЃ РЅРёРј?\n1 - РёР·РјРµРЅРёС‚СЊ РїРµСЂРµРІРѕРґ СЃР»РѕРІР°.\n2 - РёР·РјРµРЅРёС‚СЊ СЃР°РјРѕ СЃР»РѕРІРѕ." << endl;
 				cin >> num;
-				cout << "Меняем на : " << endl;
+				cout << "РњРµРЅСЏРµРј РЅР° : " << endl;
 				cin >> word;
 				vybor.SetWord(engl_word, word, num);
 			}
 			else
 			{
-				cout << "Слово не найдено в словаре." << endl;
+				cout << "РЎР»РѕРІРѕ РЅРµ РЅР°Р№РґРµРЅРѕ РІ СЃР»РѕРІР°СЂРµ." << endl;
 			}
 			break;
 		}
 		case 3:
 		{
-			cout << "Введите слово, у которого хотите узнать перевод:" << endl;
+			cout << "Р’РІРµРґРёС‚Рµ СЃР»РѕРІРѕ, Сѓ РєРѕС‚РѕСЂРѕРіРѕ С…РѕС‚РёС‚Рµ СѓР·РЅР°С‚СЊ РїРµСЂРµРІРѕРґ:" << endl;
 			cin >> engl_word;
 			if (vybor.CheckWord(engl_word))
 			{
@@ -218,23 +218,23 @@ int main(void)
 			}
 			else
 			{
-				cout << "Слово не найдено в словаре." << endl;
+				cout << "РЎР»РѕРІРѕ РЅРµ РЅР°Р№РґРµРЅРѕ РІ СЃР»РѕРІР°СЂРµ." << endl;
 			}
 			break;
 			break;
 		}
 		case 4:
 		{
-			cout << "Введите слово, которое хотите проверить на наличие:" << endl;
+			cout << "Р’РІРµРґРёС‚Рµ СЃР»РѕРІРѕ, РєРѕС‚РѕСЂРѕРµ С…РѕС‚РёС‚Рµ РїСЂРѕРІРµСЂРёС‚СЊ РЅР° РЅР°Р»РёС‡РёРµ:" << endl;
 			cin >> engl_word;
 			bool check = vybor.CheckWord(engl_word);
 			if (check == true)
 			{
-				cout << "Слово находится в словаре." << endl;
+				cout << "РЎР»РѕРІРѕ РЅР°С…РѕРґРёС‚СЃСЏ РІ СЃР»РѕРІР°СЂРµ." << endl;
 			}
 			else
 			{
-				cout << "Слово не найдено в словаре." << endl;
+				cout << "РЎР»РѕРІРѕ РЅРµ РЅР°Р№РґРµРЅРѕ РІ СЃР»РѕРІР°СЂРµ." << endl;
 			}
 			break;
 		}
@@ -245,22 +245,22 @@ int main(void)
 		}
 		case 6:
 		{
-			cout << "Словарь: " << endl;
+			cout << "РЎР»РѕРІР°СЂСЊ: " << endl;
 			vybor.PrintDictionary();
 			break;
 		}
 		case 7:
 		{
-			cout << "Сохранил в словарь. " << endl;
+			cout << "РЎРѕС…СЂР°РЅРёР» РІ СЃР»РѕРІР°СЂСЊ. " << endl;
 			vybor.FilePrintDict();
 			arr = "";
 		}
 		}
-		cout << " Хотите закончить работу?/n1-да, 0-нет" << endl;
+		cout << " РҐРѕС‚РёС‚Рµ Р·Р°РєРѕРЅС‡РёС‚СЊ СЂР°Р±РѕС‚Сѓ?/n1-РґР°, 0-РЅРµС‚" << endl;
 		cin >> type;
 		while ((type != 0) && (type != 1))
 		{
-			cout << ("Введите  0 или 1.\n");
+			cout << ("Р’РІРµРґРёС‚Рµ  0 РёР»Рё 1.\n");
 			cin >> type;
 		}
 	} while (type == 0);
