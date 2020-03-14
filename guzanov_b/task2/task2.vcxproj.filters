@@ -11,6 +11,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClCompile Include="..\..\..\..\..\source\repos\dinamicarray\dinamicarray\dinamicarray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -20,4 +21,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+=======
+    <ClInclude Include="DArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dinamicarray.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+>>>>>>> 67f439df00f011c422f7aa3c23735eca34f94b20
 </Project>

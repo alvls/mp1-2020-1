@@ -19,10 +19,17 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClCompile Include="..\..\..\..\..\source\repos\dinamicarray\dinamicarray\dinamicarray.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\source\repos\dinamicarray\dinamicarray\DArray.h" />
+=======
+    <ClInclude Include="DArray.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dinamicarray.cpp" />
+>>>>>>> 67f439df00f011c422f7aa3c23735eca34f94b20
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
