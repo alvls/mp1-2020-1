@@ -16,6 +16,7 @@ private:
 	float h;
 	float (*tabfunc)(float);
 public:
+	
 	Tab(float _sec = 10, float _p = 1, float (*func)(float) = [](float i) {return cos(i); })//1) задать текущую функцию
 	{
 		sec = _sec;
@@ -48,10 +49,12 @@ public:
 		try
 		{
 			if (!fout.is_open())
-				throw "Файл не открыт";
-			cout << "Все нормально с открытием файла" << endl;
+				throw "File is open";
+			cout << "All is normal with opening file" << endl;
 			fout << s;
 			fout << "\n";
+			cout << "Value is in file" << endl;
+
 		}
 		catch (string l)
 		{
