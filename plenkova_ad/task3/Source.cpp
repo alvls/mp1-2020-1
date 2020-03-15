@@ -8,11 +8,11 @@ private:
 	int N;
 	int FunctionNumber;
 public:
-	TaylorSeries(double _x = 0, int _num = 0, int _fuction = 0)
+	TaylorSeries(double _x = 0, int _num = 0, int _function = 0)
 	{
 		PointX = _x;
 		N = _num;
-		FunctionNumber = _fuction;
+		FunctionNumber = _function;
 	}
 	~TaylorSeries()
 	{
@@ -42,50 +42,62 @@ public:
 		PointX = _argument;
 	}
 
-	double CalculateCurrentElementOfExponent(int k)
+	double CalculateCurrentElement()
 	{
-		double u = 1.0;
-		double i = 0.0;
-		int num = k;
-		if (num == 1)
-			return 1.0;
-		else
+		switch (GetFunctionNumber())
 		{
-			i = pow(PointX, num);
-			for (int j = 1; j <= num; j++)
-				u *= j;
-			return (i / u);
-		}
-	}
-	double CalculateCurrentElementOfSin(int k)
-	{
-		double u = 1.0;
-		double i = 0.0;
-		int num = k;
-		if (num == 1)
-			return PointX;
-		else
+		case 3:
 		{
-			i = pow(-1, (2 * num - 1)) * pow(PointX, (2 * num - 1));
-			for (int j = 1; j <= (2 * num - 1); j++)
-				u *= j;
-			return (i / u);
+			double u = 1.0;
+			double i = 0.0;
+			int num = GetNumberOfElements();
+			if (num == 1)
+				return 1.0;
+			else
+			{
+				i = pow(PointX, num);
+				for (int j = 1; j <= num; j++)
+					u *= j;
+				return (i / u);
+			}
+			break;
 		}
-	}
-	double CalculateCurrentElementOfCos(int k)
-	{
-		double u = 1.0;
-		double i = 0.0;
-		if (k == 1)
-			return 1.0;
-		else
+		case 2:
 		{
-			i = pow(-1, k) * pow(PointX, 2 * k);
-			for (int j = 1; j <= (2 * k); j++)
-				u *= j;
-			return (i / u);
+			double u = 1.0;
+			double i = 0.0;
+			int num = GetNumberOfElements();
+			if (num == 1)
+				return PointX;
+			else
+			{
+				i = pow(-1, (2 * num - 1)) * pow(PointX, (2 * num - 1));
+				for (int j = 1; j <= (2 * num - 1); j++)
+					u *= j;
+				return (i / u);
+				break;
+			}
 		}
-	}
+		case 1:
+		{
+			double u = 1.0;
+			double i = 0.0;
+			int num = GetNumberOfElements();
+			if (num == 1)
+				return 1.0;
+			else
+			{
+				i = pow(-1, num) * pow(PointX, 2 * num);
+				for (int j = 1; j <= (2 * num); j++)
+					u *= j;
+				return (i / u);
+			}
+			break;
+		}
+		default:
+			return 0;
+		}
+	};
 
 	double CalculateSeries()
 	{
@@ -125,8 +137,12 @@ public:
 			}
 			return sum;
 		}
+
+		default:
+			return 0;
 		}
 	}
+
 	double GetAccuracyOfSeries()
 	{
 		double sum, g;
@@ -165,8 +181,11 @@ public:
 			}
 			return abs(sum - exp(PointX));
 		}
+		default:
+			return 0;
 		}
 	}
+
 	void PrintSeries()
 	{
 		switch (FunctionNumber)
@@ -207,7 +226,6 @@ public:
 		}
 	}
 };
-
 int main()
 {
 	int FunctionNumber = 0;
@@ -301,24 +319,7 @@ int main()
 		}
 		case 7:
 		{
-			switch (T.GetFunctionNumber())
-			{
-			case 1:
-			{
-				cout << T.CalculateCurrentElementOfCos(T.GetNumberOfElements()) << endl;
-				break;
-			}
-			case 2:
-			{
-				cout << T.CalculateCurrentElementOfSin(T.GetNumberOfElements()) << endl;
-				break;
-			}
-			case 3:
-			{
-				cout << T.CalculateCurrentElementOfExponent(T.GetNumberOfElements()) << endl;
-				break;
-			}
-			}
+			cout << T.CalculateCurrentElement() << endl;
 			system("pause");
 			system("cls");
 			break;
