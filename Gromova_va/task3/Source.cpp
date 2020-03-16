@@ -15,8 +15,8 @@ private:
 public:
 	TranslatorDictionary()
 	{
-		rus_word[0] = { "" };
-		eng_word[0] = { "" };
+		rus_word[0];
+		eng_word[0];
 		wordCount = 0;
 	}
 	TranslatorDictionary(string filename)
@@ -41,14 +41,17 @@ public:
 	}
 	TranslatorDictionary(string english_word, string russian_word)
 	{
-		rus_word[wordCount] = russian_word;
-		eng_word[wordCount] = english_word;
+		rus_word[0] = russian_word;
+		eng_word[0] = english_word;
 		wordCount = 1;
 	}
-	TranslatorDictionary(const TranslatorDictionary  &str)
+	TranslatorDictionary(const TranslatorDictionary &str)
 	{
-		rus_word[wordCount] = str.rus_word[wordCount];
-		eng_word[wordCount] = str.eng_word[wordCount];
+		for (int i = 0; i < wordCount; i++)
+		{
+			eng_word[i] = str.eng_word[i];
+			rus_word[i] = str.rus_word[i];
+		}
 	}
 	TranslatorDictionary& operator=(const TranslatorDictionary &str)//оператор присваивания
 	{
@@ -56,8 +59,12 @@ public:
 		{
 			return *this;
 		}
-		rus_word[wordCount] = str.rus_word[wordCount];
-		eng_word[wordCount] = str.eng_word[wordCount];
+		for (int i = 0; i < wordCount; i++)
+		{
+
+			eng_word[i] = str.eng_word[i];
+			rus_word[i] = str.rus_word[i];
+		}
 		return *this;
 	}
 	void ReadDict(string filename = "Dictionary.txt")
@@ -88,38 +95,30 @@ public:
 		rus_word[wordCount] = russian_word;
 		wordCount++;
 	}
-	void SetWord(string englword, string russword, int num)//функция, для измененения перевода слова
+	void SetWord(string englword, string russword)//функция, для измененения перевода слова
 	{
 		for (int i = 0; i < wordCount; i++)
 		{
 			if (englword == eng_word[i])
 			{
-				if (num == 1) // замена самого слова
-				{
-					rus_word[i] = russword;
-				}
-				if (num == 2) // замена перевода
-				{
-					eng_word[i] = russword;
-				}
-
+				eng_word[i] = russword;
 			}
 		}
 	}
-	void GetWord(string str)//функция,которая переводит слово
+	string FindTranslation(string str)//функция,которая переводит слово
 	{
 		for (int i = 0; i < wordCount; i++)
 		{
 			if (eng_word[i] == str)
 			{
 				int j = i;
-				cout << " Перевод слова: " << str << " - " << rus_word[j] << endl;
+				return rus_word[j];
 			}
 		}
 	}
-	void NumberofWords()//функция для подсчёта слов в словаре;
+	int NumberOfWords()//функция для подсчёта слов в словаре;
 	{
-		cout << "Число слов в словаре :" << wordCount << endl;
+		return wordCount;
 	}
 	void PrintDictionary()//функция для вывода слов из файла
 	{
@@ -128,7 +127,7 @@ public:
 			cout << eng_word[i] << " - " << rus_word[i] << endl;
 		}
 	}
-	void FilePrintDict()//функция для сохранения слов в файл;
+	void SaveDictionaryToFile()//функция для сохранения слов в файл;
 	{
 		ofstream file;
 		file.open("Dictionary.txt");
@@ -161,7 +160,7 @@ public:
 int main(void)
 {
 	setlocale(0, "");
-	int  choice, num;
+	int  choice;
 	int type = 0;
 	string arr;
 	string word;
@@ -196,11 +195,9 @@ int main(void)
 			cin >> engl_word;
 			if (vybor.CheckWord(engl_word))
 			{
-				cout << "Что вы хотите сделать с ним?\n1 - изменить перевод слова.\n2 - изменить само слово." << endl;
-				cin >> num;
 				cout << "Меняем на : " << endl;
 				cin >> word;
-				vybor.SetWord(engl_word, word, num);
+				vybor.SetWord(engl_word, word);
 			}
 			else
 			{
@@ -214,13 +211,12 @@ int main(void)
 			cin >> engl_word;
 			if (vybor.CheckWord(engl_word))
 			{
-				vybor.GetWord(engl_word);
+				cout << " Перевод слова: " << engl_word << " - " << vybor.FindTranslation(engl_word) << endl;
 			}
 			else
 			{
 				cout << "Слово не найдено в словаре." << endl;
 			}
-			break;
 			break;
 		}
 		case 4:
@@ -240,7 +236,7 @@ int main(void)
 		}
 		case 5:
 		{
-			vybor.NumberofWords();
+			cout << "Число слов в словаре :" << vybor.NumberOfWords() << endl;
 			break;
 		}
 		case 6:
@@ -252,7 +248,7 @@ int main(void)
 		case 7:
 		{
 			cout << "Сохранил в словарь. " << endl;
-			vybor.FilePrintDict();
+			vybor.SaveDictionaryToFile();
 			arr = "";
 		}
 		}
