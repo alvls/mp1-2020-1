@@ -17,10 +17,10 @@ public:
 	Menu(const Menu &menu1);
 	~Menu();
 
-	void setCount_act(int _count_act);
-	int getCount_act();
-	void setName_act(int number, std::string name);
-	void outPut(int x, int y);
-	int getNumber_act();
-	int getLast_act();
+	void SetCountAct(int _count_act);
+	int GetCountAct();
+	void SetNameAct(int number, std::string name);
+	void OutPut(int x, int y);
+	int GetNumberAct();
+	int GetLastAct();
 };
