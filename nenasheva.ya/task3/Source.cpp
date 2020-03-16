@@ -10,12 +10,11 @@ int main(void)
 	SetConsoleOutputCP(1251);
 
 	Dictionary Sl;
-	Sl.Read_form_file("Словарь.txt");
+	Sl.Read_from_file("Словарь.txt");
 	
 	Sl.Output();
 	
 	string r, e;
-	int w;
 	while(true)
 	{
 		cout << "Введите слово: ";
@@ -31,12 +30,12 @@ int main(void)
 
 	Sl.Output();
 
-	string a, b;
+	string rus, eng;
 	cout << "Введите слово для замены: ";
-	cin >> a;
+	cin >> rus;
 	cout << "Введите перевод для замены: ";
-	cin >> b;
-	if (Sl.Change(a, b))
+	cin >> eng;
+	if (Sl.Change(rus, eng))
 	{
 		cout << "Новый словарь: " << endl;
 		Sl.Output();
@@ -54,7 +53,7 @@ int main(void)
 	string p = Sl.Get_en(q);
 	cout << p << endl;
 
-	Sl.Saved_to_file("Словарь.txt");
+	Sl.Save_to_file("Словарь.txt");
 
 	system("pause");
 	return 0;

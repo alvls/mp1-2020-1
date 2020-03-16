@@ -25,6 +25,23 @@ void Dictionary::Add_word(string r, string e)
 	n++;
 }
 
+Dictionary::Dictionary(const Dictionary  &str)
+{
+	ru[n] = str.ru[n];
+	en[n] = str.en[n];
+}
+
+Dictionary & Dictionary::operator=(const Dictionary &str)
+{
+	if (this == &str)
+	{
+		return *this;
+	}
+	ru[n] = str.ru[n];
+	en[n] = str.en[n];
+	return *this;
+}
+
 void Dictionary::Output()
 {
 	for (int i = 0; i < n; i++)
@@ -61,24 +78,24 @@ int Dictionary::Get_count()
 	return n;
 }
 
-bool Dictionary::Change(string a, string b)
+bool Dictionary::Change(string rus, string eng)
 {
-	if (Check_word(a) == false)
+	if (Check_word(rus) == false)
 	{
 		return false;
 	}
 	for (int i = 0; i < n; i++)
 	{
-		if (a == ru[i])
+		if (rus == ru[i])
 		{
-			en[i] = b;
+			en[i] = eng;
 			return true;
 		}
 	}
 	return true;
 }
 
-void Dictionary::Saved_to_file(string name)
+void Dictionary::Save_to_file(string name)
 {
 	FILE* out;
 	fopen_s(&out, name.c_str(), "w");
@@ -91,7 +108,7 @@ void Dictionary::Saved_to_file(string name)
 	fclose(out);
 }
 
-void Dictionary::Read_form_file(string name)
+void Dictionary::Read_from_file(string name)
 {
 	FILE* in;
    	errno_t err = fopen_s(&in, name.c_str(), "r");
