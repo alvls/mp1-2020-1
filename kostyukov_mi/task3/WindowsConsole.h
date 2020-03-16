@@ -1,6 +1,7 @@
 #include "windows.h"
-#include "stdio.h"
-#include "memory.h"
+#include <stdio.h>
+#include <memory.h>
+#include <conio.h>
 
 enum TColor {BLACK, BLUE, GREEN, CYAN, RED, MAGENTA, BROWN, LIGHTGRAY,
              DARKGRAY, LIGHTBLUE, LIGHTGREEN, LIGHTCYAN, LIGHTRED,
@@ -250,21 +251,20 @@ char getKey()
 {
     char ch;
     ch = _getch();
-    if (ch == 10) return KB_ENTER;
-    if (ch != 27) return KB_DEFAULT;
-    ch = _getch();
-    if (ch != 91) return KB_DEFAULT;
+    if (ch == 13) return KB_ENTER;
+    if (ch != 224) return KB_DEFAULT;
     ch = _getch();
     
     switch (ch)
     {
-        case 65:
+        case 72:
             return KB_ARROWUP;
-        case 66:
+        case 80:
             return KB_ARROWDOWN;
-        case 67:
+        case 74:
             return KB_ARROWRIGHT;
-        case 68: //grab old terminal i/o settings_ARROWLEFT;
+        case 75: 
+            return KB_ARROWLEFT;
         default:
             return KB_DEFAULT;
     }   

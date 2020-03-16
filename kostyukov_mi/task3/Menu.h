@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <string>
 
 #ifdef __linux
     #include "LinuxConsole.h"
