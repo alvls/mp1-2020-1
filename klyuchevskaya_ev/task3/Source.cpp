@@ -98,7 +98,7 @@ public:
 		leftBorder = I.leftBorder;
 		rightBorder = I.rightBorder;
 		n = I.n;
-		result = 0;
+		result = I.result;
 	}
 
 	Integral& operator=(const Integral &I)
@@ -108,6 +108,7 @@ public:
 		rightBorder = I.rightBorder;
 		n = I.n;
 		result = I.result;
+		return *this;
 	}
 };
 
