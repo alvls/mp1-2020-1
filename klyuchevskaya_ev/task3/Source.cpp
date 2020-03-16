@@ -91,6 +91,16 @@ public:
 		result = result * h;
 		return result;
 	}
+
+	Integral(const Integral &I)
+	{
+		func = I.func;
+		leftBorder = I.leftBorder;
+		rightBorder = I.rightBorder;
+		n = I.n;
+		result = I.result;
+	}
+
 	Integral& operator=(const Integral &I)
 	{
 		func = I.func;
