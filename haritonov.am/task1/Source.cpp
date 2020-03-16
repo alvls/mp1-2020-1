@@ -17,20 +17,21 @@ public:
 		s = _s;
 	}
 
-	void show_time()
+	void show_time(int *hh, int *mm, int *ss)
 	{
-		cout << h << " hours  " << m << " minutes  " << s << " seconds" << endl;
+		*hh = h;
+		*mm = m;
+		*ss = s;
 	}
 
-	void find_diff(int _h, int _m, int _s)
+	void find_diff(int *hh, int *mm, int *ss)
 	{
-		int sec = s  +  60*m  +  3600*h;
-		int _sec = _s  +  60*_m  +  3600*_h;
+		int sec = s + 60 * m + 3600 * h;
+		int _sec = (*ss) + 60 * (*mm) + 3600 * (*hh);
 		sec = fabs(sec - _sec);
-		_h = sec / 3600;
-		_m = (sec / 60) % 60;
-		_s = (sec % 60);
-		cout << _h << " hours  " << _m << " minutes  " << _s << " seconds" << endl;
+		*hh = sec / 3600;
+		*mm = (sec / 60) % 60;
+		*ss = (sec % 60);
 	}
 
 	void set_diff(int _h, int _m, int _s, char way)
@@ -76,21 +77,6 @@ public:
 			}
 		}
 	}
-/*	{
-	_s = s - _s;
-		if (_s < 0)
-		{
-			_m = _m - 1;
-			_s = _s + 60;
-		}
-		_m = m - _m;
-		if (_m < 0)
-		{
-			_h = _h - 1;
-			_m = _m + 60;
-		}
-		_h = h - _h;
-	} */
 };
 
 void main()
@@ -115,12 +101,14 @@ void main()
 			getchar();
 			break;
 		case 2:
-			t1.show_time();
+			t1.show_time(&h, &m, &s);
+			cout << h << " hours  " << m << " minutes  " << s << " seconds" << endl;
 			break;
 		case 3:
 			cout << "Set hour, minute, second" << endl;
 			cin >> h >> m >> s;
-			t1.find_diff(h, m, s);
+			t1.find_diff(&h, &m, &s);
+			cout << h << " hours  " << m << " minutes  " << s << " seconds" << endl;
 			break;
 		case 4:
 			char way;

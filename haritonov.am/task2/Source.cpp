@@ -8,43 +8,39 @@ using namespace std;
 class matrix
 {
 private:
-	int a;
-	int b;
-	int *qq;
+	int height;
+	int *matr;
 public:
-	matrix() { a = b = 0; qq = new int[1]; }
+	matrix() { height = 0; matr = new int[0]; }   // 1*
 	matrix(const matrix &m3)
 	{
-		a = m3.a;
-		b = m3.b;
-		qq = new int[a * b];
-		for (int i = 0; i < a * b; i++)
-			qq[i] = m3.qq[i];
+		height = m3.height;
+		matr = new int[height * height];
+		for (int i = 0; i < height * height; i++)
+			matr[i] = m3.matr[i];
 	}
-	~matrix() { delete[] qq; }
+	~matrix() { delete[] matr; }
 
-	void set_len(int _a, int _b)
+	void set_len(int _height)
 	{
-		a = _a;
-		b = _b;
-		delete[] qq;
-		qq = new int[a * b];
+		height = _height;
+		delete[] matr;
+		matr = new int[height * height];
 	}
 
-	void len()
+	int len()
 	{
-		cout << a << '*' << b << endl;
-
+		return height;
 	}
 
-	void set_num(int _a, int _b, int num)
+	void set_value(int _height, int _width, int num)
 	{
-		qq[(_a-1)*b + _b - 1] = num;
+		matr[(_height -1)*height + _width - 1] = num;
 	}
 
-	int check_num(int _a, int _b)
+	int get_value(int _height, int _width)
 	{
-		return qq[(_a-1)*b + _b - 1];
+		return matr[(_height -1)*height + _width - 1];
 	}
 
 	void check_diag()
@@ -54,11 +50,11 @@ public:
 		int num1;
 		int num2 = 0;
 		int flag = 0;
-		for (i = 0; i < a; i++)
+		for (i = 0; i < height; i++)
 		{
-			num1 = qq[(i-1)*b + i];
-			for (j = 0; j < b; j++)
-			num2 = num2 + qq[(j - 1)*b + j];
+			num1 = matr[(i-1)*height + i];
+			for (j = 0; j < height; j++)
+			num2 = num2 + matr[(j - 1)*height + j];
 			num2 = num2 - num1;
 			if (num2 > num1) flag = 1;
 		}
@@ -66,32 +62,27 @@ public:
 		else cout << "It is not a diagonally dominant matrix" << endl;
 	}
 
-	int checkA()
+	int matr()
 	{
-		return a;
-	}
-	int checkB()
-	{
-		return b;
+		return height;
 	}
 
-	matrix operator+(const matrix m2)
+	matrix operator+(const matrix &m2)
 	{
 		int i;
 		matrix result;
-		result.set_len(a, b);
-		for (i = 0; i < a*b; i++)
-		result.qq[i] = this->qq[i]+m2.qq[i];
+		result.set_len(height);
+		for (i = 0; i < height*height; i++)
+		result.matr[i] = this->matr[i]+m2.matr[i];
 		return result;
 	}
-	matrix& operator=(const matrix m3)
+	matrix& operator=(const matrix &m3)
 	{
-		a = m3.a;
-		b = m3.b;
-		delete[] qq;
-		qq = new int[a*b];
-		for (int i = 0; i < a*b; i++)
-			qq[i] = m3.qq[i];
+		height = m3.height;
+		delete[] matr;
+		matr = new int[height*height];
+		for (int i = 0; i < height*height; i++)
+			matr[i] = m3.matr[i];
 		return (*this);
 	}
 };
@@ -100,14 +91,14 @@ public:
 void main()
 {
 	cout << "Select function" << endl;
-	cout << "1)Set length(a, b)" << endl;
+	cout << "1)Set length(a)" << endl;
 	cout << "2)Show length" << endl;
 	cout << "3)Set a number on place(a, b, num)" << endl;
 	cout << "4)Check a number on place(a, b)" << endl;
 	cout << "5)Check for a diagonally dominant matrix" << endl;
-	cout << "6)Show a sum of matrix 1 and matrix 2 on matrix 3" << endl;
+	cout << "6)Find a sum of matrix 1 and matrix 2 on matrix 3" << endl;
 	int sw, matr;
-	int a, b, num;
+	int height, width, num;
 	matrix m1;
 	matrix m2;
 	matrix m3;
@@ -117,15 +108,15 @@ void main()
 		switch (sw)
 		{
 		case 1:
-			cout << "Set a, b, matrix 1/2" << endl;
- 			cin >> a >> b >> matr;
+			cout << "Set width, matrix 1/2" << endl;
+ 			cin >> height >> matr;
 			switch (matr)
 			{
 			case 1:
-				m1.set_len(a, b);
+				m1.set_len(height);
 				break;
 			case 2:
-				m2.set_len(a, b);
+				m2.set_len(height);
 				break;
 			}
 			break;
@@ -138,9 +129,11 @@ void main()
 			{
 			case 1:
 				m1.len();
+				cout << m1.len() << '*' << m1.len() << endl;
 				break;
 			case 2:
 				m2.len();
+				cout << m2.len() << '*' << m2.len() << endl;
 				break;
 			}
 			break;
@@ -148,14 +141,14 @@ void main()
 
 		case 3:
 			cout << "Set a, b, num, matrix 1/2" << endl;
-			cin >> a >> b >> num >> matr;
+			cin >> height >> width >> num >> matr;
 			switch (matr)
 			{
 			case 1:
-				m1.set_num(a, b, num);
+				m1.set_value(height, width, num);
 				break;
 			case 2:
-				m2.set_num(a, b, num);
+				m2.set_value(height, width, num);
 				break;
 			}
 			break;
@@ -163,17 +156,17 @@ void main()
 
 		case 4:
 			cout << "Set a, b, matrix 1/2/3" << endl;
-			cin >> a >> b >> matr;
+			cin >> height >> height >> matr;
 			switch (matr)
 			{
 			case 1:
-				cout << m1.check_num(a, b) << endl;
+				cout << m1.get_value(height, width) << endl;
 				break;
 			case 2:
-				cout << m2.check_num(a, b) << endl;
+				cout << m2.get_value(height, width) << endl;
 				break;
 			case 3:
-				cout << m3.check_num(a, b) << endl;
+				cout << m3.get_value(height, width) << endl;
 				break;
 			}
 			break;
@@ -194,7 +187,7 @@ void main()
 
 
 		case 6:
-			m3.set_len(m1.checkA(), m1.checkB());
+			m3.set_len(m1.len());
 			m3 = m1+m2;
 			break;
 		}
