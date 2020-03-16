@@ -1,0 +1,6 @@
+0) start the game again
+1) continue the game
+2) save achievements
+3) go to the sound settings
+4) go to screen settings
+5) finish the game
