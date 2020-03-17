@@ -6,42 +6,59 @@
 #include <iostream>
 #include <fstream>
 using namespace std;
-
 class Tab
 {
 private:
 	FILE* s1;
-	float sec;
-	float p;
-	float h;
+	float left;
+	float right;
+	int point;
+	float sect;
+	float step;
 	float (*tabfunc)(float);
 public:
 	
-	Tab(float _sec = 10, float _p = 1, float (*func)(float) = [](float i) {return cos(i); })//1) задать текущую функцию
+	Tab(float _left = 0, float _right = 10.0, int _point = 1, float(*funz)(float) = [](float i) {return i * i * i; }/*float (*func)(float) =  */)//1) задать текущую функцию
 	{
-		sec = _sec;
-		p = _p;
-		tabfunc = func;
+		left = _left;
+		right = _right;
+		point = _point;
+		tabfunc = funz;
 	};
 	~Tab()
 	{
 		std::cout << "Destructor works!" << endl;
 	}
-	float tab(float  sec, float p)
+	float tab(float  left_,float right_, int point_)
 	{
-		float S;
+		float sum;
 		float i;
-		float q;
-		S = 0;
-		h = sec / p;
-		for (i = 0; i <= sec; i += h)
+		float val;
+		int flag = 0;
+		sect = right_ - left_;
+		step = sect / point_;
+		try
 		{
-			q = tabfunc(i);
-			S += q;
+			if (right_ <= left_)
+				throw "Error right is beter left ";
+			flag++;
+			for (i = left_; i <= sect; i += step)
+			{
+				val = tabfunc(i);
+				//cout << i <<"  "<< val <<endl;
+				rec(val);
+			}
+			cout << "Результаты табулирования :" << endl;//7) выдать результаты табулирования
+			reex();
+			return flag;
 		}
-		return S;
+		catch (char* err)
+		{
+			cout << err << endl;
+			return flag;
+		}
 	}
-	void rec(float s)//8) сохранить результаты табулирования в файл
+	void rec(float valz)//8) сохранить результаты табулирования в файл
 	{
 		string f = "file.txt";
 		ofstream fout;
@@ -49,40 +66,78 @@ public:
 		try
 		{
 			if (!fout.is_open())
-				throw "File is open";
-			cout << "All is normal with opening file" << endl;
-			fout << s;
+				throw "File is not open";
+			fout << valz;
 			fout << "\n";
-			cout << "Value is in file" << endl;
-
 		}
-		catch (string l)
+		catch (string lin)
 		{
-			cout << l << endl;
+			cout << lin << endl;
 		}
 		fout.close();
+		
 	};
-	void setp(float ps)//2) задать текущее число точек табулирования
+	void reex()
 	{
-		p = ps;
+		string f = "file.txt";
+		ifstream fin;
+		fin.open(f);
+		string s;
+		while (!fin.eof())
+		{
+			getline(fin, s);
+			cout << s << endl;
+		}
+		fin.close();
+		remove("file.txt");
+	}
+
+	void setpoint(float pointz)//2) задать текущее число точек табулирования
+	{
+		point = pointz;
 	};
-	float getp()//3) узнать текущее число точек табулирования
+	float getpoint()//3) узнать текущее число точек табулирования
 	{
-		return p;
+		return point;
 	};
-	void setsec(float secs)//4) задать отрезок табулирования
+	void setleft(float leftz)//4) задать левую границу табулирования
 	{
-		sec = secs;
+	    left = leftz;
 	};
-	float getsec()//5) узнать отрезок табулирования
+	float getleft()//5) узнать отрезок табулирования
 	{
-		return sec;
+		return left;
+	};
+	void setright(float rightz)//4) задать левую границу табулирования
+	{
+		right = rightz;
+	};
+	float getright()//5) узнать отрезок табулирования
+	{
+		return right;
 	};
 	Tab& operator=(const Tab& tmp)//1!!!
 	{
-		this->sec = tmp.sec;
-		this->p = tmp.p;
+		this->right = tmp.right;
+		this->point = tmp.point;
+		this->tabfunc = tmp.tabfunc;
 		return *this;
 	};
 
 };
+//char str1[30] = "iz";
+		//char str2[30] = "valz";
+		//char s[] = "                                                                                       ";
+			//fout << iz;
+			//fout << "             ";
+		//s.getline(str, 30);
+		/*while (f.get())
+		{
+
+		}
+				s[i + 2] = str1[i];
+		//cin.getline(str, 30);
+			for (int i = 0; str2[i] != '\0'; i++)
+				s[i + 32] = str2[i];
+			//fout << valz;
+			cout << "\n";*/

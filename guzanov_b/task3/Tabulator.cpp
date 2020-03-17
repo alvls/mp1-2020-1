@@ -1,33 +1,69 @@
 
 #pragma once
 #include "Tab.h"
+float exponenta(float j)
+{
+    return exp(j);
+}
+float cosinus(float j)
+{
+    return cos(j);
+}
+float sinus(float j)
+{
+    return sin(j);
+}
 int main()
 {
+    //char menu1[5][15] = { "1)экспонента","2)косинус","3)синус" };
     setlocale(LC_ALL, "Russian");
-    Tab A(12, 1);//1) задать текущую функцию
+   // int choice = item(menu1, 5);
+    Tab A;//1) задать текущую функцию
     cout << "A:" << endl;
-    cout << "Количество точек табулирования p = " << A.getp() << endl;//3) узнать текущее число точек табулирования
-    cout << "Отрезок табулирования sec = " << A.getsec() << endl;
-    Tab B(17, 1);
+    cout << "Количество точек табулирования point = " << A.getpoint() << endl;//3) узнать текущее число точек табулирования
+    cout << "Левая граница табулирования = " << A.getleft() << endl;
+    cout << "Правая граница табулирования = " << A.getright() << endl;
+    //int choice;
+    //cin >> choice;
+    Tab B(2,18,4,exponenta);
     cout << "A = B" << endl;
     A = B;
     cout << "A:" << endl;
-    cout << "Количество точек табулирования p = " << A.getp() << endl;
-    cout << "Отрезок табулирования sec = " << A.getsec() << endl;
-    float sec_;
-    float p_;
+    cout << "Количество точек табулирования point = " << A.getpoint() << endl;
+    cout << "Левая граница табулирования = " << A.getleft() << endl;
+    cout << "Правая граница табулирования = " << A.getright() << endl;
+    float right_;
+    float left_;
+    float point_;
     cout << "B:" << endl;
-    cout << "Введите sec(отрезок табулирования)" << endl;// 4) задать отрезок табулирования , , , .
-    cin >> sec_;
-    B.setsec(sec_);
-    cout << "Введите p (число точек табулирования)" << endl;//2) задать текущее число точек табулирования
-    cin >> p_;
-    B.setp(p_);
+    cout << "Введите левую границу табулирования" << endl;// 4) задать отрезок табулирования , , , .
+    cin >> left_;
+    B.setleft(left_);
+    cout << "Введите правую границу табулирования" << endl;// 4) задать отрезок табулирования , , , .
+    cin >> right_;
+    B.setright(right_);
+    cout << "Введите число точек табулирования" << endl;//2) задать текущее число точек табулирования
+    cin >> point_;
+    B.setpoint(point_);
     cout << "B:" << endl;
-    cout << "Количество точек табулирования p = " << B.getp() << endl;
-    cout << "Отрезок табулирования = " << B.getsec() << endl;//5) узнать отрезок табулирования
-    float k = B.tab(sec_, p_);//6) выполнить табулирование функции
-    cout << "Результат табулирования - " << k << endl;//7) выдать результаты табулирования
-    B.rec(k);//8) сохранить результаты табулирования в файл
+    cout << "Число точек табулирования point = " << B.getpoint() << endl;
+    cout << "Отрезок табулирования  : " <<" left= "<<B.getleft() << " right= " << B.getright() << endl;//5) узнать отрезок табулирования
+    float k = B.tab(left_,right_,point_);//6) выполнить табулирование функции
+    if (k != 0)
+    {
+       //B.rec(k);
+        //
+       //
+    }
+    else 
+        cout << "Введите правильно левую и правую границы " << endl;//7) выдать результаты табулирования
     system("pause");
 }
+/*int item(char menu[][15], int nmenu) {//
+    int i, k;
+    for (i = 0; i < nmenu; i++)
+        printf("%s\n", menu[i]);
+    cin >> k;
+    return k;
+}*/
+//unum ={}
