@@ -27,18 +27,31 @@ void Dictionary::Add_word(string r, string e)
 
 Dictionary::Dictionary(const Dictionary  &str)
 {
-	ru[n] = str.ru[n];
-	en[n] = str.en[n];
+	n = str.n;
+	ru = new string[n];
+	en = new string[n];
+	for (int i = 0; i < str.n; i++)
+	{
+		ru[i] = str.ru[i];
+		en[i] = str.en[i];
+	}
 }
 
 Dictionary & Dictionary::operator=(const Dictionary &str)
 {
-	if (this == &str)
+	if (n != str.n)
 	{
-		return *this;
+		delete[]ru;
+		delete[]en;
+		n = str.n;
+		ru = new string[n];
+		en = new string[n];
 	}
-	ru[n] = str.ru[n];
-	en[n] = str.en[n];
+	for (int i = 0; i < str.n; i++)
+	{
+		ru[i] = str.ru[i];
+		en[i] = str.en[i];
+	}
 	return *this;
 }
 
