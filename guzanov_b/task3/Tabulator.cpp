@@ -48,15 +48,12 @@ int main()
     cout << "B:" << endl;
     cout << "Число точек табулирования point = " << B.getpoint() << endl;
     cout << "Отрезок табулирования  : " <<" left= "<<B.getleft() << " right= " << B.getright() << endl;//5) узнать отрезок табулирования
-    float k = B.tab(left_,right_,point_);//6) выполнить табулирование функции
-    if (k != 0)
-    {
+    int k = B.tabulate();//6) выполнить табулирование функции
        //B.rec(k);
         //
        //
-    }
-    else 
-        cout << "Введите правильно левую и правую границы " << endl;//7) выдать результаты табулирования
+    cout << "Результаты табулирования в файле :" << endl;//7) выдать результаты табулирования
+    B.read_file();
     system("pause");
 }
 /*int item(char menu[][15], int nmenu) {//
