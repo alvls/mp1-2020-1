@@ -15,16 +15,13 @@ float sinus(float j)
 }
 int main()
 {
-    //char menu1[5][15] = { "1)экспонента","2)косинус","3)синус" };
     setlocale(LC_ALL, "Russian");
-   // int choice = item(menu1, 5);
-    Tab A;//1) задать текущую функцию
+    Tab A;
     cout << "A:" << endl;
     cout << "Количество точек табулирования point = " << A.getpoint() << endl;//3) узнать текущее число точек табулирования
     cout << "Левая граница табулирования = " << A.getleft() << endl;
     cout << "Правая граница табулирования = " << A.getright() << endl;
-    //int choice;
-    //cin >> choice;
+
     Tab B(2,18,4,exponenta);
     cout << "A = B" << endl;
     A = B;
@@ -49,18 +46,25 @@ int main()
     cout << "Число точек табулирования point = " << B.getpoint() << endl;
     cout << "Отрезок табулирования  : " <<" left= "<<B.getleft() << " right= " << B.getright() << endl;//5) узнать отрезок табулирования
     int k = B.tabulate();//6) выполнить табулирование функции
-       //B.rec(k);
-        //
-       //
-    cout << "Результаты табулирования в файле :" << endl;//7) выдать результаты табулирования
+    cout << "Результаты табулирования:" << endl;//7) выдать результаты табулирования
+    B.save_to_file(k);
     B.read_file();
     system("pause");
 }
-/*int item(char menu[][15], int nmenu) {//
+/*
+//char menu1[5][15] = { "1)экспонента","2)косинус","3)синус" };
+// int choice = item(menu1, 5);
+    //int choice;
+    //cin >> choice;
+    Tab A;//1) задать текущую функцию
+int item(char menu[][15], int nmenu) {//
     int i, k;
     for (i = 0; i < nmenu; i++)
         printf("%s\n", menu[i]);
     cin >> k;
     return k;
+      //B.rec(k);
+        //
+       //
 }*/
 //unum ={}

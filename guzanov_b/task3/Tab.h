@@ -17,18 +17,15 @@ private:
 	float step;
 	float (*tabfunc)(float);
 	float* arr;
-	int size;
 public:
-	
-	Tab(float _left = 0, float _right = 10.0, int _point = 1, float(*funz)(float) = [](float i) {return i * i * i; },int _n=500/*float (*func)(float) =  */)//1) задать текущую функцию
+	Tab(float _left = 0, float _right = 10.0, int _point = 1, float(*funz)(float) = [](float i) {return i * i * i; })//1) задать текущую функцию
 	{
 		left = _left;
 		right = _right;
 		point = _point;
 		tabfunc = funz;
-		size = _n;
-		arr = new float[size];
-		for (int i = 0; i < size; i++)
+		arr = new float[point];
+		for (int i = 0; i < point; i++)
 		{
 			arr[i] = 0;
 		}
@@ -36,25 +33,7 @@ public:
 	~Tab()
 	{
 		delete[] arr;
-		std::cout << "Destructor works!" << endl;
 	}
-	/*float& operator[](int index)  // задать/узнать элемент массива значений табулирования по его индексу,
-	{
-		float error = 2147483647;
-		try
-		{
-			if ((index < 0) || (index >= size)) {
-				throw("Error!An item with this index does not exist. ");
-			}
-			return arr[index];
-		}
-		catch (char* str)
-		{
-			cout << str << endl;
-			return error;
-		}
-	};
-	*/
 	float tabulate()
 	{
 		float sum;
@@ -64,51 +43,35 @@ public:
 		int flag = 0;
 		sect = right - left;
 		step = sect / point;
-		//try
-		//{
 			if (right > left)
-				//throw "Error right is beter left ";
+				
 			for (i = left; i <= sect; i += step)
 			{
 				val = tabfunc(i);
-				//cout << i <<"  "<< val <<endl;
-				save_to_file(val,flag);
+				arr[flag] = val;
+				
 				flag++;
 			}
-			
-			//read_file();
 			cout << endl;
-			cout << "Результаты табулирования в классе :" << endl;//7) выдать результаты табулирования
-			for(j=0;j<flag;j++)
-			cout << arr[j] << endl;
-		//}
-		/*catch (char* err)
-		{
-			cout << err << endl;
-			return flag;
-		}*/
+			
 		return flag;
 	}
-	void save_to_file(float valz,int flag)//8) сохранить результаты табулирования в файл
+	void save_to_file(int flag)//8) сохранить результаты табулирования в файл
 	{
 		string f = "file.txt";
 		ofstream fout;
 		fout.open(f, ofstream::app);
-		//try
-		//{
+	
 		if (fout.is_open()) {
-			//		throw "File is not open";
-			fout << valz;
-			arr[flag] = valz;
-			fout << "\n";
+			
+			
+			for (int i = 0; i < flag; i++) 
+			{
+				fout << arr[i];
+				fout << "\n";
+			}
 		}
-		//}
-		/*catch (string lin)
-		{
-			cout << lin << endl;
-		}
-		fout.close();
-		*/
+		
 	};
 	void read_file()
 	{
@@ -126,7 +89,6 @@ public:
 			remove("file.txt");
 		}
 	}
-
 	void setpoint(float pointz)//2) задать текущее число точек табулирования
 	{
 		point = pointz;
@@ -143,7 +105,7 @@ public:
 	{
 		return left;
 	};
-	void setright(float rightz)//4) задать левую границу табулирования
+	void setright(float rightz)//4) задать правую границу табулирования
 	{
 		right = rightz;
 	};
@@ -153,14 +115,17 @@ public:
 	};
 	Tab& operator=(const Tab& tmp)//1!!!
 	{
+		this->left = tmp.left;
 		this->right = tmp.right;
-		this->point = tmp.point;
 		this->tabfunc = tmp.tabfunc;
-		if (this->size != tmp.size)
-			delete [] arr;
-		arr = new float[size];
-		size = tmp.size;
-		for (int i = 0; i < size; i++)
+		if (this->point != tmp.point)
+		{
+			delete[] arr;
+			this->point = tmp.point;
+			arr = new float[point];
+		}
+		
+		for (int i = 0; i < point; i++)
 		{
 			arr[i] = tmp.arr[i];
 		}
@@ -168,6 +133,7 @@ public:
 	};
 
 };
+/*float (*func)(float) =  */
 //char str1[30] = "iz";
 		//char str2[30] = "valz";
 		//char s[] = "                                                                                       ";
@@ -234,3 +200,44 @@ public:
 		{
 			return error;
 		}*/
+		/*float& operator[](int index)  // задать/узнать элемент массива значений табулирования по его индексу,
+			{
+				float error = 2147483647;
+				try
+				{
+					if ((index < 0) || (index >= size)) {
+						throw("Error!An item with this index does not exist. ");
+					}
+					return arr[index];
+				}
+				catch (char* str)
+				{
+					cout << str << endl;
+					return error;
+				}
+			};
+			*/
+			//try
+					//{
+            //throw "Error right is beter left ";
+            //cout << i <<"  "<< val <<endl;
+//read_file();
+//try
+		//{
+//}
+		/*catch (char* err)
+		{
+			cout << err << endl;
+			return flag;
+		}*/
+		//		throw "File is not open";
+//}
+		/*catch (string lin)
+		{
+			cout << lin << endl;
+		}
+		fout.close();
+		*/
+		//cout << "Результаты табулирования в классе :" << endl;//7) выдать результаты табулирования
+					//for(j=0;j<flag;j++)
+					//cout << arr[j] << endl;
