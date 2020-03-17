@@ -101,7 +101,7 @@ public:
 		{
 			if (englword == eng_word[i])
 			{
-				eng_word[i] = russword;
+				rus_word[i] = russword;
 			}
 		}
 	}
