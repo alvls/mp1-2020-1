@@ -5,7 +5,8 @@
 class Tabulator
 {
 private:
-	int points, limit_1, limit_2;
+	int points;
+	double limit_1, limit_2;
 	double *values;
 	double (*func)(double x);
 public:
@@ -15,7 +16,7 @@ public:
 		points = 0;
 		limit_1 = 0;
 		limit_2 = 0;
-		values = new double[10];
+		values = new double[points+2];
 	}
 	Tabulator(const Tabulator& other)
 	{
@@ -23,8 +24,8 @@ public:
 		points = other.points;
 		limit_1 = other.limit_1;
 		limit_2 = other.limit_2;
-		values = new double[10];
-		for (int i = 0; i < 9; i++)
+		values = new double[points+2];
+		for (int i = 0; i < points+2; i++)
 			values[i] = other.values[i];
 	}
 	~Tabulator()
@@ -37,46 +38,50 @@ public:
 	}
 	void set_points(int segments)
 	{
+		delete[] values;
 		points = segments;
+		values = new double[points + 2];
 	}
-	int set_limit_1(int edge_1)
+	void set_limit_1(double edge_1)
 	{
 		limit_1 = edge_1;
-		return limit_1;
 	}
-	int set_limit_2 (int edge_2)
+	void set_limit_2 (double edge_2)
 	{
 		limit_2 = edge_2;
+	}
+	int get_points()
+	{
+		return points;
+	}
+	int get_limit_1()
+	{
+		return limit_1;
+	}
+	int get_limit_2()
+	{
 		return limit_2;
-	}
-	void print_points()
-	{
-		std::cout << "Current number of tab points is " << points << std::endl;
-	}
-	void print_limits()
-	{
-		std::cout << "Current tab lenght is [" << limit_1 << "; " << limit_2 << "]" << std::endl;
 	}
 	void do_tab()
 	{
-		double step;
+		double step, i;
+		int j;
 		step = ((limit_2 - limit_1) / points);
-		for (int i = limit_1, j=0; i <= limit_2; i = i + step, j++)
+		for (i = limit_1,  j=0; j <= points; i = i + step, j++)
 		{
 			values[j] = func(i);
 		}
-		values[points + 2] = func(limit_2);
 	}
 	void show_tab()
 	{
-		for (int x = 0; x < points+1; x++)
+		for (int x = 0; x <= points; x++)
 		{
 			std::cout << values[x] << std::endl;
 		}
-		std::cout << func(limit_2) << std::endl;
+		//std::cout << func(limit_2) << std::endl;
 	}
 	void save_tab(std::string path)
-	{ 
+	{
 
 		std::ofstream out;
 		out.open(path);
@@ -87,14 +92,15 @@ public:
 			out << func(limit_2) << std::endl;
 		}
 		else
-			std::cout << "Error: file was not opened" << std::endl;	
+			std::cout << "Error: file was not opened" << std::endl;
 	}
 };
 
 int main()
 {
 	Tabulator Tabulator;
-	int variable, var_func, segments, edge_1, edge_2;
+	int variable, var_func, segments;
+	double edge_1, edge_2;
 	std::string file;
 
 	while (true)
@@ -102,13 +108,11 @@ int main()
 		std::cout << "What is needed?" << std::endl
 			<< "1)Set current function" << std::endl
 			<< "2)Set current number of tab points" << std::endl
-			<< "3)Get current number of tab points" << std::endl
-			<< "4)Set distance of tabulation" << std::endl
-			<< "5)Get distance of tabulation" << std::endl
-			<< "6)Tabulate" << std::endl
-			<< "7)Show results of tabulation" << std::endl
-			<< "8)Save results of tabulation" << std::endl
-			<< "9)Exit" << std::endl
+			<< "3)Set distance of tabulation" << std::endl
+			<< "4)Tabulate" << std::endl
+			<< "5)Show results of tabulation" << std::endl
+			<< "6)Save results of tabulation" << std::endl
+			<< "7)Exit" << std::endl
 			<< "~~~~~~~~~~~~~~~~~~~" << std::endl;
 		std::cin >> variable;
 		std::cout << "~~~~~~~~~~~~~~~~~~~" << std::endl;
@@ -149,9 +153,6 @@ int main()
 			Tabulator.set_points(segments);
 			break;
 		case 3:
-			Tabulator.print_points();
-			break;
-		case 4:
 			std::cout << "Enter first limit: ";
 			std::cin >> edge_1;
 			Tabulator.set_limit_1(edge_1);
@@ -159,23 +160,20 @@ int main()
 			std::cin >> edge_2;
 			Tabulator.set_limit_2(edge_2);
 			break;
-		case 5:
-			Tabulator.print_limits();
-			break;
-		case 6:
+		case 4:
 			Tabulator.do_tab();
 			std::cout << "Tabulated!" << std::endl;
 			break;
-		case 7:
+		case 5:
 			Tabulator.show_tab();
 			break;
-		case 8:
+		case 6:
 			std::cout << "Enter the path where you want to save the data (only english names!)" << std::endl;
 			std::cin >> file;
 			Tabulator.save_tab(file);
 			std::cout << "Saved!" << std::endl;
 			break;
-		case 9:
+		case 7:
 			return 0;
 		}
 	}
