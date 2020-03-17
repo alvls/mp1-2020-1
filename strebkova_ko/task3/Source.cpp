@@ -24,27 +24,17 @@ public:
 		function = f;
 	}
 
-	void SetLimits(double _downlim, double _uplim, int& k)
+	void SetLimits(double _downlim, double _uplim)
 	{
 		downlim = _downlim;
 		uplim = _uplim;
-		if ((k >= 3) && (k <= 5))
-		{
-			downlim = downlim / 180 * M_PI;
-			uplim = uplim / 180 * M_PI;
-		}
 	}
 
-	void GetLimits(double& _downlim, double& _uplim, int& k)
+	void GetLimits(double& _downlim, double& _uplim)
 	{
 		
 		_downlim = downlim;
 		_uplim = uplim;
-		if ((k >= 3) && (k <= 5))
-		{
-			_downlim = _downlim * 180 / M_PI;
-			_uplim = _uplim * 180 / M_PI;
-		}
 	}
 
 	void SetNumber(int _n)
@@ -97,6 +87,16 @@ public:
 		return *this;
 	}
 
+	Integral(const Integral &_F)
+	{
+		function = _F.function;
+		downlim = _F.downlim;
+		uplim = _F.uplim;
+		n = _F.n;
+		mode = _F.mode;
+		result = _F.result;
+	}
+
 	~Integral() {}
 };
 
@@ -119,7 +119,7 @@ void main()
 		cin >> downlim;
 		cout << "Введите правую границу интегрирования:" << endl;
 		cin >> uplim;
-		F.SetLimits(downlim, uplim, num_of_func);
+		F.SetLimits(downlim, uplim);
 		cout << "Введите количество отрезков интегрирования" << endl;
 		int n;
 		cin >> n;
@@ -131,7 +131,7 @@ void main()
 		F.Calculate();
 		F.ShowResult();
 		double down, up;
-		F.GetLimits(down, up, num_of_func);
+		F.GetLimits(down, up);
 		cout << "Пределы интегрирования: от " << down << " до " << up << endl;
 		cout << "Вычислить новый интеграл? (1 - Да, 0 - Нет)" << endl;
 		cin >> flag;
