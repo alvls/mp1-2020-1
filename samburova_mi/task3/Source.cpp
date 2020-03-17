@@ -78,7 +78,6 @@ public:
 		{
 			std::cout << values[x] << std::endl;
 		}
-		//std::cout << func(limit_2) << std::endl;
 	}
 	void save_tab(std::string path)
 	{
