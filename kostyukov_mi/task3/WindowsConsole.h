@@ -252,7 +252,7 @@ char getKey()
     char ch;
     ch = _getch();
     if (ch == 13) return KB_ENTER;
-    if (ch != 224) return KB_DEFAULT;
+    if (ch != -32) return KB_DEFAULT;
     ch = _getch();
     
     switch (ch)
