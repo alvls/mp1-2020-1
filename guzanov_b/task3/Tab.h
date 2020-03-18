@@ -57,6 +57,28 @@ public:
 			
 		return flag;
 	}
+	void read_file()
+	{
+		string f = "file.txt";
+		ifstream fin;
+		fin.open(f);
+		string s;
+		if (fin.is_open()) {
+			int i = 0;
+			//while (!fin.eof())
+			//{
+				for (int i = 0; i < point;i++)
+				{
+				//getline(arr[i], s);
+				fin >> arr[i];
+				cout << arr[i] << endl;
+				}
+			//}
+			cout << endl;
+			fin.close();
+			remove("file.txt");
+		}
+	}
 	//float(*getArray)()
 	//{
 	//	return arr;
@@ -245,10 +267,10 @@ public:
 			int i = 0;
 			while (!fin.eof())
 			{
-				//for (int i = 0; i < point; i++)
+				//for (int i = 0; i < point;)
 				//{
 					getline(fin, s);
-					arr[i++] = stof(s);
+					fin>>arr[i++];
 				//}
 				//cout << s << endl;
 			}
