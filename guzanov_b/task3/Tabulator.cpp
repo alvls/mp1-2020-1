@@ -21,7 +21,6 @@ int main()
     cout << "Количество точек табулирования point = " << A.getpoint() << endl;//3) узнать текущее число точек табулирования
     cout << "Левая граница табулирования = " << A.getleft() << endl;
     cout << "Правая граница табулирования = " << A.getright() << endl;
-
     Tab B(2,18,4,exponenta);
     cout << "A = B" << endl;
     A = B;
@@ -48,7 +47,7 @@ int main()
     int k = B.tabulate();//6) выполнить табулирование функции
     cout << "Результаты табулирования:" << endl;//7) выдать результаты табулирования
     B.save_to_file(k);
-    B.read_file();
+    B.print_screen();//считали из поля и вывели на экран
     system("pause");
 }
 /*
@@ -68,3 +67,6 @@ int item(char menu[][15], int nmenu) {//
        //
 }*/
 //unum ={}
+//B.read_file();
+//cчитали из файла и вывели на экран
+ // float *pcell = B.getArray();

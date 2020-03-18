@@ -24,7 +24,7 @@ public:
 		right = _right;
 		point = _point;
 		tabfunc = funz;
-		arr = new float[point];
+		arr = new float[point];//
 		for (int i = 0; i < point; i++)
 		{
 			arr[i] = 0;
@@ -52,10 +52,15 @@ public:
 				
 				flag++;
 			}
+			
 			cout << endl;
 			
 		return flag;
 	}
+	//float(*getArray)()
+	//{
+	//	return arr;
+	//}
 	void save_to_file(int flag)//8) сохранить результаты табулирования в файл
 	{
 		string f = "file.txt";
@@ -70,24 +75,13 @@ public:
 				fout << arr[i];
 				fout << "\n";
 			}
-		}
-		
+		}	
 	};
-	void read_file()
+	
+	void print_screen()
 	{
-		string f = "file.txt";
-		ifstream fin;
-		fin.open(f);
-		string s;
-		if (fin.is_open()) {
-			while (!fin.eof())
-			{
-				getline(fin, s);
-				cout << s << endl;
-			}
-			fin.close();
-			remove("file.txt");
-		}
+		for (int i = 0; i < point; i++)
+			cout << arr[i] << endl;
 	}
 	void setpoint(float pointz)//2) задать текущее число точек табулирования
 	{
@@ -101,7 +95,7 @@ public:
 	{
 	    left = leftz;
 	};
-	float getleft()//5) узнать отрезок табулирования
+	float getleft()//5) узнать левую границу табулирования
 	{
 		return left;
 	};
@@ -109,7 +103,7 @@ public:
 	{
 		right = rightz;
 	};
-	float getright()//5) узнать отрезок табулирования
+	float getright()//5) узнать правую границу табулирования
 	{
 		return right;
 	};
@@ -241,3 +235,25 @@ public:
 		//cout << "Результаты табулирования в классе :" << endl;//7) выдать результаты табулирования
 					//for(j=0;j<flag;j++)
 					//cout << arr[j] << endl;
+/*void read_file()
+	{
+		string f = "file.txt";
+		ifstream fin;
+		fin.open(f);
+		string s;
+		if (fin.is_open()) {
+			int i = 0;
+			while (!fin.eof())
+			{
+				//for (int i = 0; i < point; i++)
+				//{
+					getline(fin, s);
+					arr[i++] = stof(s);
+				//}
+				//cout << s << endl;
+			}
+			fin.close();
+			remove("file.txt");
+		}
+	}
+	*/
