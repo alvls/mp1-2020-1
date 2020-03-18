@@ -70,45 +70,78 @@ public:
 	friend void FormulaMember(TeilorFormuls& fun);
 	double ValueMember(int number)
 	{
+		float e = exp(1.0);
 		switch (NFunction)
 		{
-		case 1:
-		{
-			return pow(x, 2 * number - 1) / factorial(2 * number - 1);
-		}
-		case 2:
-		{
-			return pow(x, 2 * number - 2) / factorial(2 * number - 2);
-		}
-		case 3:
-		{
-			return pow(x, number - 1) / factorial(number - 1);
-		}
+			case 1:
+			{
+				double curTerm = x;
+				double reference = sin(x);
+				for (int i = 3; fabs(res - reference) > e && i < n; i += 2)
+				{
+					curTerm *= (-1) * (x * x) / ((i - 1) * i);
+				}
+				return curTerm;
+			}
+			case 2:
+			{
+				double curTerm = 1;
+				double reference = cos(x);
+				for (i = 2; fabs(res - reference) > e && i < n; i += 2)
+				{
+					curTerm *= (-1) * (x * x) / ((i - 1) * i);
+				}
+				return curTerm;
+			}
+			case 3:
+			{
+				double curTerm = 1;
+				for (int i = 1; i < number; i++)
+				{
+					curTerm *= x / i;
+				}
+				return curTerm;
+			}
 		}
 	}
 	double ValueSeries()
 	{
 		double value = 0.0;
+		float e = exp(1.0);
 		switch (NFunction)
 		{
-		case 1:
-		{
-			for (int i = 0; i < n; i++)
-				value = value + pow(-1, i) * pow(x, 2 * i + 1) / factorial(2 * i + 1);
-			break;
-		}
-		case 2:
-		{
-			for (int i = 0; i < n; i++)
-				value = value + pow(-1, i) * pow(x, 2 * i) / factorial(2 * i);
-			break;
-		}
-		case 3:
-		{
-			for (int i = 0; i < n; i++)
-				value = value + pow(x, i) / factorial(i);
-			break;
-		}
+			case 1:
+			{
+				double curTerm = x;
+				double reference = sin(x);
+				for (int i = 3; fabs(res - reference) > e && i < n; i += 2)
+				{
+					curTerm *= (-1) * (x * x) / ((i - 1) * i);
+					value += curTerm;
+				}
+				break;
+			}
+			case 2:
+			{
+				double curTerm = 1;
+				double reference = cos(x);
+				for (i = 2; fabs(res - reference) > e && i < n; i += 2)
+				{
+					curTerm *= (-1) * (x * x) / ((i - 1) * i);
+					value += curTerm;
+				}
+				break;
+			}
+			case 3:
+			{
+				double curTerm = 1;
+				for (int i = 1; i < number; i++)
+				{
+					curTerm *= x / i;
+					value += curTerm;
+				}
+				break;
+			}
 		}
 		return value;
 	}
@@ -135,49 +168,48 @@ void FormulaMember(TeilorFormuls& fun)
 {
 	switch (fun.NFunction)
 	{
-	case 1:
-	{
-		cout << "sin(x) = ";
-		for (int i = 0; i < fun.n; i = i++)
+		case 1:
 		{
-			if (i % 2 == 0)
-				cout << " + ";
-			else
-				cout << " - ";
-			cout << "x^" << 2 * i + 1 << "/" << 2 * i + 1 << "!";
+			cout << "sin(x) = ";
+			for (int i = 0; i < fun.n; i = i++)
+			{
+				if (i % 2 == 0)
+					cout << " + ";
+				else
+					cout << " - ";
+					cout << "x^" << 2 * i + 1 << "/" << 2 * i + 1 << "!";
+			}
+			cout << endl;
+			break;
 		}
-		cout << endl;
-		break;
-	}
-	case 2:
-	{
-		cout << "cos(x) = ";
-		for (int i = 0; i < fun.n; i++)
+		case 2:
 		{
-			if (i % 2 == 0)
-				cout << " + ";
-			else
-				cout << " - ";
-			cout << "x^" << 2 * i << "/" << 2 * i << "!";
+			cout << "cos(x) = ";
+			for (int i = 0; i < fun.n; i++)
+			{
+				if (i % 2 == 0)
+					cout << " + ";
+				else
+					cout << " - ";
+					cout << "x^" << 2 * i << "/" << 2 * i << "!";
+			}
+			cout << endl;
+			break;
 		}
-		cout << endl;
-		break;
-	}
-	case 3:
-	{
-		cout << "exp(x) = ";
-		for (int i = 0; i < fun.n; i++)
+		case 3:
 		{
-			cout << " + x^" << i << "/" << i << "!";
+			cout << "exp(x) = ";
+			for (int i = 0; i < fun.n; i++)
+			{
+				cout << " + x^" << i << "/" << i << "!";
+			}
+			cout << endl;
+			break;
 		}
-		cout << endl;
-		break;
-		break;
-	}
-	default:
-	{
-		cout << "Invalid input" << endl;
-	}
+		default:
+		{
+			cout << "Invalid input" << endl;
+		}
 	}
 }
 int main()
@@ -210,58 +242,58 @@ int main()
 		cin >> c;
 		switch (c)
 		{
-		case 1:
-		{
-			if (f3.DiscoverFunction() == 1)
-				cout << "Current function: sin(x)\n" << endl;
-			if (f3.DiscoverFunction() == 2)
-				cout << "Current function: cos(x)\n" << endl;
-			if (f3.DiscoverFunction() == 3)
-				cout << "Current function: exp(x)\n" << endl;
-			break;
-		}
-		case 2:
-		{
-			cout << "Quantity of rows:\n" << f3.DiscoverMemberSeries() << endl;
-			break;
-		}
-		case 3:
-		{
-			cout << "The calculation point:\n" << f3.DiscoverX() << endl;
-			break;
-		}
-		case 4:
-		{
-			cout << "\n Formula of the row:\n" << endl;
-			FormulaMember(f3);
-			break;
-		}
-		case 5:
-		{
-			cout << "\n Please enter the member of the row to be calculated:";
-			cin >> d;
-			cout << "Value of the row in this number: " << d << " at the point " << f3.DiscoverX() << " = " << f3.ValueMember(d) << endl;
-			break;
-		}
-		case 6:
-		{
-			cout << "\n Value of the row of a given function at the point " << f3.DiscoverX() << " = " << f3.ValueSeries() << endl;
-			break;
-		}
-		case 7:
-		{
-			cout << "Deviation from the reference value: " << f3.Fault() << endl;
-			break;
-		}
-		case 8:
-		{
-			check = 1;
-			break;
-		}
-		default:
-		{
-			cout << "Invalid input" << endl;
-		}
+			case 1:
+			{
+				if (f3.DiscoverFunction() == 1)
+					cout << "Current function: sin(x)\n" << endl;
+				if (f3.DiscoverFunction() == 2)
+					cout << "Current function: cos(x)\n" << endl;
+				if (f3.DiscoverFunction() == 3)
+					cout << "Current function: exp(x)\n" << endl;
+				break;
+			}
+			case 2:
+			{
+				cout << "Quantity of rows:\n" << f3.DiscoverMemberSeries() << endl;
+				break;
+			}
+			case 3:
+			{
+				cout << "The calculation point:\n" << f3.DiscoverX() << endl;
+				break;
+			}
+			case 4:
+			{
+				cout << "\n Formula of the row:\n" << endl;
+				FormulaMember(f3);
+				break;
+			}
+			case 5:
+			{
+				cout << "\n Please enter the member of the row to be calculated:";
+				cin >> d;
+				cout << "Value of the row in this number: " << d << " at the point " << f3.DiscoverX() << " = " << f3.ValueMember(d) << endl;
+				break;
+			}
+			case 6:
+			{
+				cout << "\n Value of the row of a given function at the point " << f3.DiscoverX() << " = " << f3.ValueSeries() << endl;
+				break;
+			}
+			case 7:
+			{
+				cout << "Deviation from the reference value: " << f3.Fault() << endl;
+				break;
+			}
+			case 8:
+			{
+				check = 1;
+				break;
+			}
+			default:
+			{
+				cout << "Invalid input" << endl;
+			}
 		}
 	}
 	system("pause");
