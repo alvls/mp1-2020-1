@@ -6,73 +6,98 @@
 #include <Windows.h>
 using namespace std;
 
-class Dictionary
+class Translation_Dictionary
 {
+public:
+	Translation_Dictionary();
+	Translation_Dictionary(const Translation_Dictionary& str);					//конструктор копирования
+	Translation_Dictionary& operator=(const Translation_Dictionary& str);		//оператор присваивания
+	~Translation_Dictionary();
+	void enter_words(string, string);											//добавить слово в словарь
+	void console_output();														//вывод на консоль
+	string eng_translation(string);												//узнать перевод слова
+	bool сheck_word(string);													//наличие слова в словаре
+	bool change_translation(string, string);									//изменить перевод
+	int get_amount();															//число слов в словаре
+	void file_save(string);														//сохранить в файл
+	void read_file(string);														//прочитать из файла
 private:
 	int l;
 	int len;
-	string* rus;
-	string* eng;
-public:
-	Dictionary();
-	~Dictionary();
-	void add_new_word(string, string);			//добавить слово в словарь
-	void output();								//вывод
-	string eng_translete(string);				//узнать перевод слова
-	bool сheck_word(string);					//наличие слова в словаре
-	bool change_translation(string, string);	//изменить перевод
-	int get_amount();							//число слов
-	void saved_to_file(string);					//сохранить в файл
-	void read_from_file(string);				//прочитать из файла
+	string* rus;		//массив русских слов
+	string* eng;		//массив английских слов
 };
 
-Dictionary::Dictionary()
+Translation_Dictionary::Translation_Dictionary()
 {
 	l = 0;
 	len = 100;
 	eng = new string[len];
 	rus = new string[len];
 }
-Dictionary::~Dictionary()
+Translation_Dictionary& Translation_Dictionary::operator=(const Translation_Dictionary& str)
+{
+	if (len != str.len)
+	{
+		delete[] rus;
+		delete[] eng;
+		len = str.len;
+		rus = new string[len];
+		eng = new string[len];
+	}
+	for (int i = 0; i < str.len; i++)
+	{
+		rus[i] = str.rus[i];
+		eng[i] = str.eng[i];
+	}
+	return *this;
+}
+Translation_Dictionary::Translation_Dictionary(const Translation_Dictionary& str)
+{
+	len = str.len;
+	rus = new string [len];
+	eng = new string[len];
+	for (int i = 0; i < len; i++)
+	{
+		rus[i] = str.rus[i];
+		eng[i] = str.eng[i];
+	}
+}
+Translation_Dictionary::~Translation_Dictionary()
 {
 	delete[]eng;
 	delete[]rus;
 }
-void Dictionary::add_new_word(string r, string e)
+void Translation_Dictionary::enter_words(string my_rus_word, string my_eng_word)
 {
-		rus[l] = r;
-		eng[l] = e;
-		l++;
+		rus[l] = my_rus_word;
+		eng[l] = my_eng_word;
+		l = l + 1;
 }
-void Dictionary::output()
+void Translation_Dictionary::console_output()
+{
+	for (int i = 0; i < l; i++)        
+		cout << rus[i] << " - " << eng[i] <<endl;
+}
+string Translation_Dictionary::eng_translation(string my_rus_word)
 {
 	for (int i = 0; i < l; i++)
 	{
-		cout << rus[i];
-		cout << " - ";
-		cout << eng[i];
-		cout << endl;
-	}
-}
-string Dictionary::eng_translete(string r)
-{
-	for (int i = 0; i < l; i++)
-	{
-		if (rus[i] == r)
+		if (rus[i] == my_rus_word)
 			return eng[i];
 	}
 	return string();
 }
-bool Dictionary::сheck_word(string r)
+bool Translation_Dictionary::сheck_word(string my_rus_word)
 {
 	for (int i = 0; i < l; i++)
 	{
-		if (r == rus[i])
+		if (my_rus_word == rus[i])
 			return true;
 	}
 	return false;
 }
-bool Dictionary::change_translation(string a, string b)
+bool Translation_Dictionary::change_translation(string a, string b)
 {
 	if (сheck_word(a) == false)
 	{
@@ -88,11 +113,11 @@ bool Dictionary::change_translation(string a, string b)
 	}
 	return true;
 }
-int Dictionary::get_amount()
+int Translation_Dictionary::get_amount()
 {
 	return l;
 }
-void Dictionary::saved_to_file(string name)
+void Translation_Dictionary::file_save(string name)
 {
 	FILE* out;
 	fopen_s(&out, name.c_str(), "w");
@@ -101,11 +126,10 @@ void Dictionary::saved_to_file(string name)
 	{
 		fprintf(out, "%s - %s\n", rus[i].c_str(), eng[i].c_str());
 	}
-
 	fclose(out);
 }
 
-void Dictionary::read_from_file(string name)
+void Translation_Dictionary::read_file(string name)
 {
 	FILE* in;
 	errno_t err = fopen_s(&in, name.c_str(), "r");
@@ -113,14 +137,15 @@ void Dictionary::read_from_file(string name)
 	{
 		return;
 	}
-	char r[100], e[100];
+	char my_rus_word[100];
+	char my_eng_word[100];
 	l = 0;
-	while (fgets(r, 100, in))
+	while (fgets(my_rus_word, 100, in))
 	{
-		r[strlen(r) - 1] = 0;
-		char* s = strchr(r, ' ');
+		my_rus_word[strlen(my_rus_word) - 1] = 0;
+		char* s = strchr(my_rus_word, ' ');
 		*s = 0;
-		rus[l] = string(r);
+		rus[l] = string(my_rus_word);
 		eng[l] = string(s + 3);
 		l++;
 	}
@@ -132,59 +157,98 @@ int main(void)
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 
-	Dictionary Sl;
-	cout << "Программа русско-английский словарь" << endl;
-	Sl.read_from_file("Словарь.txt");
-
-	Sl.output();
-
-	string r, e;
-	int w;
-	while (true)
+	Translation_Dictionary Sl;
+	Sl.read_file("Dictionary.txt");
+	Sl.console_output();
+	int a = 0;
+	while (a != 7)
 	{
-		cout << "Введите слово на русском: ";
-		cin >> r;
-		cout << "Введите его перевод на английский: ";
-		cin >> e;
-		Sl.add_new_word(r, e);
-		cout << "Хотите добавить ещё слово? (1-да, 0-нет)" << endl;
-		cin >> r;
-		if (r == "0")
-			break;
-	}
-
-	Sl.output();
-
-	string a, b;
-	cout << "Введите слово для замены его перевода: ";
-	cin >> a;
-	if (Sl.сheck_word(a)==false)
-	{
-		cout << "Данное слово отсутсвует в cловаре "<< endl;
-	}
-	else if (Sl.сheck_word(a) == true)
-	{
-		cout << "Введите новый перевод: ";
-		cin >> b;
-		if (Sl.change_translation(a, b))
+		cout << endl << "Введите:" << endl << "0 - Добавить слово и его перевод в словарь" << endl << "1 - Изменить перевод указанного слова" << endl << "2 - Узнать перевод выбранного слова" << endl << "3 - Проверить наличие слова в словаре" << endl << "4 - Узнать число слов в словаре" << endl << "5 - Сохранить словарь в файл" << endl << "6 - Прочитать словарь из файла" << endl << "7 - Выйти из программы" << endl;
+		cin >> a;
+		switch (a)
 		{
-			cout << "Новый словарь: " << endl;
-			Sl.output();
+		case 0:
+		{
+			string my_rus_word, my_eng_word;
+			cout << "Введите слово по-русски: ";
+			cin >> my_rus_word;
+			cout << "Введите его перевод на английский: ";
+			cin >> my_eng_word;
+			Sl.enter_words(my_rus_word, my_eng_word);
+			break;
+		}
+		case 1:
+		{
+			string a, b;
+			cout << "Введите слово, перевод которого хотите изменить: ";
+			cin >> a;
+			if (Sl.сheck_word(a) == false)
+			{
+				cout << "Данное слово отсутсвует в cловаре " << endl;
+			}
+			else if (Sl.сheck_word(a) == true)
+			{
+				cout << "Введите новый перевод: ";
+				cin >> b;
+				if (Sl.change_translation(a, b))
+				{
+					cout << "Новый словарь: " << endl;
+					Sl.console_output();
+				}
+			}
+			break;
+		}
+		case 2:
+		{
+			string n;
+			cout << "Введите слово, чтобы узнать его перевод: ";
+			cin >> n;
+			if (Sl.сheck_word(n))
+			{
+				string p = Sl.eng_translation(n);
+				cout << p << endl;
+			}
+			else cout << "Слово отсутсвует в словаре" << endl;
+			break;
+		}
+		case 3:
+		{
+			string n;
+			cout << "Введите слово, чтобы проверить наличие: ";
+			cin >> n;
+			if (Sl.сheck_word(n))
+				cout << "Слово есть в словаре" << endl;
+			else cout << "Слово отсутсвует в словаре" << endl;
+			break;
+		}
+		case 4:
+		{
+			cout << "В словаре " << Sl.get_amount() << " " << "слов(а)" << endl;
+			break;
+		}
+		case 5:
+		{
+			Sl.file_save("Dictionary.txt");
+			cout << "Словарь сохранен"<<endl;
+			break;
+		}
+		case 6:
+		{
+			Sl.read_file("Dictionary.txt");
+			cout << "Cловарь: " << endl;
+			Sl.console_output();
+			break;
+		}
+		case 7:
+		{
+			system("pause");
+			break;
+			{
+		default:
+			cout << "Вы неправильно ввели номер. Данная функция отсутсвует" << endl;
+			break;
+			}
+		}
 		}
 	}
-
-	cout << "В словаре " << Sl.get_amount() << " " << "слов(а)" << endl;
-	string n;
-	cout << "Введите слово для перевода: ";
-	cin >> n;
-	if (Sl.сheck_word(n))
-		cout << "Слово есть в словаре" << endl;
-	else cout << "Слово отсутсвует в словаре" << endl;
-	string p = Sl.eng_translete(n);
-	cout << p << endl;
-	
-	Sl.saved_to_file("Словарь.txt");
-
-	system("pause");
-	return 0;
 }
