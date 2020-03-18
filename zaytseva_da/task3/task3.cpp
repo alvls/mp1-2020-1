@@ -70,14 +70,12 @@ public:
 	friend void FormulaMember(TeilorFormuls& fun);
 	double ValueMember(int number)
 	{
-		float e = exp(1.0);
 		switch (NFunction)
 		{
 			case 1:
 			{
 				double curTerm = x;
-				double reference = sin(x);
-				for (int i = 3; fabs(res - reference) > e && i < n; i += 2)
+				for (int i = 3; i < number; i += 2)
 				{
 					curTerm *= (-1) * (x * x) / ((i - 1) * i);
 				}
@@ -86,8 +84,7 @@ public:
 			case 2:
 			{
 				double curTerm = 1;
-				double reference = cos(x);
-				for (i = 2; fabs(res - reference) > e && i < n; i += 2)
+				for (i = 2; i < number; i += 2)
 				{
 					curTerm *= (-1) * (x * x) / ((i - 1) * i);
 				}
@@ -104,17 +101,15 @@ public:
 			}
 		}
 	}
-	double ValueSeries()
+	double ValueSeries(int number)
 	{
 		double value = 0.0;
-		float e = exp(1.0);
 		switch (NFunction)
 		{
 			case 1:
 			{
 				double curTerm = x;
-				double reference = sin(x);
-				for (int i = 3; fabs(res - reference) > e && i < n; i += 2)
+				for (int i = 3; i < number; i += 2)
 				{
 					curTerm *= (-1) * (x * x) / ((i - 1) * i);
 					value += curTerm;
@@ -124,8 +119,7 @@ public:
 			case 2:
 			{
 				double curTerm = 1;
-				double reference = cos(x);
-				for (i = 2; fabs(res - reference) > e && i < n; i += 2)
+				for (i = 2; i < number; i += 2)
 				{
 					curTerm *= (-1) * (x * x) / ((i - 1) * i);
 					value += curTerm;
@@ -277,7 +271,7 @@ int main()
 			}
 			case 6:
 			{
-				cout << "\n Value of the row of a given function at the point " << f3.DiscoverX() << " = " << f3.ValueSeries() << endl;
+				cout << "\n Value of the row of a given function at the point " << f3.DiscoverX() << " = " << f3.ValueSeries(d) << endl;
 				break;
 			}
 			case 7:
