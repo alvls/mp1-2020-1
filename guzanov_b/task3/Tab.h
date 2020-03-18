@@ -69,9 +69,8 @@ public:
 			//{
 				for (int i = 0; i < point;i++)
 				{
-				//getline(arr[i], s);
 				fin >> arr[i];
-				cout << arr[i] << endl;
+				//cout << arr[i] << endl;
 				}
 			//}
 			cout << endl;
