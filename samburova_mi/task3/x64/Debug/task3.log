@@ -1,0 +1,4 @@
+﻿  Source.cpp
+E:\каво\mp1-2020-1\samburova_mi\task3\Source.cpp(59,10): warning C4244: return: преобразование "double" в "int", возможна потеря данных
+E:\каво\mp1-2020-1\samburova_mi\task3\Source.cpp(63,10): warning C4244: return: преобразование "double" в "int", возможна потеря данных
+  task3.vcxproj -> E:\каво\mp1-2020-1\samburova_mi\x64\Debug\task3.exe
