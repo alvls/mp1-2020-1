@@ -84,6 +84,7 @@ class Menu
                     gotoxy(x+j,y+(2*verticalPadding+2)*i+verticalPadding); cout<<" ";
                 }
                 cout << commands[i].GetName() << " ";
+                gotoxy(0,0);
                 textbackground(BLACK);
             }
         }
