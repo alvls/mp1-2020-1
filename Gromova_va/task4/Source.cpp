@@ -26,10 +26,9 @@ public:
 		InitialDay = 1;
 		InitialHour = 0;
 	}
-	Thermometr ReadFile(string filename)
+	Thermometr(string filename)
 	{
 		ifstream in(filename);
-		Thermometr Therm;
 		int i = 0;
 		if (in.is_open())
 		{
@@ -40,7 +39,6 @@ public:
 			int temperature;
 			while (!in.eof())
 			{
-
 				year = 0;
 				month = 0;
 				day = 0;
@@ -64,7 +62,6 @@ public:
 			Temperature.pop_back();
 		}
 		in.close();
-		return Therm;
 	}
 	Thermometr(int year, int month, int day, int hour)
 	{
@@ -121,7 +118,6 @@ public:
 		for (int i = 0; i < 24; i++)
 		{
 			SetObservation(year, month, day, i, TempArr[i]);
-
 		}
 	}
 	double GetTemperature(int year, int month, int day, int hour)//функция,которая получает температуру в заданный период
@@ -260,7 +256,7 @@ int main(void)
 	int type = 0;
 	string Arr;
 	int month = 0, year = 0, day = 0, hours = 0;
-	Thermometr File;
+	Thermometr Temp("Temperature.txt");
 	cout << "Установите начальное наблюдение: " << endl;
 	cout << "Год - ";
 	cin >> year;
@@ -270,9 +266,8 @@ int main(void)
 	cin >> day;
 	cout << endl << "Время - ";
 	cin >> hours;
-	Thermometr Temp(year, month, day, hours);
+	Temp.SetInitialDate(year, month, day, hours);
 	Temp.CheckData(year, month, day, hours);
-	Temp.ReadFile("Temperature.txt");
 	do
 	{
 		cout << "Что вы хотите сделать:\n 1  - Узнать начальную дату и время наблюдения.\n 2 - Задать наблюдение.\n 3 - Получить температуру в заданном наблюдении.\n 4 - Здать серию наблюдений.\n 5 - Получить среднюю температуру за день/месяц/всё время.\n 6 - Получить среднюю дневную или ночную температуру за месяц.\n 7 - Сохранить наблюдение.\n 8 - Считать историю наблюдений из файла." << endl;
@@ -303,7 +298,7 @@ int main(void)
 		case 3:
 		{
 			int  m, d, h;
-			cout << "Введите данные для поиска наблюдения наблюдения:\n  " << endl;
+			cout << "Введите данные для поиска наблюдения:  " << endl;
 			cout << " 2)Месяц: " << endl;
 			cin >> m;
 			cout << " 2)День: " << endl;
