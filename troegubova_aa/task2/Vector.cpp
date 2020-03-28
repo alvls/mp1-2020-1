@@ -67,7 +67,7 @@ int main()
 	std::cout << std::setprecision(2) << std::fixed;
 
 	int *d1 = new int[12];
-	for (int i = 0; i < 12; ++i)ыыыыыы
+	for (int i = 0; i < 12; ++i)
 		d1[i] = 1 + (i + 1) * 2;
 	Vector v1(20, 6), v2(12, d1), v3(12, 15);
 	int i, act, r;

@@ -1,4 +1,4 @@
-#include <clocale>
+п»ї#include <clocale>
 #include <string>
 #include <vector>
 #include <iomanip>
@@ -23,10 +23,10 @@ std::vector<std::string> SetSongData(int i, std::string _data, std::vector<std::
 	return _Data;
 }
 
-Songbook SetSong(std::vector<std::string> _data_song, Songbook _songbook)//добавить песню
+Songbook SetSong(std::vector<std::string> _data_song, Songbook _songbook)//РґРѕР±Р°РІРёС‚СЊ РїРµСЃРЅСЋ
 {
 	std::vector<std::string> Data;
-	std::cout << "Введите данные о песне, которую хотите добавить:" << std::endl;
+	std::cout << "Р’РІРµРґРёС‚Рµ РґР°РЅРЅС‹Рµ Рѕ РїРµСЃРЅРµ, РєРѕС‚РѕСЂСѓСЋ С…РѕС‚РёС‚Рµ РґРѕР±Р°РІРёС‚СЊ:" << std::endl;
 
 	for (int i = 0; i < 6; i++)
 		Data = SetSongData(i, _data_song[i], Data);
@@ -34,14 +34,14 @@ Songbook SetSong(std::vector<std::string> _data_song, Songbook _songbook)//добав
 	return _songbook;
 }
 
-Songbook ChangeDataSong(std::vector<std::string> _data_song, Songbook _songbook)//изменить данные о песне
+Songbook ChangeDataSong(std::vector<std::string> _data_song, Songbook _songbook)//РёР·РјРµРЅРёС‚СЊ РґР°РЅРЅС‹Рµ Рѕ РїРµСЃРЅРµ
 {
 	std::string change_song, data;
 	std::vector<std::string> Data;
-	std::cout << "Введите название песни, данные которой хотите изменить: ";
+	std::cout << "Р’РІРµРґРёС‚Рµ РЅР°Р·РІР°РЅРёРµ РїРµСЃРЅРё, РґР°РЅРЅС‹Рµ РєРѕС‚РѕСЂРѕР№ С…РѕС‚РёС‚Рµ РёР·РјРµРЅРёС‚СЊ: ";
 	std::getline(std::cin, change_song);
 	std::getline(std::cin, change_song);
-	std::cout << "Введите данные о песне, которые хотите изменить:" << std::endl;
+	std::cout << "Р’РІРµРґРёС‚Рµ РґР°РЅРЅС‹Рµ Рѕ РїРµСЃРЅРµ, РєРѕС‚РѕСЂС‹Рµ С…РѕС‚РёС‚Рµ РёР·РјРµРЅРёС‚СЊ:" << std::endl;
 
 	for (int i = 0; i < 6; i++)
 	{
@@ -53,38 +53,38 @@ Songbook ChangeDataSong(std::vector<std::string> _data_song, Songbook _songbook)
 	return _songbook;
 }
 
-void GetSong(Songbook songbook)//найти песню по названию и исполнителю
+void GetSong(Songbook songbook)//РЅР°Р№С‚Рё РїРµСЃРЅСЋ РїРѕ РЅР°Р·РІР°РЅРёСЋ Рё РёСЃРїРѕР»РЅРёС‚РµР»СЋ
 {
 	std::string _name_song, _singer;
-	std::cout << "Название песни:";
+	std::cout << "РќР°Р·РІР°РЅРёРµ РїРµСЃРЅРё:";
 	std::getline(std::cin, _name_song);
 	std::getline(std::cin, _name_song);
-	std::cout << "Имя исполнителя:";
+	std::cout << "РРјСЏ РёСЃРїРѕР»РЅРёС‚РµР»СЏ:";
 	std::getline(std::cin, _singer);
 	Song get_song = songbook.GetSong(_name_song, _singer);
 	get_song.WriteCon1();
 	get_song.WriteCon2();
 }
 
-void GetSongs(Songbook songbook, int human)// выдать все песни заданного поэта, композитора, исполнителя
+void GetSongs(Songbook songbook, int human)// РІС‹РґР°С‚СЊ РІСЃРµ РїРµСЃРЅРё Р·Р°РґР°РЅРЅРѕРіРѕ РїРѕСЌС‚Р°, РєРѕРјРїРѕР·РёС‚РѕСЂР°, РёСЃРїРѕР»РЅРёС‚РµР»СЏ
 {
 	std::string _name;
-	std::cout << "Название имя:";
+	std::cout << "РќР°Р·РІР°РЅРёРµ РёРјСЏ:";
 	std::getline(std::cin, _name);
 	std::getline(std::cin, _name);
 	Songbook get_songbook = songbook.GetSongsData(_name, human);
 	get_songbook.WriteCon();
 }
 
-void GetCountSong(Songbook songbook)//выдать количество песен
+void GetCountSong(Songbook songbook)//РІС‹РґР°С‚СЊ РєРѕР»РёС‡РµСЃС‚РІРѕ РїРµСЃРµРЅ
 {
-	std::cout << "Текущее кол-во песен в песеннике: " << songbook.GetCountSong() << std::endl;
+	std::cout << "РўРµРєСѓС‰РµРµ РєРѕР»-РІРѕ РїРµСЃРµРЅ РІ РїРµСЃРµРЅРЅРёРєРµ: " << songbook.GetCountSong() << std::endl;
 }
 
 Songbook DeleteSong(Songbook songbook)
 {
 	std::string delete_song;
-	std::cout << "Введите название песни, которую хотите удалить: ";
+	std::cout << "Р’РІРµРґРёС‚Рµ РЅР°Р·РІР°РЅРёРµ РїРµСЃРЅРё, РєРѕС‚РѕСЂСѓСЋ С…РѕС‚РёС‚Рµ СѓРґР°Р»РёС‚СЊ: ";
 	std::getline(std::cin, delete_song);
 	std::getline(std::cin, delete_song);
 	songbook.DeleteSong(delete_song);
@@ -93,7 +93,7 @@ Songbook DeleteSong(Songbook songbook)
 void SaveInFile(Songbook songbook)
 {
 	songbook.SaveInFile();
-	std::cout << "Песенник сохранён в файл" << std::endl;
+	std::cout << "РџРµСЃРµРЅРЅРёРє СЃРѕС…СЂР°РЅС‘РЅ РІ С„Р°Р№Р»" << std::endl;
 }
 
 Songbook ReadFile(Songbook songbook)
@@ -110,7 +110,7 @@ int main()
 	int i, item;
 
 	std::vector<std::string> data_song
-		= { "Название песни:", "Автор слов:", "Композитор:", "Исполнитель:", "Название альбома, в который входит песня:", "Дата выпуска песни:" };
+		= { "РќР°Р·РІР°РЅРёРµ РїРµСЃРЅРё:", "РђРІС‚РѕСЂ СЃР»РѕРІ:", "РљРѕРјРїРѕР·РёС‚РѕСЂ:", "РСЃРїРѕР»РЅРёС‚РµР»СЊ:", "РќР°Р·РІР°РЅРёРµ Р°Р»СЊР±РѕРјР°, РІ РєРѕС‚РѕСЂС‹Р№ РІС…РѕРґРёС‚ РїРµСЃРЅСЏ:", "Р”Р°С‚Р° РІС‹РїСѓСЃРєР° РїРµСЃРЅРё:" };
 	Songbook(*Act_1[2])(std::vector<std::string> _data_song, Songbook _songbook) = { SetSong, ChangeDataSong };
 	void(*Act_2[3])(Songbook songbook) = { GetSong, GetCountSong, SaveInFile };
 	Songbook(*Act_3[2])(Songbook _songbook) = { DeleteSong, ReadFile };
@@ -118,7 +118,7 @@ int main()
 	while (true)
 	{
 		system("cls");
-		std::cout << "1) добавить песню\n2) изменить данные выбранной песни\n3) выдать все песни заданного поэта\n4) выдать все песни заданного композитора\n5) выдать все песни заданного исполнителя\n6) найти песню по названию и исполнителю\n7) узнать текущее число песен\n8) сохранить песенник в файл\n9) удалить песню\n10) считать песенник из файла\n";
+		std::cout << "1) РґРѕР±Р°РІРёС‚СЊ РїРµСЃРЅСЋ\n2) РёР·РјРµРЅРёС‚СЊ РґР°РЅРЅС‹Рµ РІС‹Р±СЂР°РЅРЅРѕР№ РїРµСЃРЅРё\n3) РІС‹РґР°С‚СЊ РІСЃРµ РїРµСЃРЅРё Р·Р°РґР°РЅРЅРѕРіРѕ РїРѕСЌС‚Р°\n4) РІС‹РґР°С‚СЊ РІСЃРµ РїРµСЃРЅРё Р·Р°РґР°РЅРЅРѕРіРѕ РєРѕРјРїРѕР·РёС‚РѕСЂР°\n5) РІС‹РґР°С‚СЊ РІСЃРµ РїРµСЃРЅРё Р·Р°РґР°РЅРЅРѕРіРѕ РёСЃРїРѕР»РЅРёС‚РµР»СЏ\n6) РЅР°Р№С‚Рё РїРµСЃРЅСЋ РїРѕ РЅР°Р·РІР°РЅРёСЋ Рё РёСЃРїРѕР»РЅРёС‚РµР»СЋ\n7) СѓР·РЅР°С‚СЊ С‚РµРєСѓС‰РµРµ С‡РёСЃР»Рѕ РїРµСЃРµРЅ\n8) СЃРѕС…СЂР°РЅРёС‚СЊ РїРµСЃРµРЅРЅРёРє РІ С„Р°Р№Р»\n9) СѓРґР°Р»РёС‚СЊ РїРµСЃРЅСЋ\n10) СЃС‡РёС‚Р°С‚СЊ РїРµСЃРµРЅРЅРёРє РёР· С„Р°Р№Р»Р°\n";
 		std::cin >> item;
 		if ((item == 1) || (item == 2))
 		{
@@ -141,7 +141,7 @@ int main()
 				}
 			}
 		}
-		std::cout << "Продолжить работу программы?\n1)да\n2)нет\n";
+		std::cout << "РџСЂРѕРґРѕР»Р¶РёС‚СЊ СЂР°Р±РѕС‚Сѓ РїСЂРѕРіСЂР°РјРјС‹?\n1)РґР°\n2)РЅРµС‚\n";
 		std::cin >> i;
 		if (i != 1)break;
 	}

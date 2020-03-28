@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include <fstream> 
 #include <vector>
 #include <string>
@@ -6,7 +6,7 @@
 #include <iostream>
 #include <iomanip>
 
-const std::vector<std::string> data_song = { "Название песни:", "Автор слов:", "Композитор:", "Исполнитель:", "Альбома:", "Дата выпуска:" };
+const std::vector<std::string> data_song = { "РќР°Р·РІР°РЅРёРµ РїРµСЃРЅРё:", "РђРІС‚РѕСЂ СЃР»РѕРІ:", "РљРѕРјРїРѕР·РёС‚РѕСЂ:", "РСЃРїРѕР»РЅРёС‚РµР»СЊ:", "РђР»СЊР±РѕРјР°:", "Р”Р°С‚Р° РІС‹РїСѓСЃРєР°:" };
 
 class Song
 {

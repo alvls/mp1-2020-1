@@ -1,4 +1,4 @@
-#include"Songbook.h"
+п»ї#include"Songbook.h"
 #include <iomanip>
 #include <iostream>
 #include <vector>
@@ -121,12 +121,12 @@ void Songbook::SetSong(Song new_song)
 	songs.push_back(new_song);
 }
 
-int Songbook::GetCountSong()//узнать кол-во песен в песеннике
+int Songbook::GetCountSong()//СѓР·РЅР°С‚СЊ РєРѕР»-РІРѕ РїРµСЃРµРЅ РІ РїРµСЃРµРЅРЅРёРєРµ
 {
 	return songs.size();
 }
 
-void Songbook::ChangeDataSong(std::string _song, std::vector<std::string> _data)//изменить данные о песне
+void Songbook::ChangeDataSong(std::string _song, std::vector<std::string> _data)//РёР·РјРµРЅРёС‚СЊ РґР°РЅРЅС‹Рµ Рѕ РїРµСЃРЅРµ
 {
 	size_t i;
 	for (i = 0; i < songs.size(); i++)
@@ -138,10 +138,10 @@ void Songbook::ChangeDataSong(std::string _song, std::vector<std::string> _data)
 		}
 	}
 	if (i == songs.size())
-		throw "Песенник не содержит данную песню";
+		throw "РџРµСЃРµРЅРЅРёРє РЅРµ СЃРѕРґРµСЂР¶РёС‚ РґР°РЅРЅСѓСЋ РїРµСЃРЅСЋ";
 }
 
-Song Songbook::GetSong(std::string _name_song, std::string _singer)//найти песню по назв. и исполнителю
+Song Songbook::GetSong(std::string _name_song, std::string _singer)//РЅР°Р№С‚Рё РїРµСЃРЅСЋ РїРѕ РЅР°Р·РІ. Рё РёСЃРїРѕР»РЅРёС‚РµР»СЋ
 {
 	Song song;
 	size_t i;
@@ -157,12 +157,12 @@ Song Songbook::GetSong(std::string _name_song, std::string _singer)//найти песню
 	}
 	if (i == songs.size())
 	{
-		throw "Данная песня не содержится в песеннике";
+		throw "Р”Р°РЅРЅР°СЏ РїРµСЃРЅСЏ РЅРµ СЃРѕРґРµСЂР¶РёС‚СЃСЏ РІ РїРµСЃРµРЅРЅРёРєРµ";
 	}
 	return songs[i];
 }
 
-Songbook Songbook::GetSongsData(std::string _name, int human)//выдать все песни поэта, композитора, певца
+Songbook Songbook::GetSongsData(std::string _name, int human)//РІС‹РґР°С‚СЊ РІСЃРµ РїРµСЃРЅРё РїРѕСЌС‚Р°, РєРѕРјРїРѕР·РёС‚РѕСЂР°, РїРµРІС†Р°
 {
 	size_t i;
 	Songbook _songbook;
@@ -174,11 +174,11 @@ Songbook Songbook::GetSongsData(std::string _name, int human)//выдать все песни 
 		}
 	}
 	if (_songbook.songs.size() == 0)
-		throw "Искомые песни не найдены";
+		throw "РСЃРєРѕРјС‹Рµ РїРµСЃРЅРё РЅРµ РЅР°Р№РґРµРЅС‹";
 	return _songbook;
 }
 
-void Songbook::DeleteSong(std::string _delete_song)//удалить песню
+void Songbook::DeleteSong(std::string _delete_song)//СѓРґР°Р»РёС‚СЊ РїРµСЃРЅСЋ
 {
 	size_t i;
 	for (i = 0; i < songs.size(); i++)
@@ -190,7 +190,7 @@ void Songbook::DeleteSong(std::string _delete_song)//удалить песню
 		}
 	}
 	if (i == songs.size())
-		throw "Песенник не содержит данную песню";
+		throw "РџРµСЃРµРЅРЅРёРє РЅРµ СЃРѕРґРµСЂР¶РёС‚ РґР°РЅРЅСѓСЋ РїРµСЃРЅСЋ";
 }
 
 void Songbook::WriteCon()
@@ -207,7 +207,7 @@ void Songbook::SaveInFile()
 	std::fstream file("Songbook2.txt", std::fstream::out);
 	if (!file)
 	{
-		std::cout << "Не удалось открыть файл " << std::endl;
+		std::cout << "РќРµ СѓРґР°Р»РѕСЃСЊ РѕС‚РєСЂС‹С‚СЊ С„Р°Р№Р» " << std::endl;
 		exit(1);
 	}
 	else
@@ -228,7 +228,7 @@ void Songbook::ReadFile()
 	Song song;
 	if (!file)
 	{
-		std::cout << "Не удалось открыть файл " << std::endl;
+		std::cout << "РќРµ СѓРґР°Р»РѕСЃСЊ РѕС‚РєСЂС‹С‚СЊ С„Р°Р№Р» " << std::endl;
 		exit(1);
 	}
 	else
