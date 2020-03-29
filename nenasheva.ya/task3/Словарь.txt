@@ -1,2 +1,7 @@
-рука - hand
+рука - arm
 нога - leg
+велосипед - bicycle
+машина - car
+котик - cat
+собака - dog
+коронавирус - koronavirus
