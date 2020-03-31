@@ -71,6 +71,7 @@ class SongBook
                 if ((song.getSinger() == singer) &&(song.getName() == name))
                     return song;
             }
+            return Song();
         }
         std::vector<Song> songsByAuthor(std::string author)
         {
