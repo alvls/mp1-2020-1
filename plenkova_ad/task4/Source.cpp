@@ -185,7 +185,13 @@ public:
 
 			}
 		}
-		return avg / count;
+		if (count == 0)
+		{
+			cout << "Error";
+			return 0;
+		}
+		else
+			return avg / count;
 	};
 	double AvgWeightThisMonth(string _name, int _month, int _year)
 	{
@@ -205,7 +211,13 @@ public:
 				}
 			}
 		}
-		return avg / count;
+		if (count == 0)
+		{
+			cout << "Error";
+			return 0;
+		}
+		else
+			return avg / count;
 	};
 
 	double MinWeightAllTime(string _name)
