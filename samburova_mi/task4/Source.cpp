@@ -34,19 +34,6 @@ public:
 			weekdays.push_back(other.weekdays[i]);
 		}
 	}
-
-	~Pedometer()
-	{
-		days.resize(0);
-		months.resize(0);
-		years.resize(0);
-		steps.resize(0);
-		hours_1.resize(0);
-		minutes_1.resize(0);
-		hours_2.resize(0);
-		minutes_2.resize(0);
-		weekdays.resize(0);
-	}
 	void SetFirstDate(int dayX, int monthX, int yearX)
 	{
 		firstday = dayX;
@@ -121,6 +108,7 @@ public:
 		int sum = 0;
 		for (int j = 0; j < records; j++)
 			sum = sum + steps[j];
+		if (records == 0) return -1;
 		return sum / records;
 	}
 	int GetAverageMonth(int month)
@@ -135,6 +123,7 @@ public:
 				k++;
 			}
 		}
+		if (k == 0) return -1;
 		return sum / k;
 	}
 	int GetAverageWeekDay(string weekday)
@@ -150,6 +139,7 @@ public:
 				k++;
 			}
 		}
+		if (k == 0) return -1;
 		return sum / k;
 	}
 	int* GetMaxMonth(int month)
@@ -321,16 +311,19 @@ int main()
 			cout << "Enter month: ";
 			cin >> month;
 			step = pedometer.GetAverageMonth(month);
+			if (step == -1) cout << "There is no average number of steps!";
 			cout << "Average steps in entered month is " << step << ", ";
 			break;
 		case 6:
 			step = pedometer.GetAverage();
+			if (step == -1) cout << "There is no average number of steps!";
 			cout << "Average number of steps is " << step << ", ";
 			break;
 		case 7:
 			cout << "Enter day of the week: ";
 			cin >> weekday;
 			step = pedometer.GetAverageWeekDay(weekday);
+			if (step == -1) cout << "There is no average number of steps!";
 			cout << "Average number of steps on this weekday is " << step << ", ";
 			break;
 		case 8:
