@@ -1,6 +1,6 @@
 ﻿#include <iostream>
-#include <clocale>
 #include <string>
+#include <clocale>
 #include <vector>
 #include <fstream>
 #include <Windows.h>
