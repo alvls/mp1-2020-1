@@ -10,21 +10,25 @@ const std::vector<std::string> data_song = { "Название песни:", "А
 
 class Song
 {
-	std::vector<std::string> song;
-
+	std::string name_song;
+	std::string poet;
+	std::string composer;
+	std::string singer;
+	std::string name_album;
+	std::string release_date;
 public:
 	Song();
 	Song(std::vector<std::string> _song);
+	Song(std::string _name_song, std::string _poet, std::string _composer, std::string _singer, std::string _name_album, std::string _release_date);
 	Song(const Song &_song);
 	~Song();
 
-	void ChangeData(std::vector<std::string> _data);
-	void WriteCon1();
-	void WriteCon2();
+	void Song::SetData(int index, std::string data);
+	void ChangeDataOfSong(std::vector<std::string> _data);
+	void WriteConSong();
 	std::string GetData(int index);
 	void ReadFile(std::string new_song);
-	void Song::SaveInFile1(std::fstream &file);
-	void SaveInFile2(std::fstream &file);
+	void SaveInFileSong(std::fstream &file);
 };
 
 //-------------------------------------------------------------------------------------------------------------------------------------------
@@ -38,13 +42,15 @@ public:
 	~Songbook();
 
 	void SetSong(std::vector<std::string> last_song);
-	void Songbook::SetSong(Song new_song);
+	void SetSong(Song new_song);
 	int GetCountSong();
-	void ChangeDataSong(std::string _song, std::vector<std::string> _data);
-	Song GetSong(std::string _name_song, std::string _singer);
-	Songbook GetSongsData(std::string _name, int human);
+	void ChangeDataOfSong(std::string _song, std::vector<std::string> _data);
+	Songbook GetSong(std::string _name_song, std::string _singer);
+	Songbook GetDataOfSongs(std::string _name, int human);
 	void DeleteSong(std::string _delete_song);
-	void WriteCon();
+	void Songbook::WriteConDataSong();
+	void WriteConSongbook();
+	void SaveInFileData(std::fstream &file);
 	void SaveInFile();
 	void ReadFile();
 };

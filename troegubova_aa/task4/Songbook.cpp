@@ -10,66 +10,80 @@
 
 Song::Song()
 {
-	song.resize(6);
+	name_song = " ";
+	poet = " ";
+	composer = " ";
+	singer = " ";
+	name_album = " ";
+	release_date = " ";
 }
 
 Song::Song(std::vector<std::string> _song)
 {
-	song.assign(_song.begin(), _song.end());
+	name_song = _song[0];
+	poet = _song[1];
+	composer = _song[2];
+	singer = _song[3];
+	name_album = _song[4];
+	release_date = _song[5];
 }
 
+Song::Song(std::string _name_song, std::string _poet, std::string _composer, std::string _singer, std::string _name_album, std::string _release_date) :
+	name_song(_name_song), poet(_poet), composer(_composer), singer(_singer), name_album(_name_album), release_date(_release_date)
+{}
+
 Song::Song(const Song &_song)
-{
-	song.assign(_song.song.begin(), _song.song.end());
-}
+	: name_song(_song.name_song), poet(_song.poet), composer(_song.composer), singer(_song.singer), name_album(_song.name_album), release_date(_song.release_date)
+{}
 
 Song::~Song()
 {}
 
-void Song::ChangeData(std::vector<std::string> _data)
+void Song::ChangeDataOfSong(std::vector<std::string> _data)
 {
-	song.assign(_data.begin(), _data.end());
-}
-
-void Song::WriteCon1()
-{
-	for (size_t i = 0; i < 6; i++)
-	{
-		std::cout << std::left << "*  " << std::setw(25) << data_song[i];
-	}
-	std::cout << std::endl;
-}
-
-
-void Song::WriteCon2()
-{
-	for (size_t i = 0; i < 6; i++)
-	{
-		std::cout << std::left << "*  " << std::setw(25) << song[i];
-	}
-	std::cout << std::endl;
+	name_song = _data[0];
+	poet = _data[1];
+	composer = _data[2];
+	singer = _data[3];
+	name_album = _data[4];
+	release_date = _data[5];
 }
 
 std::string Song::GetData(int index)
 {
-	return song[index];
+	std::vector<std::string> data = { name_song, poet, composer, singer, name_album, release_date };
+	return data[index];
 }
 
-void Song::SaveInFile1(std::fstream &file)
+void Song::SetData(int index, std::string data)
+{
+	std::string * SetData[6];
+	SetData[0] = &name_song;
+	SetData[1] = &poet;
+	SetData[2] = &composer;
+	SetData[3] = &singer;
+	SetData[4] = &name_album;
+	SetData[5] = &release_date;
+
+	*SetData[index] = data;
+
+}
+
+void Song::WriteConSong()
 {
 	for (size_t i = 0; i < 6; i++)
 	{
-		file << std::left << "*  " << std::setw(21) << data_song[i];
+		std::cout << std::left << "*  " << std::setw(25) << GetData(i);
 	}
-	file << std::endl;
+	std::cout << std::endl;
 }
 
-void Song::SaveInFile2(std::fstream &file)
+void Song::SaveInFileSong(std::fstream &file)
 {
 
 	for (size_t i = 0; i < 6; i++)
 	{
-		file << std::left << "*  " << std::setw(21) << song[i];
+		file << std::left << "*  " << std::setw(21) << GetData(i);
 	}
 	file << std::endl;
 }
@@ -77,22 +91,23 @@ void Song::SaveInFile2(std::fstream &file)
 void Song::ReadFile(std::string new_song)
 {
 	int pos1, pos2;
+	std::string new_data;
 	for (int i = 0; i < 6; i++)
 	{
 		if (i == 5)
 		{
 			new_song.erase(0, 3);
-			song[5] = new_song;
+			SetData(5, new_song);
 			break;
 		}
 		pos1 = new_song.find("*", 0);
 		pos2 = new_song.find("   ", 0);
-		song[i] = new_song.substr(pos1 + 3, pos2 - pos1 - 3);
+		new_data = new_song.substr(pos1 + 3, pos2 - pos1 - 3);
+		SetData(i, new_data);
 		new_song.erase(0, 1);
 		pos1 = new_song.find("*", 0);
 		new_song.erase(0, pos1);
 	}
-
 }
 
 //--------------------------------------------------------------------------------------
@@ -126,14 +141,14 @@ int Songbook::GetCountSong()//узнать кол-во песен в песен�
 	return songs.size();
 }
 
-void Songbook::ChangeDataSong(std::string _song, std::vector<std::string> _data)//изменить данные о песне
+void Songbook::ChangeDataOfSong(std::string _song, std::vector<std::string> _data)//изменить данные о песне
 {
 	size_t i;
 	for (i = 0; i < songs.size(); i++)
 	{
 		if (_song == songs[i].GetData(0))
 		{
-			songs[i].ChangeData(_data);
+			songs[i].ChangeDataOfSong(_data);
 			break;
 		}
 	}
@@ -141,9 +156,9 @@ void Songbook::ChangeDataSong(std::string _song, std::vector<std::string> _data)
 		throw "Песенник не содержит данную песню";
 }
 
-Song Songbook::GetSong(std::string _name_song, std::string _singer)//найти песню по назв. и исполнителю
+Songbook Songbook::GetSong(std::string _name_song, std::string _singer)//найти песню по назв. и исполнителю
 {
-	Song song;
+	Songbook song;
 	size_t i;
 	for (i = 0; i < songs.size(); i++)
 	{
@@ -159,10 +174,11 @@ Song Songbook::GetSong(std::string _name_song, std::string _singer)//найти 
 	{
 		throw "Данная песня не содержится в песеннике";
 	}
-	return songs[i];
+	song.SetSong(songs[i]);
+	return song;
 }
 
-Songbook Songbook::GetSongsData(std::string _name, int human)//выдать все песни поэта, композитора, певца
+Songbook Songbook::GetDataOfSongs(std::string _name, int human)//выдать все песни поэта, композитора, певца
 {
 	size_t i;
 	Songbook _songbook;
@@ -187,19 +203,38 @@ void Songbook::DeleteSong(std::string _delete_song)//удалить песню
 		{
 			songs.erase(songs.begin() + i);
 			songs.shrink_to_fit();
+			break;
 		}
 	}
 	if (i == songs.size())
 		throw "Песенник не содержит данную песню";
 }
 
-void Songbook::WriteCon()
+void Songbook::WriteConDataSong()
 {
-	songs[0].WriteCon1();
+	for (size_t i = 0; i < 6; i++)
+	{
+		std::cout << std::left << "*  " << std::setw(25) << data_song[i];
+	}
+	std::cout << std::endl;
+}
+
+void Songbook::WriteConSongbook()
+{
+	WriteConDataSong();
 	for (size_t i = 0; i < songs.size(); i++)
 	{
-		songs[i].WriteCon2();
+		songs[i].WriteConSong();
 	}
+}
+
+void Songbook::SaveInFileData(std::fstream &file)
+{
+	for (size_t i = 0; i < 6; i++)
+	{
+		file << std::left << "*  " << std::setw(21) << data_song[i];
+	}
+	file << std::endl;
 }
 
 void Songbook::SaveInFile()
@@ -212,10 +247,10 @@ void Songbook::SaveInFile()
 	}
 	else
 	{
-		songs[0].SaveInFile1(file);
+		SaveInFileData(file);
 		for (size_t i = 0; i < songs.size(); i++)
 		{
-			songs[i].SaveInFile2(file);
+			songs[i].SaveInFileSong(file);
 		}
 	}
 	file.close();

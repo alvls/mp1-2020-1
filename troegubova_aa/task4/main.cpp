@@ -49,7 +49,7 @@ Songbook ChangeDataSong(std::vector<std::string> _data_song, Songbook _songbook)
 		std::getline(std::cin, data);
 		Data.push_back(data);
 	}
-	_songbook.ChangeDataSong(change_song, Data);
+	_songbook.ChangeDataOfSong(change_song, Data);
 	return _songbook;
 }
 
@@ -61,9 +61,8 @@ void GetSong(Songbook songbook)//найти песню по названию и 
 	std::getline(std::cin, _name_song);
 	std::cout << "Имя исполнителя:";
 	std::getline(std::cin, _singer);
-	Song get_song = songbook.GetSong(_name_song, _singer);
-	get_song.WriteCon1();
-	get_song.WriteCon2();
+	Songbook get_song = songbook.GetSong(_name_song, _singer);
+	get_song.WriteConSongbook();
 }
 
 void GetSongs(Songbook songbook, int human)// выдать все песни заданного поэта, композитора, исполнителя
@@ -72,8 +71,8 @@ void GetSongs(Songbook songbook, int human)// выдать все песни з�
 	std::cout << "Название имя:";
 	std::getline(std::cin, _name);
 	std::getline(std::cin, _name);
-	Songbook get_songbook = songbook.GetSongsData(_name, human);
-	get_songbook.WriteCon();
+	Songbook get_songbook = songbook.GetDataOfSongs(_name, human);
+	get_songbook.WriteConSongbook();
 }
 
 void GetCountSong(Songbook songbook)//выдать количество песен
