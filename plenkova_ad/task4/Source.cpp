@@ -187,7 +187,6 @@ public:
 		}
 		if (count == 0)
 		{
-			cout << "Error";
 			return 0;
 		}
 		else
@@ -213,7 +212,6 @@ public:
 		}
 		if (count == 0)
 		{
-			cout << "Error";
 			return 0;
 		}
 		else
