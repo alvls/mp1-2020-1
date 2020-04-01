@@ -467,97 +467,97 @@ void main()
 		char letter, path[256];
 		switch (mode)
 		{
-		case 1:
-			cout << "Введите данные контакта:" << endl;
-			cout << "Фамилия: " << endl;
-			cin >> surname;
-			cout << "Имя: " << endl;
-			cin >> name;
-			cout << "Отчество: " << endl;
-			cin >> patronymic;
-			cout << "Телефон: " << endl;
-			cin >> phone;
-			cout << "Дата рождения:" << endl;
-			cout << "День: " << endl;
-			cin >> day;
-			cout << "Месяц: " << endl;
-			cin >> month;
-			cout << "Год: " << endl;
-			cin >> year;
-			cout << "Добавить в избранное? (1 - Да, 0 - Нет): " << endl;
-			cin >> fav;
-			list.Create_New_Contact(surname, name, patronymic, phone, day, month, year, fav);
-			break;
-		case 2:
-			i = Find_Contact(list);
-			cout << "Что хотите изменить?" << endl;
-			cout << "1)Фамилия" << endl << "2)Имя" << endl << "3)Отчество" << endl << "4)Телефон" << endl << "Дата рождения:" << endl << "5)День" << endl << "6)Месяц" << endl << "7)Год" << endl;
-			cin >> mode;
-			cout << "Введите изменение: " << endl;
-			cin >> change;
-			list.Change_Contact(i, mode, change);
-			break;
-		case 3:
-			cout << "Введите фамилию: ";
-			cin >> surname;
-			cout << endl;
-			cout << "Введите имя: ";
-			cin >> name;
-			cout << endl;
-			cout << "Введите отчество: ";
-			cin >> patronymic;
-			cout << endl;
-			i = list.Search_By_Name(surname, name, patronymic);
-			if (i != -1)
-				list[i].Show_Contact();
-			break;
-		case 4:
-			cout << "Введите телефон: ";
-			cin >> phone;
-			cout << endl;
-			i = list.Search_By_Phone(phone);
-			if (i != -1)
-				list[i].Show_Contact();
-			break;
-		case 5:
-			cout << "Введите букву: ";
-			cin >> letter;
-			cout << endl;
-			contact_numbers = list.Show_By_Letter(letter);
-			if (contact_numbers[0] != -1)
-				for (i = 0; i < contact_numbers.size(); i++)
-					list[contact_numbers[i]].Show_Contact();
+			case 1:
+				cout << "Введите данные контакта:" << endl;
+				cout << "Фамилия: " << endl;
+				cin >> surname;
+				cout << "Имя: " << endl;
+				cin >> name;
+				cout << "Отчество: " << endl;
+				cin >> patronymic;
+				cout << "Телефон: " << endl;
+				cin >> phone;
+				cout << "Дата рождения:" << endl;
+				cout << "День: " << endl;
+				cin >> day;
+				cout << "Месяц: " << endl;
+				cin >> month;
+				cout << "Год: " << endl;
+				cin >> year;
+				cout << "Добавить в избранное? (1 - Да, 0 - Нет): " << endl;
+				cin >> fav;
+				list.Create_New_Contact(surname, name, patronymic, phone, day, month, year, fav);
 				break;
-			case 6:
-				cout << list.Get_Count_Of_Contacts() << endl;
-				break;
-			case 7:
+			case 2:
 				i = Find_Contact(list);
-				list.Add_To_Favourites(i);
+				cout << "Что хотите изменить?" << endl;
+				cout << "1)Фамилия" << endl << "2)Имя" << endl << "3)Отчество" << endl << "4)Телефон" << endl << "Дата рождения:" << endl << "5)День" << endl << "6)Месяц" << endl << "7)Год" << endl;
+				cin >> mode;
+				cout << "Введите изменение: " << endl;
+				cin >> change;
+				list.Change_Contact(i, mode, change);
 				break;
-			case 8:
-				i = Find_Contact(list);
-				list.Delete_From_Favourites(i);
-				break;
-			case 9:
-				list.Show_Favourites();
-				break;
-			case 10:
-				i = Find_Contact(list);
-				list.Delete_Contact(i);
-				break;
-			case 11:
-				cout << "Введите путь к файлу: ";
-				cin >> path;
+			case 3:
+				cout << "Введите фамилию: ";
+				cin >> surname;
 				cout << endl;
-				list.Save_To_File(path);
-				break;
-			case 12:
-				cout << "Введите путь к файлу: ";
-				cin >> path;
+				cout << "Введите имя: ";
+				cin >> name;
 				cout << endl;
-				list.Load_From_File(path);
+				cout << "Введите отчество: ";
+				cin >> patronymic;
+				cout << endl;
+				i = list.Search_By_Name(surname, name, patronymic);
+				if (i != -1)
+					list[i].Show_Contact();
 				break;
+			case 4:
+				cout << "Введите телефон: ";
+				cin >> phone;
+				cout << endl;
+				i = list.Search_By_Phone(phone);
+				if (i != -1)
+					list[i].Show_Contact();
+				break;
+			case 5:
+				cout << "Введите букву: ";
+				cin >> letter;
+				cout << endl;
+				contact_numbers = list.Show_By_Letter(letter);
+				if (contact_numbers[0] != -1)
+					for (i = 0; i < contact_numbers.size(); i++)
+						list[contact_numbers[i]].Show_Contact();
+					break;
+				case 6:
+					cout << list.Get_Count_Of_Contacts() << endl;
+					break;
+				case 7:
+					i = Find_Contact(list);
+					list.Add_To_Favourites(i);
+					break;
+				case 8:
+					i = Find_Contact(list);
+					list.Delete_From_Favourites(i);
+					break;
+				case 9:
+					list.Show_Favourites();
+					break;
+				case 10:
+					i = Find_Contact(list);
+					list.Delete_Contact(i);
+					break;
+				case 11:
+					cout << "Введите путь к файлу: ";
+					cin >> path;
+					cout << endl;
+					list.Save_To_File(path);
+					break;
+				case 12:
+					cout << "Введите путь к файлу: ";
+					cin >> path;
+					cout << endl;
+					list.Load_From_File(path);
+					break;
 		}
 		cout << "Продолжить? (1 - Да, 0 - Нет)" << endl;
 		cin >> flag;
