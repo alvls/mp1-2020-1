@@ -1,2 +1,5 @@
 ﻿  Source.cpp
+E:\каво\mp1-2020-1\samburova_mi\task4\Source.cpp(221,82): warning C4101: arrr: неиспользованная локальная переменная
+E:\каво\mp1-2020-1\samburova_mi\task4\Source.cpp(221,91): warning C4101: i: неиспользованная локальная переменная
+E:\каво\mp1-2020-1\samburova_mi\task4\Source.cpp(221,88): warning C4101: x: неиспользованная локальная переменная
   task4.vcxproj -> E:\каво\mp1-2020-1\samburova_mi\x64\Debug\task4.exe

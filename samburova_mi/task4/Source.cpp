@@ -65,43 +65,17 @@ public:
 		minutes_2.push_back(minute_2);
 		records++;
 	}
-	int** GetInfo(int step)
+	
+	int GetInfo(int day, int month, int year, int hour1, int minute1, int hour2, int minute2)
 	{
-		int counter = 0;
+		int step = 0;
 		for (int i = 0; i < records; i++)
 		{
-			if (steps[i] == step)
-				counter++;
+			if (days[i] == day && months[i] == month && years[i] == year && hours_1[i] == hour1 && minutes_1[i] == minute1 && hours_2[i] == hour2 && minutes_2[i] == minute2)
+				step = steps[i];
 		}
-		int** res = new int* [counter];
-		counter = 0;
-		for (int i = 0; i < records; i++)
-		{
-			if (steps[i] == step)
-			{
-				res[counter] = new int[8];
-				res[counter][0] = days[i];
-				res[counter][1] = months[i];
-				res[counter][2] = years[i];
-				res[counter][3] = hours_1[i];
-				res[counter][4] = minutes_1[i];
-				res[counter][5] = hours_2[i];
-				res[counter][6] = minutes_2[i];
-				res[counter][7] = steps[i];
-				counter++;
-			}
-		}
-		return res;
-	}
-	int GetCounter(int step)
-	{
-		int counter = 0;
-		for (int i = 0; i < records; i++)
-		{
-			if (steps[i] == step)
-				counter++;
-		}
-		return counter;
+		if (step == 0) return -1;
+		return step;
 	}
 	int GetAverage()
 	{
@@ -244,7 +218,7 @@ public:
 int main()
 {
 	Pedometer pedometer;
-	int day, month, year, variable, hour1, hour2, minute1, minute2, step, * arr, ** arrr, x, i;
+	int day, month, year, variable, hour1, hour2, minute1, minute2, step, * arr, ** arrr, x, i, info;
 	string weekday, path;
 	while (true)
 	{
@@ -290,22 +264,15 @@ int main()
 			cout << "Recorded! ";
 			break;
 		case 4:
-			cout << "Enter number of steps: ";
-			cin >> step;
-			x = pedometer.GetCounter(step);
-			arrr = pedometer.GetInfo(step);
-			cout << "Info: ";
-			for (i = 0; i < x; i++)
-			{
-				cout << arrr[i][0] << ".";
-				cout << arrr[i][1] << ".";
-				cout << arrr[i][2] << "; ";
-				cout << arrr[i][3] << ":";
-				cout << arrr[i][4] << "-";
-				cout << arrr[i][5] << ":";
-				cout << arrr[i][6] << "; ";
-				cout << arrr[i][7] << " steps " << endl;
-			}
+			cout << "Enter day, month and year: ";
+			cin >> day >> month >> year;
+			cout << "Enter time of start: ";
+			cin >> hour1 >> minute1;
+			cout << "Enter time of finish: ";
+			cin >> hour2 >> minute2;
+			info = pedometer.GetInfo(day, month, year, hour1, minute1, hour2, minute2);
+			if (info == -1) cout << "There is no record with this date and time" << endl;
+			else cout << "Number of steps with this date and time is " << info << endl;
 			break;
 		case 5:
 			cout << "Enter month: ";
