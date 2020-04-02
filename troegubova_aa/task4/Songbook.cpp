@@ -136,7 +136,7 @@ void Songbook::SetSong(Song new_song)
 	songs.push_back(new_song);
 }
 
-int Songbook::GetCountSong()//узнать кол-во песен в песеннике
+int Songbook::GetCountOfSong()//узнать кол-во песен в песеннике
 {
 	return songs.size();
 }
@@ -156,9 +156,10 @@ void Songbook::ChangeDataOfSong(std::string _song, std::vector<std::string> _dat
 		throw "Песенник не содержит данную песню";
 }
 
-Songbook Songbook::GetSong(std::string _name_song, std::string _singer)//найти песню по назв. и исполнителю
+
+Song Songbook::GetSong(std::string _name_song, std::string _singer)//найти песню по назв. и исполнителю
 {
-	Songbook song;
+	Song song;
 	size_t i;
 	for (i = 0; i < songs.size(); i++)
 	{
@@ -174,17 +175,31 @@ Songbook Songbook::GetSong(std::string _name_song, std::string _singer)//най�
 	{
 		throw "Данная песня не содержится в песеннике";
 	}
-	song.SetSong(songs[i]);
-	return song;
+	return songs[i];
 }
 
-Songbook Songbook::GetDataOfSongs(std::string _name, int human)//выдать все песни поэта, композитора, певца
+Songbook Songbook::GetDataOfSongs(std::string _name, std::string human)//выдать все песни поэта, композитора, певца
 {
 	size_t i;
 	Songbook _songbook;
+	int _human = 0;
+	if (human == "poet")
+	{
+		_human = 1;
+	}
+	if (human == "composer")
+	{
+		_human = 2;
+	}
+	if (human == "singer")
+	{
+		_human = 3;
+	}
+	if (_human == 0)
+		throw "Переданы неверные параметры";
 	for (i = 0; i < songs.size(); i++)
 	{
-		if (_name == songs[i].GetData(human))
+		if (_name == songs[i].GetData(_human))
 		{
 			_songbook.SetSong(songs[i]);
 		}

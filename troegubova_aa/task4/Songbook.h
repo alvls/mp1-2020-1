@@ -36,6 +36,8 @@ public:
 class Songbook
 {
 	std::vector <Song> songs;
+	void Songbook::WriteConDataSong();
+	void SaveInFileData(std::fstream &file);
 public:
 	Songbook();
 	Songbook(const Songbook &_song);
@@ -43,14 +45,12 @@ public:
 
 	void SetSong(std::vector<std::string> last_song);
 	void SetSong(Song new_song);
-	int GetCountSong();
+	int GetCountOfSong();
 	void ChangeDataOfSong(std::string _song, std::vector<std::string> _data);
-	Songbook GetSong(std::string _name_song, std::string _singer);
-	Songbook GetDataOfSongs(std::string _name, int human);
+	Song GetSong(std::string _name_song, std::string _singer);
+	Songbook GetDataOfSongs(std::string _name, std::string human);
 	void DeleteSong(std::string _delete_song);
-	void Songbook::WriteConDataSong();
 	void WriteConSongbook();
-	void SaveInFileData(std::fstream &file);
 	void SaveInFile();
 	void ReadFile();
 };

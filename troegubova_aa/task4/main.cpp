@@ -61,23 +61,38 @@ void GetSong(Songbook songbook)//найти песню по названию и 
 	std::getline(std::cin, _name_song);
 	std::cout << "Имя исполнителя:";
 	std::getline(std::cin, _singer);
-	Songbook get_song = songbook.GetSong(_name_song, _singer);
-	get_song.WriteConSongbook();
+	Song get_song = songbook.GetSong(_name_song, _singer);
+	Songbook song;
+	song.SetSong(get_song);
+	song.WriteConSongbook();
 }
 
 void GetSongs(Songbook songbook, int human)// выдать все песни заданного поэта, композитора, исполнителя
 {
+	std::string _human;
+	if (human == 1)
+	{
+		_human = "poet";
+	}
+	if (human == 2)
+	{
+		_human = "composer";
+	}
+	if (human == 3)
+	{
+		_human = "singer";
+	}
 	std::string _name;
 	std::cout << "Название имя:";
 	std::getline(std::cin, _name);
 	std::getline(std::cin, _name);
-	Songbook get_songbook = songbook.GetDataOfSongs(_name, human);
+	Songbook get_songbook = songbook.GetDataOfSongs(_name, _human);
 	get_songbook.WriteConSongbook();
 }
 
 void GetCountSong(Songbook songbook)//выдать количество песен
 {
-	std::cout << "Текущее кол-во песен в песеннике: " << songbook.GetCountSong() << std::endl;
+	std::cout << "Текущее кол-во песен в песеннике: " << songbook.GetCountOfSong() << std::endl;
 }
 
 Songbook DeleteSong(Songbook songbook)
