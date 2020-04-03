@@ -14,7 +14,8 @@ int main(void)
 	Observation s = W.Get_start();
 	cout << "Дата начала наблюдений: " << s.day << '.' << s.month << '.' << s.year << endl;
 	cout << "Время: " << s.time << ".00" << endl;
-	int d, m, y, h, t;
+	int d, m, y, h, t, from, to;
+	int *q = new int[25];
 	int r;
 	cout << "Что вы хотите сделать?" << endl;
 	cout << "1) Задать наблюдение" << endl;
@@ -32,8 +33,13 @@ int main(void)
 		break;
 	case 2:
 		cout << "Введите день, месяц, год, начальный и конечный часы: ";
-		cin >> d >> m >> y >> h >> t;
-		W.Set_series(d, m, y, h, t);
+		cin >> d >> m >> y >> from >> to;
+		for (int i = 0; i < to - from + 1; i++)
+		{
+			cout << "Введите температуру для " << from + i << ": ";
+			cin >> q[i];
+		}
+		W.Set_series(d, m, y, from, to, q);
 		break;
 	}
 	int p;

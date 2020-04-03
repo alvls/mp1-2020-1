@@ -70,15 +70,28 @@ void Weather::Set_observation(int d, int m, int y, int h, int t)
 	temp.t = t;
 	int d1 = start.year * 365 + Days_before(start.month) + start.day;
 	int d2 = y * 365 + Days_before(m) + d;
-	if (d2 < d1)
+	try
 	{
-		cout << "Дата раньше, чем начало наблюдений" << endl;
-		return;
+		if (d2 < d1)
+		{
+			throw "Дата раньше, чем начало наблюдений";
+		}
 	}
-	if (d2 > d1 + 365)
+	catch(char *str)
 	{
-		cout << "Дата больше, чем окончание наблюдений" << endl;
-		return;
+		cout << str << endl;
+	}
+	
+	try
+	{
+		if (d2 > d1 + 365)
+		{
+			throw "Дата позже, чем окончание наблюдений";
+		}
+	}
+	catch (char *str)
+	{
+		cout << str << endl;
 	}
 	data[h][d2 - d1] = temp;
 }
@@ -131,14 +144,11 @@ void Weather::Read_from_file(char* name)
 	fclose(in);
 }
 
-void Weather::Set_series(int d, int m, int y, int from, int to)
+void Weather::Set_series(int d, int m, int y, int from, int to, int *Temp)
 {
 	for (int h = from; h <= to; h++)
 	{
-		int t;
-		cout << "Введите температуру для " << h << ": ";
-		cin >> t;
-		Set_observation(d, m, y, h, t);
+		Set_observation(d, m, y, h, Temp[h-from]);
 	}
 }
 

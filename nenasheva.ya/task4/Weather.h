@@ -25,7 +25,7 @@ public:
 	int Get_T(int, int, int, int);
 	void Save_to_file(char*);
 	void Read_from_file(char*);
-	void Set_series(int, int, int, int, int);
+	void Set_series(int, int, int, int, int, int*);
 	double Search_average_T_for_year();
 	double Search_average_T_for_month(int, int);
 	double Search_average_T_for_day(int, int, int);
