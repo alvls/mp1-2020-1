@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <fstream> 
 #include <string>
+#include <vector>
 using namespace std;
 
 struct Date
@@ -42,6 +43,21 @@ ostream& operator<<(ostream& os, const Date& date)
 	return os;
 }
 
+istream& operator>>(istream& in, Date& date)
+{
+	char c;
+	in >> date.year;
+	in >> c;
+	if (c == '-')
+	{
+		in >> date.month;
+		in >> c;
+		if (c == '-') in >> date.day;
+		else cout << "Wrong date format, excepted '-' after month, variable is not complete\n";
+	}
+	else cout << "Wrong date format, excepted '-' after years, variable is not complete\n";
+	return in;
+}
 class Scale
 {
 	Date* date;
@@ -158,6 +174,11 @@ public:
 	int GetSize()
 	{
 		return size;
+	}
+
+	string GetName()
+	{
+		return name;
 	}
 
 	bool SetData(Date _date_1, double _weight)
@@ -304,44 +325,173 @@ public:
 		cout << date[i_m].day << "." << date[i_m].month << "." << date[i_m].year << endl;
 	}
 
-	void SaveInFile()
+	pair<Date, double> operator [] (size_t index)
 	{
-		scale_in << name << endl;
-		scale_in << "Number of observations: " << size << endl;
-		for (int i = 0; i < size; i++)
-		{
-			scale_in << date[i] << endl << weight[i] << endl;
-		}
-	}
-
-	void LoadFromFile()
-	{
-		char y[300];
-		scale_out.getline(y, 100, '\n');
-		name = y;
-		scale_out.getline(y, 100, ' ');
-		scale_out.getline(y, 100, ' ');
-		scale_out.getline(y, 100, '\n');
-		size = atoi(y);
-		date = new Date[size];
-		weight = new double[size];
-		for (int i = 0; i < size; i++)
-		{
-			scale_out.getline(y, 100, '.');
-			date[i].day = atoi(y);
-			scale_out.getline(y, 100, '.');
-			date[i].month = atoi(y);
-			scale_out.getline(y, 100, '\n');
-			date[i].year = atoi(y);
-			scale_out.getline(y, 100, '\n');
-			weight[i] = atoi(y);
-		}
+		return pair<Date, double>(date[index], weight[index]);
 	}
 
 	~Scale()
 	{
 		delete[] weight;
 		delete[] date;
+	}
+
+};
+
+class Libra
+{
+	vector <Scale> family;
+	Date beginingdate;
+public:
+	void Setbeginingdate(const Date& date)
+	{
+		beginingdate = date;
+	}
+	Date Getbeginingdate()
+	{
+		return beginingdate;
+	}
+	void Setscale(string& name, Date& date, double weight)
+	{
+		for (size_t i = 0; i < family.size(); i++)
+		{
+			if (family[i].GetName() == name)
+			{
+				family[i].SetData(date, weight);
+				return;
+			}
+		}
+		family.push_back(Scale(name));
+		family[family.size() - 1].SetData(date, weight);
+	}
+	double Getscaleweight(string name, Date& date)
+	{
+		for (size_t i = 0; i < family.size(); i++)
+		{
+			if (family[i].GetName() == name)
+			{
+				return family[i].GetWeight(date);
+			}
+		}
+		return -1;
+	}
+
+	pair<Date, double> GetMinWeight(string& name, int month, int year)
+	{
+		for (size_t i = 0; i < family.size(); i++)
+		{
+			if (family[i].GetName() == name)
+			{
+				return family[i].MinWeight(month, year);
+			}
+		}
+		throw "A person with that name is not in Libra's memory";
+	}
+
+	double AverageWeight(string& name, int month, int year)
+	{
+		for (size_t i = 0; i < family.size(); i++)
+		{
+			if (family[i].GetName() == name)
+			{
+				return family[i].AverageWeight(month, year);
+			}
+		}
+		throw "A person with that name is not in Libra's memory";
+	}
+
+	pair<Date, double> MaxWeight(string& name, int month, int year)
+	{
+		for (size_t i = 0; i < family.size(); i++)
+		{
+			if (family[i].GetName() == name)
+			{
+				return family[i].MaxWeight(month, year);
+			}
+		}
+		throw "A person with that name is not in Libra's memory";
+	}
+	//...
+	//Среднее значение, максимум, проверить работу с файлом
+
+
+	//Name1
+	//date11 45
+	//date12 65
+	//Name2
+	//...
+	void SaveInFile(const string& path)
+	{
+		std::fstream file;
+		file.open(path, std::fstream::out);
+		if (!file.is_open())
+		{
+			std::cout << "File not open!" << std::endl;
+		}
+		else
+		{
+			for (size_t i = 0; i < family.size() - 1; i++)
+			{
+				file << family[i].GetName() << endl;
+				int size = family[i].GetSize();
+				file << size << endl;
+				for (int j = 0; j < size; j++)
+				{
+					pair<Date, double> curScale = family[i][j];
+					file << curScale.first << " " << curScale.second << endl;
+				}
+			}
+			file << family[family.size() - 1].GetName() << endl;
+			int size = family[family.size() - 1].GetSize();
+			file << size << endl;
+			for (int j = 0; j < size - 1; j++)
+			{
+				pair<Date, double> curScale = family[family.size() - 1][j];
+				file << curScale.first << " " << curScale.second << endl;
+			}
+			pair<Date, double> curScale = family[family.size() - 1][size - 1];
+			file << curScale.first << " " << curScale.second;
+			std::cout << "Saving succeed!" << std::endl;
+		}
+		file.close();
+
+
+	}
+
+	void LoadFromFile(const string& path)
+	{
+		std::fstream file;
+		file.open(path, std::fstream::in);
+		if (!file.is_open())
+		{
+			std::cout << "File not open!" << std::endl;
+		}
+		else
+		{
+			family.clear();
+			while (!file.eof())
+			{
+				int index = family.size();
+				string name;
+				int size;
+				file >> name;
+				file >> size;
+				family.push_back(Scale(name));
+				for (int i = 0; i < size; i++)
+				{
+					Date date;
+					double weight;
+					file >> date >> weight;
+					family[index].SetData(date, weight);
+				}
+			}
+		}
+		file.close();
+	}
+
+	Scale& operator [](size_t index)
+	{
+		return family[index];
 	}
 
 };
@@ -358,21 +508,21 @@ int main()
 	string name;
 	int family = 0;
 	int k = 0;
-	Scale scale[5];
+	Libra libra;
 menu2:
 	cout << "\n1) Add a family member" << endl;
-	cout << "\n2) Select a family member" << endl;
-	cout << "\n3) Set the start date of observations" << endl;
-	cout << "\n4) Find out the start date of observations" << endl;
-	cout << "\n5) Set an observation" << endl;
-	cout << "\n6) Find out the weight in the selected observation" << endl;
-	cout << "\n7) Find the average weight of a family member" << endl;
-	cout << "\n8) Find the minimum weight of a family member" << endl;
-	cout << "\n9) Find the maximum weight of a family member" << endl;
-	cout << "\n10) Save the observation history to a file" << endl;
-	cout << "\n11) Read the observation history from a file" << endl;
-	cout << "\n12) Clear the console" << endl;
-	cout << "\n13) Exit" << endl << endl;
+	cout << "2) Select a family member" << endl;
+	cout << "3) Set the start date of observations" << endl;
+	cout << "4) Find out the start date of observations" << endl;
+	cout << "5) Set an observation" << endl;
+	cout << "6) Find out the weight in the selected observation" << endl;
+	cout << "7) Find the average weight of a family member" << endl;
+	cout << "8) Find the minimum weight of a family member" << endl;
+	cout << "9) Find the maximum weight of a family member" << endl;
+	cout << "10) Save the observation history to a file" << endl;
+	cout << "11) Read the observation history from a file" << endl;
+	cout << "12) Clear the console" << endl;
+	cout << "13) Exit" << endl << endl;
 	while (x == 0)
 	{
 	menu:
@@ -391,13 +541,13 @@ menu2:
 			cin >> name;
 			for (int i = 0; i < 5; i++)
 			{
-				if (scale[i].CheckName(name))
+				if (libra[i].CheckName(name))
 				{
 					cout << "This name already exists" << endl << endl;
 					goto menu;
 				}
 			}
-			scale[family].ChangeName(name);
+			libra[family].ChangeName(name);
 			k = family;
 			family++;
 			cout << "Added" << endl << endl;
@@ -415,7 +565,7 @@ menu2:
 			cin >> name;
 			for (int i = 0; i < 5; i++)
 			{
-				if (scale[i].CheckName(name))
+				if (libra[i].CheckName(name))
 				{
 					k = i;
 					cout << "Selected" << endl << endl;
@@ -441,7 +591,7 @@ menu2:
 			cin >> date.year;
 			cout << "Please, enter the weight value (kg): ";
 			cin >> weight;
-			scale[k].SetData(date, weight);
+			libra[k].SetData(date, weight);
 			cout << "Conserved" << endl << endl;
 			break;
 		}
@@ -453,8 +603,8 @@ menu2:
 				cout << "You need to add a family member" << endl << endl;
 				goto menu;
 			}
-			if (scale[k].GetSize())
-				scale[k].KnowStartData();
+			if (libra[k].GetSize())
+				libra[k].KnowStartData();
 			else
 				cout << "The observation history is empty" << endl;
 			cout << endl;
@@ -476,7 +626,7 @@ menu2:
 			cin >> date.year;
 			cout << "Please, enter the weight value (kg): ";
 			cin >> weight;
-			if (scale[k].SetData(date, weight))
+			if (libra[k].SetData(date, weight))
 				cout << "Changed" << endl;
 			else
 				cout << "Conserved" << endl;
@@ -491,7 +641,7 @@ menu2:
 				cout << "You need to add a family member" << endl << endl;
 				goto menu;
 			}
-			if (scale[k].GetSize())
+			if (libra[k].GetSize())
 			{
 				cout << "Please, enter the day: ";
 				cin >> date.day;
@@ -499,8 +649,8 @@ menu2:
 				cin >> date.month;
 				cout << "Please, enter the year: ";
 				cin >> date.year;
-				if (scale[k].GetWeight(date))
-					cout << "Weight value: " << scale[k].GetWeight(date) << endl;
+				if (libra[k].GetWeight(date))
+					cout << "Weight value: " << libra[k].GetWeight(date) << endl;
 				else
 					cout << "Observation is not found" << endl;
 			}
@@ -517,7 +667,7 @@ menu2:
 				cout << "You need to add a family member" << endl << endl;
 				goto menu;
 			}
-			if (scale[k].GetSize())
+			if (libra[k].GetSize())
 			{
 				cout << "\n1) For the entire history of observations" << endl;
 				cout << "\n2) In the selected month" << endl;
@@ -526,7 +676,7 @@ menu2:
 				{
 				case 1:
 				{
-					cout << "Average Weight: " << scale[k].AverageWeight() << endl;
+					cout << "Average Weight: " << libra[k].AverageWeight() << endl;
 					break;
 				}
 
@@ -536,8 +686,8 @@ menu2:
 					cin >> month;
 					cout << "Please, enter the year: ";
 					cin >> year;
-					if (scale[k].AverageWeight(month, year))
-						cout << "Average Weight: " << scale[k].AverageWeight(month, year) << endl;
+					if (libra[k].AverageWeight(month, year))
+						cout << "Average Weight: " << libra[k].AverageWeight(month, year) << endl;
 					else
 						cout << "There are no observations this month" << endl;
 					break;
@@ -562,7 +712,7 @@ menu2:
 				cout << "You need to add a family member" << endl << endl;
 				goto menu;
 			}
-			if (scale[k].GetSize())
+			if (libra[k].GetSize())
 			{
 				cout << "\n1) For the entire history of observations" << endl;
 				cout << "\n2) In the selected month" << endl;
@@ -571,7 +721,7 @@ menu2:
 				{
 				case 1:
 				{
-					cout << "Minimum weight: " << scale[k].MinWeight().first << "Date: " << scale[k].MinWeight().second << endl;
+					cout << "Minimum weight: " << libra[k].MinWeight().first << "Date: " << libra[k].MinWeight().second << endl;
 					break;
 				}
 
@@ -581,9 +731,9 @@ menu2:
 					cin >> month;
 					cout << "Please, enter the year: ";
 					cin >> year;
-					if (scale[k].AverageWeight(month, year))
+					if (libra[k].AverageWeight(month, year))
 					{
-						cout << "Minimum weight: " << scale[k].MinWeight().first << "Date: " << scale[k].MinWeight().second << endl;
+						cout << "Minimum weight: " << libra[k].MinWeight().first << "Date: " << libra[k].MinWeight().second << endl;
 
 					}
 					else
@@ -602,6 +752,7 @@ menu2:
 			cout << endl;
 			break;
 		}
+
 		case 9:
 		{
 			if (family == 0)
@@ -609,7 +760,7 @@ menu2:
 				cout << "You need to add a family member" << endl << endl;
 				goto menu;
 			}
-			if (scale[k].GetSize())
+			if (libra[k].GetSize())
 			{
 				cout << "\n1) For the entire history of observations" << endl;
 				cout << "\n2) In the selected month" << endl;
@@ -618,7 +769,7 @@ menu2:
 				{
 				case 1:
 				{
-					cout << "Maximum weight: " << scale[k].MaxWeight().first << "Date: " << scale[k].MinWeight().second << endl;
+					cout << "Maximum weight: " << libra[k].MaxWeight().first << "Date: " << libra[k].MinWeight().second << endl;
 					break;
 				}
 
@@ -628,9 +779,9 @@ menu2:
 					cin >> month;
 					cout << "Please, enter the year: ";
 					cin >> year;
-					if (scale[k].AverageWeight(month, year))
+					if (libra[k].AverageWeight(month, year))
 					{
-						cout << "Maximum weight: " << scale[k].MaxWeight().first << "Date: " << scale[k].MinWeight().second << endl;
+						cout << "Maximum weight: " << libra[k].MaxWeight().first << "Date: " << libra[k].MinWeight().second << endl;
 					}
 					else
 						cout << "There are no observations this month" << endl;
@@ -653,10 +804,7 @@ menu2:
 		{
 			scale_in.open("scale.txt");
 			scale_in << "Number of family members: " << family << endl;
-			for (int i = 0; i < family; i++)
-			{
-				scale[i].SaveInFile();
-			}
+			libra.SaveInFile("scale.txt");
 			scale_in.close();
 			break;
 		}
@@ -670,10 +818,7 @@ menu2:
 			scale_out.getline(x, 100, ' ');
 			scale_out.getline(x, 100, '\n');
 			family = atoi(x);
-			for (int i = 0; i < family; i++)
-			{
-				scale[i].LoadFromFile();
-			}
+			libra.LoadFromFile("scale.txt");
 			scale_out.close();
 			break;
 		}
