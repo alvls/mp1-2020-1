@@ -159,7 +159,6 @@ void Songbook::ChangeDataOfSong(std::string _song, std::vector<std::string> _dat
 
 Song Songbook::GetSong(std::string _name_song, std::string _singer)//найти песню по назв. и исполнителю
 {
-	Song song;
 	size_t i;
 	for (i = 0; i < songs.size(); i++)
 	{
@@ -207,6 +206,21 @@ Songbook Songbook::GetDataOfSongs(std::string _name, std::string human)//выд�
 	if (_songbook.songs.size() == 0)
 		throw "Искомые песни не найдены";
 	return _songbook;
+}
+
+Songbook Songbook::GetSongsOfPoet(std::string _name)
+{
+	return this->GetDataOfSongs(_name, "poet");
+}
+
+Songbook Songbook::GetSongsOfComposer(std::string _name)
+{
+	return this->GetDataOfSongs(_name, "composer");
+}
+
+Songbook Songbook::GetSongsOfSinger(std::string _name)
+{
+	return this->GetDataOfSongs(_name, "singer");
 }
 
 void Songbook::DeleteSong(std::string _delete_song)//удалить песню

@@ -38,6 +38,7 @@ class Songbook
 	std::vector <Song> songs;
 	void Songbook::WriteConDataSong();
 	void SaveInFileData(std::fstream &file);
+	Songbook GetDataOfSongs(std::string _name, std::string human);
 public:
 	Songbook();
 	Songbook(const Songbook &_song);
@@ -48,7 +49,9 @@ public:
 	int GetCountOfSong();
 	void ChangeDataOfSong(std::string _song, std::vector<std::string> _data);
 	Song GetSong(std::string _name_song, std::string _singer);
-	Songbook GetDataOfSongs(std::string _name, std::string human);
+	Songbook GetSongsOfPoet(std::string _name);
+	Songbook GetSongsOfComposer(std::string _name);
+	Songbook GetSongsOfSinger(std::string _name);
 	void DeleteSong(std::string _delete_song);
 	void WriteConSongbook();
 	void SaveInFile();

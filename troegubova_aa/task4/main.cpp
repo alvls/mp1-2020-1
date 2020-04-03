@@ -69,24 +69,23 @@ void GetSong(Songbook songbook)//найти песню по названию и 
 
 void GetSongs(Songbook songbook, int human)// выдать все песни заданного поэта, композитора, исполнителя
 {
-	std::string _human;
-	if (human == 1)
-	{
-		_human = "poet";
-	}
-	if (human == 2)
-	{
-		_human = "composer";
-	}
-	if (human == 3)
-	{
-		_human = "singer";
-	}
+	Songbook get_songbook;
 	std::string _name;
 	std::cout << "Название имя:";
 	std::getline(std::cin, _name);
 	std::getline(std::cin, _name);
-	Songbook get_songbook = songbook.GetDataOfSongs(_name, _human);
+	if (human == 1)
+	{
+		get_songbook = songbook.GetSongsOfPoet(_name);
+	}
+	if (human == 2)
+	{
+		get_songbook = songbook.GetSongsOfComposer(_name);
+	}
+	if (human == 3)
+	{
+		get_songbook = songbook.GetSongsOfSinger(_name);
+	}
 	get_songbook.WriteConSongbook();
 }
 
