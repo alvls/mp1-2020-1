@@ -26,7 +26,16 @@ int main(void)
 	case 1:
 		cout << "Введите день, месяц, год, время и температуру: ";
 		cin >> d >> m >> y >> h >> t;
-		W.Set_observation(d, m, y, h, t);
+		try
+		{
+			W.Set_observation(d, m, y, h, t);
+		}
+		catch (char *str)
+		{
+			cout << str << endl;
+			system("pause");
+			return 404;
+		}
 		cout << "Введите день, месяц, год и время, чтобы узнать температуру: ";
 		cin >> d >> m >> y >> h;
 		cout << "Заданная температура: " << W.Get_T(d, m, y, h) << endl;
