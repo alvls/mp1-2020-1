@@ -70,28 +70,13 @@ void Weather::Set_observation(int d, int m, int y, int h, int t)
 	temp.t = t;
 	int d1 = start.year * 365 + Days_before(start.month) + start.day;
 	int d2 = y * 365 + Days_before(m) + d;
-	try
+	if (d2 < d1)
 	{
-		if (d2 < d1)
-		{
-			throw "Дата раньше, чем начало наблюдений";
-		}
+		throw "Дата раньше, чем начало наблюдений";
 	}
-	catch(char *str)
+	if (d2 > d1 + 365)
 	{
-		cout << str << endl;
-	}
-	
-	try
-	{
-		if (d2 > d1 + 365)
-		{
-			throw "Дата позже, чем окончание наблюдений";
-		}
-	}
-	catch (char *str)
-	{
-		cout << str << endl;
+		throw "Дата позже, чем окончание наблюдений";
 	}
 	data[h][d2 - d1] = temp;
 }
