@@ -83,7 +83,7 @@ public:
 	{
 		Day = _day;
 	}
-	Information(string _Name = "Без названия", int _Year = 1, int _Month = 1, int _Fees = 0, int _Day = 1, string _Producer = "Не указан", string _Screenwriter = "Не указан", string _Composer = "не указан")
+	Information(string _Name = "Без названия", int _Year = 1, int _Month = 1, int _Day= 1, int _Fees = 0, string _Producer = "Не указан", string _Screenwriter = "Не указан", string _Composer = "не указан")
 	{
 		Name = _Name;
 		Producer = _Producer;
@@ -123,19 +123,19 @@ public:
 	{
 		unsigned int i = 0;
 		bool flag = false;
-		if (Year > Info.Year)
-			flag = true;
+		while ((i < size(Name)) && (i < size(Info.Name)))
+		{
+			if (Name[i] < Info.Name[i])
+			{
+				flag = true;
+				break;
+			}
+			i++;
+		}
 		if (!flag)
-			if (Year == Info.Year)
-				while ((i < size(Name)) && (i < size(Info.Name)))
-				{
-					if (Name[i] < Info.Name[i])
-					{
-						flag = true;
-						break;
-					}
-					i++;
-				}
+			if (Name == Info.Name)
+				if (Year > Info.Year)
+					flag = true;
 		return flag;
 	}
 };
@@ -159,7 +159,7 @@ public:
 	{
 		return Films;
 	}
-	void SortAdd()
+	void Sort()
 	{
 		if (Films.size() > 1)
 		{
@@ -233,7 +233,7 @@ public:
 		tmp.setComposer(_Composer);
 		tmp.setFees(_Fees);
 		Films.push_back(tmp);
-		SortAdd();
+		Sort();
 	}
 	int GetNumberFilms()
 	{
@@ -245,6 +245,19 @@ public:
 		for (int i = 0; i < Films.size(); i++)
 		{
 			if (Films[i].getName() == _Name)
+			{
+				tmp = i; ;
+				break;
+			}
+		}
+		return tmp;
+	}
+	int SearchFilmYear(int tmp, int _Year)
+	{
+		tmp = -1;
+		for (int i = 0; i < Films.size(); i++)
+		{
+			if (Films[i].getYear() == _Year)
 			{
 				tmp = i; ;
 				break;
@@ -380,44 +393,54 @@ void Print(int _index, Filmoteka _Library)
 	cout << "Сценарист: " << _Library.GetScreenwriter(_index) << endl;
 	cout << "Композитор: " << _Library.GetComposer(_index) << endl << endl;
 }
-void PrintFilmProducer(string _Producer, Filmoteka _Library)
+vector <int> PrintFilmProducer(string _Producer, Filmoteka _Library)
 {
+	vector <int> film_numbers;
 	bool flag = false;
 	for (int i = 0; i < _Library.GetNumberFilms(); i++)
 		if (_Library.GetProducer(i) == _Producer)
 		{
-			Print(i, _Library);
+			film_numbers.push_back(i);
 			flag = true;
 		}
 	if (!flag)
+	{
 		cout << "Фильмов данного режиссера не найдено." << endl;
+		film_numbers.push_back(-1);
+	}
+	return film_numbers;
 }
-void PrintFilmYear(int _Year, Filmoteka _Library)
+vector <int> PrintFilmYear(int _Year, Filmoteka _Library)
 {
+	vector <int> film_numbers;
 	bool flag = false;
 	for (int i = 0; i < _Library.GetNumberFilms(); i++)
 		if (_Library.GetYear(i) == _Year)
 		{
-			Print(i, _Library);
+			film_numbers.push_back(i);
 			flag = true;
 		}
 	if (!flag)
 		cout << "Фильмов в данном году не найдено." << endl;
+	return film_numbers;
 }
-void PrintFilmSearch(string _Name, int _Year, Filmoteka _Library)
+vector <int>  PrintFilmSearch(string _Name, int _Year, Filmoteka _Library)
 {
+	vector <int> film_numbers;
 	bool flag = false;
 	for (int i = 0; i < _Library.GetNumberFilms(); i++)
 		if ((_Library.GetName(i) == _Name) && (_Library.GetYear(i) == _Year))
 		{
-			Print(i, _Library);
+			film_numbers.push_back(i);
 			flag = true;
 		}
 	if (!flag)
 		cout << "Фильм с данными параметрами не найден." << endl;
+	return film_numbers;
 }
-void PrintFees(int _Number, Filmoteka _Library)
+vector <int>  PrintFees(int _Number, Filmoteka _Library)
 {
+	vector <int> film_numbers;
 	if (_Number > _Library.GetNumberFilms())
 	{
 		cout << "Количество запрашиваемых фильмов превышает общее количество. Будет выведено - " << _Library.GetNumberFilms() << endl;
@@ -425,10 +448,12 @@ void PrintFees(int _Number, Filmoteka _Library)
 	}
 	_Library.SortFees();
 	for (int i = 0; i < _Number; i++)
-		Print(i, _Library);
+		film_numbers.push_back(i);
+	return film_numbers;
 }
-void PrintFeesYear(int _Number, int _Year, Filmoteka _Library)
+vector <int> PrintFeesYear(int _Number, int _Year, Filmoteka _Library)
 {
+	vector <int> film_numbers;
 	int num = 0;
 	for (int i = 0; i < _Library.GetNumberFilms(); i++)
 		if (_Library.GetYear(i) == _Year)
@@ -436,7 +461,7 @@ void PrintFeesYear(int _Number, int _Year, Filmoteka _Library)
 	if (num == 0)
 	{
 		cout << "Не найдено ни одного фильма " << _Year << " года" << endl;
-		return;
+		film_numbers.push_back(-1);
 	}
 	if (_Number > num)
 		cout << "Количество запрашиваемых фильмов превышает количество фильмов данного года. Будет выведено - " << num << endl;
@@ -448,11 +473,12 @@ void PrintFeesYear(int _Number, int _Year, Filmoteka _Library)
 	{
 		if (_Library.GetYear(k) == _Year)
 		{
-			Print(k, _Library);
+			film_numbers.push_back(i);
 			i++;
 		}
 		k++;
 	}
+	return film_numbers;
 }
 void Menu()
 {
@@ -475,8 +501,9 @@ int main()
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 	setlocale(LC_ALL, "Russian");
+	vector <int> film_number;
 	string Name, Produсer, Screenwriter, Composer;
-	int count = 0, number = 0, i = 0, j;
+	int count = 0, number = 0, i = 0, j, x;
 	int Year, Month, Day, Fees;
 	Filmoteka Library;
 	Filmoteka lib;
@@ -518,6 +545,18 @@ int main()
 				system("pause");
 				break;
 			}
+			else
+			{
+				cout << "Введите год выхода фильма ";
+				cin >> x;
+				if (Library.SearchFilmYear(i,Year) < 0)
+				{
+					cout << endl << "Фильм с данным названием и годом не найден.";
+					system("pause");
+					break;
+				}
+
+			}
 			j = Library.SearchFilmName(i, Name);
 			cout << "Введите название нового фильма: ";
 			getline(cin, Name);
@@ -553,20 +592,29 @@ int main()
 			cout << "Введите фамилию режиссера: ";
 			cin.ignore();
 			getline(cin, Produсer);
-			PrintFilmProducer(Produсer, Library);
+			film_number = PrintFilmProducer(Produсer, Library);
+			if (film_number[0] != -1)
+				for (i = 0; i < film_number.size(); i++)
+					Print(film_number[i], Library);
 			system("pause");
 			break;
 		case 5:
 			cout << "Введите год: ";
 			cin >> Year;
-			PrintFilmYear(Year, Library);
+			film_number = PrintFilmYear(Year, Library);
+			if (film_number[0] != -1)
+				for (i = 0; i < film_number.size(); i++)
+					Print(film_number[i], Library);
 			system("pause");
 			break;
 		case 6:
 			cout << "Введите количество фильмов: ";
 			cin >> number;
 			cout << endl;
-			PrintFees(number, Library);
+			film_number = PrintFees(number, Library);
+			if (film_number[0] != -1)
+				for (i = 0; i < film_number.size(); i++)
+					Print(film_number[i], Library);
 			system("pause");
 			break;
 		case 7:
@@ -576,7 +624,10 @@ int main()
 			cout << "Введите год: ";
 			cin >> Year;
 			cout << endl;
-			PrintFeesYear(number, Year, Library);
+			film_number = PrintFeesYear(number, Year, Library);
+			if (film_number[0] != -1)
+				for (i = 0; i < film_number.size(); i++)
+					Print(film_number[i], Library);
 			system("pause");
 			break;
 		case 8:
