@@ -283,33 +283,33 @@ int main()
 	setlocale(LC_ALL, "rus");
 	SongList list;
 	/*list.AddSong();
-	list.Changesongname(1, "ананасина");
-	list.Changesongperformer(1, "фыфка");
-	list.Changesongtextwriter(1, "АсПушка");
+	list.Changesongname(1, "Р°РЅР°РЅР°СЃРёРЅР°");
+	list.Changesongperformer(1, "С„С‹С„РєР°");
+	list.Changesongtextwriter(1, "ССЃС•СѓС€РєР°");
 	list.AddSong();
-	list.Changesongname(2, "ляпота");
+	list.Changesongname(2, "Р»В¤РїРѕС‚Р°");
 	list.Changesongperformer(2, "evgenMc");
-	list.Changesongtextwriter(2, "АсПушка");
-	Song a(list.Getsong("ляпота", "evgenMc"));
+	list.Changesongtextwriter(2, "ССЃС•СѓС€РєР°");
+	Song a(list.Getsong("Р»В¤РїРѕС‚Р°", "evgenMc"));
 	a.Outsongtextwriter();
 
-	vector <Song> songsbyperf = list.GetSongsByTextWritter("АсПушка");
+	vector <Song> songsbyperf = list.GetSongsByTextWritter("ССЃС•СѓС€РєР°");
 	cout << endl << endl << endl;
 	songsbyperf[0].Outsongname();
 	songsbyperf[1].Outsongname();
 	cout << endl;
-	list.DeleteSong("ананасина", "фыфка");
+	list.DeleteSong("Р°РЅР°РЅР°СЃРёРЅР°", "С„С‹С„РєР°");
 	list.AddSong();
-	list.Changesongname(2, "абрикос");
+	list.Changesongname(2, "Р°Р±СЂРёРєРѕСЃ");
 	list.AddSong();
-	list.Changesongname(3, "розетка");
+	list.Changesongname(3, "СЂРѕР·РµС‚РєР°");
 	list.AddSong();
-	list.Changesongname(4, "перфоратор");
+	list.Changesongname(4, "РїРµСЂС„РѕСЂР°С‚РѕСЂ");
 
 
 	cout << endl << endl << list.GetQuantity();
 	*/
-	list.Getfromfile("myList.txt");
-	list.Outinfile("ascasc.txt");
+	list.Getfromfile("MyList.txt");
+	list.Outinfile("Newlist.txt");
 	system("pause");
 }

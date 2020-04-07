@@ -1,2 +1,3 @@
 ﻿  Source.cpp
+C:\Users\Денис\mp1-2020-1\Bychkov_DA\task4\Source.cpp(110): warning C4715:  SongList::Getsong: значение возвращается не при всех путях выполнения
   task4.vcxproj -> C:\Users\Денис\mp1-2020-1\Bychkov_DA\x64\Debug\task4.exe
