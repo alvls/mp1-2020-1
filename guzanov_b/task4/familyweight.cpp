@@ -1,116 +1,51 @@
 #include <iostream>
 #include "slaves.h"
 #include "locale.h"
-
 int main()
 {
-    setlocale(LC_ALL, "Russian");
-    slaves mother;
-    slaves father;
-    slaves granny;
-    slaves dad;
-    slaves cousin;
-    float m, m1, f, f1, g, g1, d, d1, c, c1;
-    string arr;
-    mother.gettime();//2) узнать начальную дату наблюдений
-    mother.setweight(54.45, "01:01:01");// 3) задать наблюдение
-    cout << "Вес = ";
-    mother.getweight();//4) узнать вес в выбранном наблюдении
-    mother.setweight(55.40, "13:02:01");// 3) задать наблюдение
-    cout << "Вес = ";
-    mother.getweight();//4) узнать вес в выбранном наблюдении
-    mother.setweight(56.00, "15:03:01");// 3) задать наблюдение
-    cout << "Вес = ";
-    mother.getweight();//4) узнать вес в выбранном наблюдении
-    mother.setweight(55.25, "23:05:01");// 3) задать наблюдение
-    cout << "Вес = ";
-    mother.getweight();//4) узнать вес в выбранном наблюдении
-    cout << "Средний вес мамы равен " << (int)mother.finf_middle_weight() << " " << "kg" << " " << modf(mother.finf_middle_weight(), &m) * 1000 << " " << "g" << endl;//5) найти средний вес члена семьи в выбранном месяце или за всю историю наблюдений
-    m = mother.minim();//6) найти минимальный вес члена семьи в выбранном месяце или за всю историю наблюдений и дату, когда он наблюдался
-    m1 = mother.maxim();//7) найти максимальный вес члена семьи в выбранном месяце или за всю историю наблюдений и дату, когда он наблюдался
-    mother.save_data();//8) сохранить историю наблюдений в файл
-    arr = "";
-    mother.read_file();
-    arr = "";
-    father.gettime();//2) узнать начальную дату наблюдений
-    father.setweight(70.45, "01:01:01");// 3) задать наблюдение
-    cout << "Вес = ";
-    father.getweight();//4) узнать вес в выбранном наблюдении
-    father.setweight(72.50, "13:02:01");// 3) задать наблюдение
-    cout << "Вес = ";
-    father.getweight();//4) узнать вес в выбранном наблюдении
-    father.setweight(71.00, "15:03:01");// 3) задать наблюдение
-    cout << "Вес = ";
-    father.getweight();//4) узнать вес в выбранном наблюдении
-    father.setweight(71.25, "23:05:01");// 3) задать наблюдение
-    cout << "Вес = ";
-    father.getweight();//4) узнать вес в выбранном наблюдении
-    cout << "Средний вес мамы равен " << (int)mother.finf_middle_weight() << " " << "kg" << " " << modf(mother.finf_middle_weight(), &f) * 1000 << " " << "g" << endl;//5) найти средний вес члена семьи в выбранном месяце или за всю историю наблюдений
-    f = father.minim();//6) найти минимальный вес члена семьи в выбранном месяце или за всю историю наблюдений и дату, когда он наблюдался
-    f1 = father.maxim();//7) найти максимальный вес члена семьи в выбранном месяце или за всю историю наблюдений и дату, когда он наблюдался
-    father.save_data();//8) сохранить историю наблюдений в файл
-    arr = "";
-    father.read_file();
-    arr = "";
-    granny.gettime();//2) узнать начальную дату наблюдений
-    granny.setweight(46.45, "01:01:01");// 3) задать наблюдение
-    cout << "Вес = ";
-    granny.getweight();//4) узнать вес в выбранном наблюдении
-    granny.setweight(54.50, "13:02:01");// 3) задать наблюдение
-    cout << "Вес = ";
-    granny.getweight();//4) узнать вес в выбранном наблюдении
-    granny.setweight(56.00, "15:03:01");// 3) задать наблюдение
-    cout << "Вес = ";
-    granny.getweight();//4) узнать вес в выбранном наблюдении
-    granny.setweight(61.25, "23:05:01");// 3) задать наблюдение
-    cout << "Вес = ";
-    granny.getweight();//4) узнать вес в выбранном наблюдении
-    cout << "Средний вес отца равен " << (int)mother.finf_middle_weight() << " " << "kg" << " " << modf(mother.finf_middle_weight(), &d) * 1000 << " " << "g" << endl;//5) найти средний вес члена семьи в выбранном месяце или за всю историю наблюдений
-    g = granny.minim();//6) найти минимальный вес члена семьи в выбранном месяце или за всю историю наблюдений и дату, когда он наблюдался
-    g1 = granny.maxim();//7) найти максимальный вес члена семьи в выбранном месяце или за всю историю наблюдений и дату, когда он наблюдался
-    granny.save_data();//8) сохранить историю наблюдений в файл
-    arr = "";
-    granny.read_file();
-    arr = "";
-    dad.gettime();//2) узнать начальную дату наблюдений
-    dad.setweight(56.45, "01:01:01");// 3) задать наблюдение
-    cout << "Вес = ";
-    dad.getweight();//4) узнать вес в выбранном наблюдении
-    dad.setweight(54.50, "13:02:01");// 3) задать наблюдение
-    cout << "Вес = ";
-    dad.getweight();//4) узнать вес в выбранном наблюдении
-    dad.setweight(53.00, "15:03:01");// 3) задать наблюдение
-    cout << "Вес = ";
-    dad.getweight();//4) узнать вес в выбранном наблюдении
-    dad.setweight(54.25, "23:05:01");// 3) задать наблюдение
-    cout << "Вес = ";
-    dad.getweight();//4) узнать вес в выбранном наблюдении
-    cout << "Средний вес деда равен " << (int)mother.finf_middle_weight() << " " << "kg" << " " << modf(mother.finf_middle_weight(), &g) * 1000 << " " << "g" << endl;//5) найти средний вес члена семьи в выбранном месяце или за всю историю наблюдений
-    d = dad.minim();//6) найти минимальный вес члена семьи в выбранном месяце или за всю историю наблюдений и дату, когда он наблюдался
-    d1 = dad.maxim();//7) найти максимальный вес члена семьи в выбранном месяце или за всю историю наблюдений и дату, когда он наблюдался
-    dad.save_data();//8) сохранить историю наблюдений в файл
-    arr = "";
-    dad.read_file();
-    arr = "";
-    cousin.gettime();//2) узнать начальную дату наблюдений
-    cousin.setweight(96.45, "01:01:01");// 3) задать наблюдение
-    cout << "Вес = ";
-    cousin.getweight();//4) узнать вес в выбранном наблюдении
-    cousin.setweight(104.50, "13:02:01");// 3) задать наблюдение
-    cout << "Вес = ";
-    cousin.getweight();//4) узнать вес в выбранном наблюдении
-    cousin.setweight(126.00, "15:03:01");// 3) задать наблюдение
-    cout << "Вес = ";
-    cousin.getweight();//4) узнать вес в выбранном наблюдении
-    cousin.setweight(111.55, "23:05:01");// 3) задать наблюдение
-    cout << "Вес = ";
-    cousin.getweight();//4) узнать вес в выбранном наблюдении
-    cout << "Средний вес двоюродного брата равен " << (int)mother.finf_middle_weight() << " " << "kg" << " " << modf(mother.finf_middle_weight(), &c) * 1000 << " " << "g" << endl;//5) найти средний вес члена семьи в выбранном месяце или за всю историю наблюдений
-    c = cousin.minim();//6) найти минимальный вес члена семьи в выбранном месяце или за всю историю наблюдений и дату, когда он наблюдался
-    c1 = cousin.maxim();//7) найти максимальный вес члена семьи в выбранном месяце или за всю историю наблюдений и дату, когда он наблюдался
-    cousin.save_data();//8) сохранить историю наблюдений в файл
-    arr = "";
-    cousin.read_file();
-    arr = "";
-    system("pause");
+    slaves A;
+    A.add("Petia", 20, 4, 2020, 25);
+    A.add("Vania", 20, 4, 2020, 45);
+    A.add("Petia", 22, 4, 2020, 24);
+    A.add("Petia", 10, 4, 2020, 48);
+    A.add("Petia", 21, 5, 2020, 60);
+    A.add("Petia", 21, 6, 2020, 55);
+    for (int i = 0; i < A.Getcount_measurement("Petia"); i++)
+    {
+        cout << A.GetWeight("Petia")[i] << endl;
+    }
+    for (int i = 0; i < A.Getcount_people(); i++)
+    {
+        cout << A[i] << endl;
+    }
+    cout << endl;
+    cout << "Min weight Peti " << A.Getminweight("Petia", 4) << endl;
+    cout << endl;
+    cout << "Max weight Peti " << A.Getmaxweight("Petia", 4) << endl;
+    cout << endl;
+    cout << "Middle weight Peti " << A.Getmiddleweight("Petia", 4) << endl;
+    cout << endl;
+    A.save_data();
+    //A.add("Ann", 20, 4, 2020, 45);
+    /*
+     for (int i = 0; i < A.Getcount_people(); i++)
+    {
+        cout << A[i] << endl;
+        for (int j = 0; j < A.Getcount_measurement(A[i]); j++)
+        {
+            cout << A.GetWeight(A[i])[j] << endl;
+        }
+    }
+    */
+
+    A.read_file();
+    /*for (int i = 0; i < A.Getcount_people(); i++)
+    {
+        cout << A[i] << endl;
+        for (int j = 0; j < A.Getcount_measurement(A[i]); j++)
+        {
+            cout << A.GetWeight(A[i])[j] << endl;
+        }
+    }
+    */
 }
