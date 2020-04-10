@@ -69,6 +69,17 @@ public:
 		songs.push_back(tmpsong);
 	}
 	///////////////////////////////////////////////////////////////////////////////////
+	int GetNumber(string _name, string _performer)
+	{
+		for (int k = 0; k < quantity; k++)
+		{
+			if ((_name == songs[k].name) && (_performer == songs[k].performer))
+			{
+				return k + 1;
+			}
+		}
+	}
+	///////////////////////////////////////////////////////////////////////////////////
 	void Changesongname(int n, const string& a)
 	{
 		songs[n - 1].name = a;
@@ -305,11 +316,10 @@ int main()
 	list.Changesongname(3, "розетка");
 	list.AddSong();
 	list.Changesongname(4, "перфоратор");
-
-
-	cout << endl << endl << list.GetQuantity();
 	*/
+	cout << endl << endl << list.GetQuantity();
 	list.Getfromfile("MyList.txt");
+	list.Changesongname(list.GetNumber("ляпота", "evgenMc"), "новое название");
 	list.Outinfile("Newlist.txt");
 	system("pause");
 }
