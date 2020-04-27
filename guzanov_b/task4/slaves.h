@@ -187,6 +187,24 @@ public:
 		}
 		return *this;
 	}
+	void Getbegindata(string name)
+	{
+		int l = -1;
+		for (int i = 0; (i < count_people) && (l == -1); i++)
+		{
+			if (GetName(i) == name)
+				l = i;
+		}
+		if (l > -1)
+		{
+			print(history_of_day_of_measurement[l][0]);
+			print(":");
+			print(history_of_mounth_of_measurement[l][0]);
+			print(":");
+			print(history_of_year_of_measurement[l][0]);
+			print("\n");
+		}
+	}
 	void print(string d)
 	{
 		cout << d;
