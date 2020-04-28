@@ -330,7 +330,7 @@ public:
 	};
 };
 
-
+	
 int main()
 {
 	Scales Scale;
