@@ -61,6 +61,33 @@ public:
 		PIN.push_back(Pin);
 		CREDIT.push_back(Credit);
 	}
+	void set_ChangeAmount(int _Amount)
+	{
+		Amount = _Amount;
+	}
+
+	void set_Pin(string _Pin)
+	{
+		Pin = _Pin;
+	}
+
+	void set_Name(string _Name1, string _Name2, string _Name3)
+	{
+		Name1 = _Name1;
+		Name2 = _Name2;
+		Name3 = _Name3;
+	}
+
+	void set_ChangePIN(int _CardNum, string _Pin, string _Pin1)
+	{
+		if (CardNum == _CardNum)
+			if (Pin == _Pin)
+			{
+				Pin = _Pin1;
+				return;
+			}
+		throw;
+	}
 
 	void set_Person(int _CardNum, string _Name1, string _Name2, string _Name3, string _Pin, int _Amount)
 	{
@@ -414,29 +441,16 @@ int main()
 	int q = 0;
 	int w;
 	int f;
-
-	cout << "\n1) Create an account/Authorization" << endl;
-	cout << "2) View available credits" << endl;
-	cout << "3) Check the availability of credit" << endl;
-	cout << "4) Check the ability to get" << endl;
-	cout << "5) Receive credit" << endl;
-	cout << "6) Find out the current status of the loan" << endl;
-	cout << "7) Make a monthly loan payment" << endl;
-	cout << "8) Make an extra payment on the loanonal payment on the loan" << endl;
-	cout << "9) Exit" << endl;
+	int r = 0;
+	ProcessingCenter Person(a, name1, name2, name3, pin, s, m);
 
 	while (x == 0)
 	{
-		ProcessingCenter Person(a, name1, name2, name3, pin, s, m);
-		cin >> c;
-
-		switch (c)
+		do
 		{
-		case 1:
-		{
-
-			cout << "\nCreate an account" << endl;
-			cout << "Authorization" << endl;
+			cout << "\n1) Create an account" << endl;
+			cout << "2) Authorization" << endl;
+			cout << "10) Exit" << endl;
 			cin >> k;
 			if (k == 1)
 			{
@@ -474,16 +488,23 @@ int main()
 				Person.set_Person(a, name1, name2, name3, pin, s);
 				Person.DataBase();
 				Person.get_Person();
-				break;
+				r = 0;
 			}
 
-			if (k == 2)
+			else if (k == 2)
 			{
 				cout << "Please enter your card number: " << endl;
 				cin >> a;
 				cout << "Please enter your pin: " << endl;
 				cin >> pin;
 				C.Authorization(Person, a, pin);
+				r = 1;
+
+			}
+
+			else if (k == 3)
+			{
+				exit(EXIT_SUCCESS);
 				break;
 			}
 
@@ -492,66 +513,145 @@ int main()
 				cout << "Invalid input" << endl;
 			}
 
-		}
-
-		case 2:
+		} while (r == 0);
+		int z = 0;
+		while (z == 0)
 		{
-			cout << "Please enter the term for which you want to take out a loan: " << endl;
-			cin >> y;
-			cout << "Please enter the loan amount: " << endl;
-			cin >> q;
-			C.AvailableCredit(y, q);
-			break;
-		}
+			cout << "\n1) Change account" << endl;
+			cout << "2) View available credits" << endl;
+			cout << "3) Check the availability of credit" << endl;
+			cout << "4) Check the ability to get" << endl;
+			cout << "5) Receive credit" << endl;
+			cout << "6) Find out the current status of the loan" << endl;
+			cout << "7) Make a monthly loan payment" << endl;
+			cout << "8) Make an extra payment on the loanonal payment on the loan" << endl;
+			cout << "9) Log out" << endl;
+			cout << "10) Exit" << endl;
 
-		case 3:
-		{
-			C.CheckCredit(Person);
-			break;
-		}
+			cin >> c;
 
-		case 4:
-		{
-			C.CheckToGet(Person);
-			break;
-		}
+			switch (c)
+			{
+			case 1:
+			{
+				cout << "\n1) Change pin" << endl;
+				cout << "2) Change name" << endl;
+				cout << "3) Change amount" << endl;
+				cin >> t;
+				switch (t)
+				{
+				case 1:
+				{
+					cout << "Please enter your card number" << endl;
+					cin >> a;
+					cout << "Please enter your old pin" << endl;
+					cin >> pin1;
+					cout << "Please enter your new pin" << endl;
+					cin >> pin;
+					Person.set_ChangePIN(a, pin1, pin);
+					Person.get_Person();
+					break;
+				}
 
-		case 5:
-		{
-			C.AddCredit(Person);
-			break;
-		}
+				case 2:
+				{
+					cout << "Please enter your last name" << endl;
+					cin >> name1;
+					cout << "Please enter your name" << endl;
+					cin >> name2;
+					cout << "Please enter your middle name" << endl;
+					cin >> name3;
+					Person.set_Name(name1, name2, name3);
+					Person.get_Person();
+					break;
+				}
 
-		case 6:
-		{
-			C.CreditStatus(Person);
-			break;
-		}
+				case 3:
+				{
+					cout << "Please enter your new account balance" << endl;
+					cin >> s;
+					Person.set_ChangeAmount(s);
+					Person.get_Person();
+					break;
+				}
 
-		case 7:
-		{
-			C.MonthlyPayment(Person);
-			break;
-		}
+				default:
+				{
+					cout << "Invalid input" << endl;
+					break;
+				}
+				}
 
-		case 8:
-		{
-			cout << "Enter the payment amount: " << endl;
-			cin >> f;
-			C.ExtraPayment(Person, f);
-			break;
-		}
 
-		case 9:
-		{
-			exit(EXIT_SUCCESS);
-			break;
-		}
 
-		default:
-		{
-			cout << "Invalid input" << endl;
-		}
+
+			}
+
+			case 2:
+			{
+				cout << "Please enter the term for which you want to take out a loan: " << endl;
+				cin >> y;
+				cout << "Please enter the loan amount: " << endl;
+				cin >> q;
+				C.AvailableCredit(y, q);
+				break;
+			}
+
+			case 3:
+			{
+				C.CheckCredit(Person);
+				break;
+			}
+
+			case 4:
+			{
+				C.CheckToGet(Person);
+				break;
+			}
+
+			case 5:
+			{
+				C.AddCredit(Person);
+				break;
+			}
+
+			case 6:
+			{
+				C.CreditStatus(Person);
+				break;
+			}
+
+			case 7:
+			{
+				C.MonthlyPayment(Person);
+				break;
+			}
+
+			case 8:
+			{
+				cout << "Enter the payment amount: " << endl;
+				cin >> f;
+				C.ExtraPayment(Person, f);
+				break;
+			}
+
+			case 9:
+			{
+				z = 1;
+				break;
+			}
+
+			case 10:
+			{
+				exit(EXIT_SUCCESS);
+				break;
+			}
+
+			default:
+			{
+				cout << "Invalid input" << endl;
+			}
+			}
 		}
 	}
 }
