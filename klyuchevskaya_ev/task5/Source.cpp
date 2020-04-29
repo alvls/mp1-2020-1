@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <cstdlib>
 #include <vector>
 #include <clocale>
@@ -323,19 +323,19 @@ int main()
 	vector<reserve> res1;
 	Cinema Bumbastic(info1, hall1);
 	TicketOffice kassa(Bumbastic, res1);
-	cout << "Ââåäèòå ñåãîäíÿøíåå ÷èñëî:" << endl;
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÑÐµÐ³Ð¾Ð´Ð½ÑÑˆÐ½ÐµÐµ Ñ‡Ð¸ÑÐ»Ð¾:" << endl;
 	cin >> virtday;
-	cout << "Ââåäèòå âðåìÿ:" << endl;
-	cout << "÷:";
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð²Ñ€ÐµÐ¼Ñ:" << endl;
+	cout << "Ñ‡:";
 	cin >> virtime.hour;
-	cout << "ì:";
+	cout << "Ð¼:";
 	cin >> virtime.minute;
 	while (f)
 	{
-		cout << "Âûáåðèòå äåéñòâèÿ:" << endl;
-		cout << "1.Äîáàâèòü èíôîðìàöèþ î êèíîñåàíñàõ" << endl;
-		cout << "2.Çàêàçàòü áèëåòû â êèíî" << endl;
-		cout << "3.Âûéòè èç ïðîãðàììû" << endl;
+		cout << "Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ Ð´ÐµÐ¹ÑÑ‚Ð²Ð¸Ñ:" << endl;
+		cout << "1.Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸ÑŽ Ð¾ ÐºÐ¸Ð½Ð¾ÑÐµÐ°Ð½ÑÐ°Ñ…" << endl;
+		cout << "2.Ð—Ð°ÐºÐ°Ð·Ð°Ñ‚ÑŒ Ð±Ð¸Ð»ÐµÑ‚Ñ‹ Ð² ÐºÐ¸Ð½Ð¾" << endl;
+		cout << "3.Ð’Ñ‹Ð¹Ñ‚Ð¸ Ð¸Ð· Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ñ‹" << endl;
 		cin >> a;
 		switch (a)
 		{
@@ -344,40 +344,40 @@ int main()
 			w = 1;
 			while (w)
 			{
-				cout << "×òî õîòèòå äîáàâèòü?" << endl << "1.Îáîçíà÷èòü ñòîèìîñòü áèëåòîâ" << endl << "2.Äîáàâèòü ñåàíñ" << endl << "3.Ãëàâíîå ìåíþ" << endl;
+				cout << "Ð§Ñ‚Ð¾ Ñ…Ð¾Ñ‚Ð¸Ñ‚Ðµ Ð´Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ?" << endl << "1.ÐžÐ±Ð¾Ð·Ð½Ð°Ñ‡Ð¸Ñ‚ÑŒ ÑÑ‚Ð¾Ð¸Ð¼Ð¾ÑÑ‚ÑŒ Ð±Ð¸Ð»ÐµÑ‚Ð¾Ð²" << endl << "2.Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ ÑÐµÐ°Ð½Ñ" << endl << "3.Ð“Ð»Ð°Ð²Ð½Ð¾Ðµ Ð¼ÐµÐ½ÑŽ" << endl;
 				cin >> b;
 				switch (b)
 				{
 				case 1:
 				{
-					cout << "Íîìåð çàëà:";
+					cout << "ÐÐ¾Ð¼ÐµÑ€ Ð·Ð°Ð»Ð°:";
 					cin >> c;
-					cout << "Ñòàíäàðòíàÿ öåíà áèëåòà:";
+					cout << "Ð¡Ñ‚Ð°Ð½Ð´Ð°Ñ€Ñ‚Ð½Ð°Ñ Ñ†ÐµÐ½Ð° Ð±Ð¸Ð»ÐµÑ‚Ð°:";
 					cin >> d;
-					cout << "Öåíà VIP-áèëåòà:";
+					cout << "Ð¦ÐµÐ½Ð° VIP-Ð±Ð¸Ð»ÐµÑ‚Ð°:";
 					cin >> e;
 					hall h1(c, d, e);
 					Bumbastic.AddHall(h1);
-					cout << "Çàë äîáàâëåí!" << endl;
+					cout << "Ð—Ð°Ð» Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½!" << endl;
 					break;
 				}
 				case 2:
 				{
-					cout << "Íàçâàíèå ôèëüìà:";
+					cout << "ÐÐ°Ð·Ð²Ð°Ð½Ð¸Ðµ Ñ„Ð¸Ð»ÑŒÐ¼Ð°:";
 					cin.ignore();
 					getline(cin, s1);
-					cout << "Äåíü:";
+					cout << "Ð”ÐµÐ½ÑŒ:";
 					cin >> c;
-					cout << "Âðåìÿ ñåàíñà:" << endl;
-					cout << "÷:";
+					cout << "Ð’Ñ€ÐµÐ¼Ñ ÑÐµÐ°Ð½ÑÐ°:" << endl;
+					cout << "Ñ‡:";
 					cin >> t1.hour;
-					cout << "ì:";
+					cout << "Ð¼:";
 					cin >> t1.minute;
-					cout << "Íîìåð çàëà, â êîòîðîì áóäåò ïðîõîäèòü ñåàíñ:";
+					cout << "ÐÐ¾Ð¼ÐµÑ€ Ð·Ð°Ð»Ð°, Ð² ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ð¼ Ð±ÑƒÐ´ÐµÑ‚ Ð¿Ñ€Ð¾Ñ…Ð¾Ð´Ð¸Ñ‚ÑŒ ÑÐµÐ°Ð½Ñ:";
 					cin >> d;
 					kino.ChangeData(s1, c, t1, d);
 					Bumbastic.AddSeance(kino, c);
-					cout << "Êèíîñåàíñ äîáàâëåí!" << endl;
+					cout << "ÐšÐ¸Ð½Ð¾ÑÐµÐ°Ð½Ñ Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½!" << endl;
 					break;
 				}
 				case 3:
@@ -395,28 +395,28 @@ int main()
 			y = 1;
 			while (y)
 			{
-				cout << "Äîáðî ïîæàëîâàòü â êèíîòåàòð 'Áóìáàñòèê'! Âûáåðèòå æåëàåìîå äåéñòâèå:" << endl;
-				cout << "1. Ïîñìîòðåòü ðàñïèñàíèå êèíîñåàíñîâ" << endl;
-				cout << "2. Ïðîâåðèòü íàëè÷èå ñâîáîäíûõ ìåñò â òðåáóåìîé çîíå" << endl;
-				cout << "3. Ñäåëàòü çàêàç" << endl;
-				cout << "4. Çàáðîíèðîâàòü ìåñòà" << endl;
-				cout << "5. Óçíàòü îáùóþ ñòîèìîñòü çàêàçà" << endl;
-				cout << "6. Îòìåíèòü çàêàç" << endl;
-				cout << "7. Âûâåñòè èíôîðìàöèþ î áèëåòàõ" << endl;
-				cout << "8. Âåðíóòüñÿ â ãëàâíîå ìåíþ" << endl;
+				cout << "Ð”Ð¾Ð±Ñ€Ð¾ Ð¿Ð¾Ð¶Ð°Ð»Ð¾Ð²Ð°Ñ‚ÑŒ Ð² ÐºÐ¸Ð½Ð¾Ñ‚ÐµÐ°Ñ‚Ñ€ 'Ð‘ÑƒÐ¼Ð±Ð°ÑÑ‚Ð¸Ðº'! Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ Ð¶ÐµÐ»Ð°ÐµÐ¼Ð¾Ðµ Ð´ÐµÐ¹ÑÑ‚Ð²Ð¸Ðµ:" << endl;
+				cout << "1. ÐŸÐ¾ÑÐ¼Ð¾Ñ‚Ñ€ÐµÑ‚ÑŒ Ñ€Ð°ÑÐ¿Ð¸ÑÐ°Ð½Ð¸Ðµ ÐºÐ¸Ð½Ð¾ÑÐµÐ°Ð½ÑÐ¾Ð²" << endl;
+				cout << "2. ÐŸÑ€Ð¾Ð²ÐµÑ€Ð¸Ñ‚ÑŒ Ð½Ð°Ð»Ð¸Ñ‡Ð¸Ðµ ÑÐ²Ð¾Ð±Ð¾Ð´Ð½Ñ‹Ñ… Ð¼ÐµÑÑ‚ Ð² Ñ‚Ñ€ÐµÐ±ÑƒÐµÐ¼Ð¾Ð¹ Ð·Ð¾Ð½Ðµ" << endl;
+				cout << "3. Ð¡Ð´ÐµÐ»Ð°Ñ‚ÑŒ Ð·Ð°ÐºÐ°Ð·" << endl;
+				cout << "4. Ð—Ð°Ð±Ñ€Ð¾Ð½Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ð¼ÐµÑÑ‚Ð°" << endl;
+				cout << "5. Ð£Ð·Ð½Ð°Ñ‚ÑŒ Ð¾Ð±Ñ‰ÑƒÑŽ ÑÑ‚Ð¾Ð¸Ð¼Ð¾ÑÑ‚ÑŒ Ð·Ð°ÐºÐ°Ð·Ð°" << endl;
+				cout << "6. ÐžÑ‚Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ Ð·Ð°ÐºÐ°Ð·" << endl;
+				cout << "7. Ð’Ñ‹Ð²ÐµÑÑ‚Ð¸ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸ÑŽ Ð¾ Ð±Ð¸Ð»ÐµÑ‚Ð°Ñ…" << endl;
+				cout << "8. Ð’ÐµÑ€Ð½ÑƒÑ‚ÑŒÑÑ Ð² Ð³Ð»Ð°Ð²Ð½Ð¾Ðµ Ð¼ÐµÐ½ÑŽ" << endl;
 				cin >> a;
 				switch (a)
 				{
 				case 1:
 				{
-					cout << "1.Ïîñìîòðåòü ðàñïèñàíèå íà áëèæàéøèé ìåñÿö" << endl << "2.Ïîñìîòðåòü ðàñïèñàíèå íà áëèæàéøèå 3 äíÿ" << endl;
+					cout << "1.ÐŸÐ¾ÑÐ¼Ð¾Ñ‚Ñ€ÐµÑ‚ÑŒ Ñ€Ð°ÑÐ¿Ð¸ÑÐ°Ð½Ð¸Ðµ Ð½Ð° Ð±Ð»Ð¸Ð¶Ð°Ð¹ÑˆÐ¸Ð¹ Ð¼ÐµÑÑÑ†" << endl << "2.ÐŸÐ¾ÑÐ¼Ð¾Ñ‚Ñ€ÐµÑ‚ÑŒ Ñ€Ð°ÑÐ¿Ð¸ÑÐ°Ð½Ð¸Ðµ Ð½Ð° Ð±Ð»Ð¸Ð¶Ð°Ð¹ÑˆÐ¸Ðµ 3 Ð´Ð½Ñ" << endl;
 					cin >> vib;
 					if (vib == 1) {
 						for (size_t i = 0; i < Bumbastic.AllOfSeances().size(); i++)
 						{
-							cout << i + 1 << "." << Bumbastic.AllOfSeances()[i].ReturnNameFilm() << " , " << Bumbastic.AllOfSeances()[i].ReturnDayOfTheSeance() << " ìàÿ 2020." << endl;
-							cout << "Âðåìÿ ñåàíñà: " << Bumbastic.AllOfSeances()[i].ReturnTimeOfTheSeance().hour << ":" << Bumbastic.AllOfSeances()[i].ReturnTimeOfTheSeance().minute << endl;
-							cout << "Íîìåð çàëà: " << Bumbastic.AllOfSeances()[i].ReturnNumberOfHall() << endl;
+							cout << i + 1 << "." << Bumbastic.AllOfSeances()[i].ReturnNameFilm() << " , " << Bumbastic.AllOfSeances()[i].ReturnDayOfTheSeance() << " Ð¼Ð°Ñ 2020." << endl;
+							cout << "Ð’Ñ€ÐµÐ¼Ñ ÑÐµÐ°Ð½ÑÐ°: " << Bumbastic.AllOfSeances()[i].ReturnTimeOfTheSeance().hour << ":" << Bumbastic.AllOfSeances()[i].ReturnTimeOfTheSeance().minute << endl;
+							cout << "ÐÐ¾Ð¼ÐµÑ€ Ð·Ð°Ð»Ð°: " << Bumbastic.AllOfSeances()[i].ReturnNumberOfHall() << endl;
 							cout << endl;
 						}
 						break;
@@ -426,9 +426,9 @@ int main()
 						for (size_t i = 0; i < Bumbastic.AllOfSeances().size(); i++)
 						{
 							if ((Bumbastic.AllOfSeances()[i].ReturnDayOfTheSeance() - virtday) <= 3) {
-								cout << i + 1 << "." << Bumbastic.AllOfSeances()[i].ReturnNameFilm() << " , " << Bumbastic.AllOfSeances()[i].ReturnDayOfTheSeance() << " ìàÿ 2020." << endl;
-								cout << "Âðåìÿ ñåàíñà: " << Bumbastic.AllOfSeances()[i].ReturnTimeOfTheSeance().hour << ":" << Bumbastic.AllOfSeances()[i].ReturnTimeOfTheSeance().minute << endl;
-								cout << "Íîìåð çàëà: " << Bumbastic.AllOfSeances()[i].ReturnNumberOfHall() << endl;
+								cout << i + 1 << "." << Bumbastic.AllOfSeances()[i].ReturnNameFilm() << " , " << Bumbastic.AllOfSeances()[i].ReturnDayOfTheSeance() << " Ð¼Ð°Ñ 2020." << endl;
+								cout << "Ð’Ñ€ÐµÐ¼Ñ ÑÐµÐ°Ð½ÑÐ°: " << Bumbastic.AllOfSeances()[i].ReturnTimeOfTheSeance().hour << ":" << Bumbastic.AllOfSeances()[i].ReturnTimeOfTheSeance().minute << endl;
+								cout << "ÐÐ¾Ð¼ÐµÑ€ Ð·Ð°Ð»Ð°: " << Bumbastic.AllOfSeances()[i].ReturnNumberOfHall() << endl;
 							}
 						}
 						break;
@@ -437,27 +437,27 @@ int main()
 				}
 				case 2:
 				{
-					cout << "Ââåäèòå äàííûå ñåàíñà:" << endl;
-					cout << "Äåíü:";
+					cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð´Ð°Ð½Ð½Ñ‹Ðµ ÑÐµÐ°Ð½ÑÐ°:" << endl;
+					cout << "Ð”ÐµÐ½ÑŒ:";
 					cin >> b;
-					cout << "Íàçâàíèå ôèëüìà:";
+					cout << "ÐÐ°Ð·Ð²Ð°Ð½Ð¸Ðµ Ñ„Ð¸Ð»ÑŒÐ¼Ð°:";
 					cin.ignore();
 					getline(cin, s1);
-					cout << "Íîìåð çàëà:";
+					cout << "ÐÐ¾Ð¼ÐµÑ€ Ð·Ð°Ð»Ð°:";
 					cin >> c;
-					cout << "Âðåìÿ:" << endl;
-					cout << "÷:";
+					cout << "Ð’Ñ€ÐµÐ¼Ñ:" << endl;
+					cout << "Ñ‡:";
 					cin >> t1.hour;
-					cout << "ì:";
+					cout << "Ð¼:";
 					cin >> t1.minute;
-					cout << "Ââåäèòå ìåñòà, êîòîðûå æåëàåòå ïðîâåðèòü" << endl;
+					cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¼ÐµÑÑ‚Ð°, ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ Ð¶ÐµÐ»Ð°ÐµÑ‚Ðµ Ð¿Ñ€Ð¾Ð²ÐµÑ€Ð¸Ñ‚ÑŒ" << endl;
 					do {
-						cout << "Ðÿä:";
+						cout << "Ð ÑÐ´:";
 						cin >> q2.raw_;
-						cout << "Ìåñòî:";
+						cout << "ÐœÐµÑÑ‚Ð¾:";
 						cin >> q2.place_;
 						n2.push_back(q2);
-						cout << "VIP(1) èëè ñòàíäàðò(2)?" << endl;
+						cout << "VIP(1) Ð¸Ð»Ð¸ ÑÑ‚Ð°Ð½Ð´Ð°Ñ€Ñ‚(2)?" << endl;
 						cin >> e;
 						if (e == 1) {
 							q1.type = true;
@@ -466,43 +466,43 @@ int main()
 						{
 							q1.type = false;
 						}
-						cout << "Åù¸ îäíî ìåñòî?" << endl;
-						cout << "1.Äà" << endl;
-						cout << "2.Íåò" << endl;
+						cout << "Ð•Ñ‰Ñ‘ Ð¾Ð´Ð½Ð¾ Ð¼ÐµÑÑ‚Ð¾?" << endl;
+						cout << "1.Ð”Ð°" << endl;
+						cout << "2.ÐÐµÑ‚" << endl;
 						cin >> j;
 					} while (j == 1);
 
 					if (kassa.CheckPlaces(Bumbastic.ReturnTheSeance(b, t1, c), n2))
-						cout << "Ìåñòà ñâîáîäíû!" << endl;
+						cout << "ÐœÐµÑÑ‚Ð° ÑÐ²Ð¾Ð±Ð¾Ð´Ð½Ñ‹!" << endl;
 					else
-						cout << "Ìåñòà çàíÿòû." << endl;
+						cout << "ÐœÐµÑÑ‚Ð° Ð·Ð°Ð½ÑÑ‚Ñ‹." << endl;
 					n2.clear();
 					break;
 				}
 				case 3:
 				{
-					cout << "Äåíü:";
+					cout << "Ð”ÐµÐ½ÑŒ:";
 					cin >> d;
-					cout << "Âðåìÿ:" << endl;
-					cout << "÷:";
+					cout << "Ð’Ñ€ÐµÐ¼Ñ:" << endl;
+					cout << "Ñ‡:";
 					cin >> t1.hour;
-					cout << "ì:";
+					cout << "Ð¼:";
 					cin >> t1.minute;
 					if (((abs(t1.minute - virtime.minute) < 10) && (virtday == d)) || ((d - virtday) > 3) || ((d - virtday) < 0)) {
-						cout << "Ê ñîæàëåíèþ, äàííûé ñåàíñ íåäîñòóïåí" << endl;
+						cout << "Ðš ÑÐ¾Ð¶Ð°Ð»ÐµÐ½Ð¸ÑŽ, Ð´Ð°Ð½Ð½Ñ‹Ð¹ ÑÐµÐ°Ð½Ñ Ð½ÐµÐ´Ð¾ÑÑ‚ÑƒÐ¿ÐµÐ½" << endl;
 						break;
 					}
 					else {
-						cout << "Íàçâàíèå ôèëüìà:";
+						cout << "ÐÐ°Ð·Ð²Ð°Ð½Ð¸Ðµ Ñ„Ð¸Ð»ÑŒÐ¼Ð°:";
 						cin.ignore();
 						getline(cin, s1);
-						cout << "Íîìåð çàëà:";
+						cout << "ÐÐ¾Ð¼ÐµÑ€ Ð·Ð°Ð»Ð°:";
 						cin >> c;
-						cout << "Ðÿä:";
+						cout << "Ð ÑÐ´:";
 						cin >> q1.raw_;
-						cout << "Ìåñòî:";
+						cout << "ÐœÐµÑÑ‚Ð¾:";
 						cin >> q1.place_;
-						cout << "VIP(1) èëè ñòàíäàðò(2)?" << endl;
+						cout << "VIP(1) Ð¸Ð»Ð¸ ÑÑ‚Ð°Ð½Ð´Ð°Ñ€Ñ‚(2)?" << endl;
 						cin >> e;
 						if (e == 1) {
 							q1.type = true;
@@ -512,60 +512,60 @@ int main()
 							q1.type = false;
 						}
 						n1.push_back(q1);
-						cout << "Åù¸ îäíî ìåñòî?" << endl;
-						cout << "1.Äà" << endl;
-						cout << "2.Íåò" << endl;
+						cout << "Ð•Ñ‰Ñ‘ Ð¾Ð´Ð½Ð¾ Ð¼ÐµÑÑ‚Ð¾?" << endl;
+						cout << "1.Ð”Ð°" << endl;
+						cout << "2.ÐÐµÑ‚" << endl;
 						cin >> j;
 
-						cout << "Çàêàç ïðèíÿò! ×òîáû çàáðîíèðîâàòü, íåîáõîäèìî âûéòè â îñíîâíîå ìåíþ è âûáðàòü íóæíûé ïóêíò" << endl;
-						cout << "Âàø íîìåð çàêàçà: " << kassa.AcceptData(d, t1, s1, c, n1) << endl;
+						cout << "Ð—Ð°ÐºÐ°Ð· Ð¿Ñ€Ð¸Ð½ÑÑ‚! Ð§Ñ‚Ð¾Ð±Ñ‹ Ð·Ð°Ð±Ñ€Ð¾Ð½Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ, Ð½ÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ð¾ Ð²Ñ‹Ð¹Ñ‚Ð¸ Ð² Ð¾ÑÐ½Ð¾Ð²Ð½Ð¾Ðµ Ð¼ÐµÐ½ÑŽ Ð¸ Ð²Ñ‹Ð±Ñ€Ð°Ñ‚ÑŒ Ð½ÑƒÐ¶Ð½Ñ‹Ð¹ Ð¿ÑƒÐºÐ½Ñ‚" << endl;
+						cout << "Ð’Ð°Ñˆ Ð½Ð¾Ð¼ÐµÑ€ Ð·Ð°ÐºÐ°Ð·Ð°: " << kassa.AcceptData(d, t1, s1, c, n1) << endl;
 						n1.clear();
 						break;
 					}
 				}
 				case 4:
 				{
-					cout << "Äëÿ ðåçåðâèðîâàíèÿ ââåäèòå íîìåð çàêàçà:";
+					cout << "Ð”Ð»Ñ Ñ€ÐµÐ·ÐµÑ€Ð²Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ Ð²Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð¾Ð¼ÐµÑ€ Ð·Ð°ÐºÐ°Ð·Ð°:";
 					cin >> b;
 					if (kassa.MakeReservation(b))
-						cout << "Ìåñòà óñïåøíî çàáðîíèðîâàíû!" << endl;
+						cout << "ÐœÐµÑÑ‚Ð° ÑƒÑÐ¿ÐµÑˆÐ½Ð¾ Ð·Ð°Ð±Ñ€Ð¾Ð½Ð¸Ñ€Ð¾Ð²Ð°Ð½Ñ‹!" << endl;
 					else
-						cout << "Îøèáêà! Ìåñòà óæå áûëè çàáðîíèðîâàíû." << endl;
+						cout << "ÐžÑˆÐ¸Ð±ÐºÐ°! ÐœÐµÑÑ‚Ð° ÑƒÐ¶Ðµ Ð±Ñ‹Ð»Ð¸ Ð·Ð°Ð±Ñ€Ð¾Ð½Ð¸Ñ€Ð¾Ð²Ð°Ð½Ñ‹." << endl;
 					break;
 				}
 				case 5:
 				{
-					cout << "Ââåäèòå âàø íîìåð çàêàçà:";
+					cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð²Ð°Ñˆ Ð½Ð¾Ð¼ÐµÑ€ Ð·Ð°ÐºÐ°Ð·Ð°:";
 					cin >> b;
-					cout << "Îáùàÿ ñìîèìîñòü áèëåòîâ ñîñòàâèëà " << kassa.TotalValue(b) << " ðóáëåé." << endl;
+					cout << "ÐžÐ±Ñ‰Ð°Ñ ÑÐ¼Ð¾Ð¸Ð¼Ð¾ÑÑ‚ÑŒ Ð±Ð¸Ð»ÐµÑ‚Ð¾Ð² ÑÐ¾ÑÑ‚Ð°Ð²Ð¸Ð»Ð° " << kassa.TotalValue(b) << " Ñ€ÑƒÐ±Ð»ÐµÐ¹." << endl;
 					break;
 				}
 				case 6:
 				{
-					cout << "Ââåäèòå âàø íîìåð çàêàçà:";
+					cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð²Ð°Ñˆ Ð½Ð¾Ð¼ÐµÑ€ Ð·Ð°ÐºÐ°Ð·Ð°:";
 					cin >> b;
 					kassa.DeleteReserve(b);
-					cout << "Çàêàç îòìåí¸í." << endl;
+					cout << "Ð—Ð°ÐºÐ°Ð· Ð¾Ñ‚Ð¼ÐµÐ½Ñ‘Ð½." << endl;
 					break;
 				}
 				case 7:
 				{
-					cout << "Ââåäèòå âàø íîìåð çàêàçà:";
+					cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð²Ð°Ñˆ Ð½Ð¾Ð¼ÐµÑ€ Ð·Ð°ÐºÐ°Ð·Ð°:";
 					cin >> b;
 					vector <ticket> bilet;
 					bilet = kassa.MakeTickets(b);
-					cout << "ÂÀØÈ ÁÈËÅÒÛ:" << endl;
+					cout << "Ð’ÐÐ¨Ð˜ Ð‘Ð˜Ð›Ð•Ð¢Ð«:" << endl;
 					if (bilet.size() == 0) {
-						cout << "Âû íå çàáðîíèðîâàëè çàêàç";
+						cout << "Ð’Ñ‹ Ð½Ðµ Ð·Ð°Ð±Ñ€Ð¾Ð½Ð¸Ñ€Ð¾Ð²Ð°Ð»Ð¸ Ð·Ð°ÐºÐ°Ð·";
 					}
 					for (size_t i = 0; i < bilet.size(); i++)
 					{
-						cout << "Áèëåò íîìåð " << i + 1 << "." << endl;
-						cout << "Äàòà: " << bilet[i].t_date << " ìàÿ 2020." << endl;
-						cout << "Âðåìÿ ñåàíñà: " << bilet[i].t_time.hour << ":" << bilet[i].t_time.minute << endl;
-						cout << "Íàçâàíèå ôèëüìà: " << bilet[i].t_name << endl;
-						cout << "Íîìåð çàëà: " << bilet[i].t_numberh << endl;
-						cout << "Ðÿä: " << bilet[i].t_place.raw_ << " Ìåñòî: " << bilet[i].t_place.place_ << endl;
+						cout << "Ð‘Ð¸Ð»ÐµÑ‚ Ð½Ð¾Ð¼ÐµÑ€ " << i + 1 << "." << endl;
+						cout << "Ð”Ð°Ñ‚Ð°: " << bilet[i].t_date << " Ð¼Ð°Ñ 2020." << endl;
+						cout << "Ð’Ñ€ÐµÐ¼Ñ ÑÐµÐ°Ð½ÑÐ°: " << bilet[i].t_time.hour << ":" << bilet[i].t_time.minute << endl;
+						cout << "ÐÐ°Ð·Ð²Ð°Ð½Ð¸Ðµ Ñ„Ð¸Ð»ÑŒÐ¼Ð°: " << bilet[i].t_name << endl;
+						cout << "ÐÐ¾Ð¼ÐµÑ€ Ð·Ð°Ð»Ð°: " << bilet[i].t_numberh << endl;
+						cout << "Ð ÑÐ´: " << bilet[i].t_place.raw_ << " ÐœÐµÑÑ‚Ð¾: " << bilet[i].t_place.place_ << endl;
 					}
 					break;
 				}
