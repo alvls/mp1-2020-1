@@ -4,7 +4,7 @@ using std::to_string;
 
 TicketWindow::TicketWindow() {}
 
-string TicketWindow::RealTimeAdd10Minutes() //вычисляет настоящее время + 10 минут для проверки доступности сеанса
+string TicketWindow::RealTimeAdd10Minutes() //calculates present + 10 minutes to check seance availability
 {
 	time_t sec;
 	sec = time(NULL);

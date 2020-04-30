@@ -73,9 +73,9 @@ void Hall::Init()
 		for (int j = 0; j < defaultZone.Cols; j++)
 			if ((i < (defaultZone.Rows / 2 - vipZone.Rows / 2)) || (i > (defaultZone.Rows / 2 + vipZone.Rows / 2)) //расположим вип-зону по центру
 				|| (j < (defaultZone.Cols / 2 - vipZone.Cols / 2)) || (j > (defaultZone.Cols / 2 + vipZone.Cols / 2)))
-				HallMatrix[i][j] = 0; //обычные места
+				HallMatrix[i][j] = 0; //default
 			else
-				HallMatrix[i][j] = 2; //вип
+				HallMatrix[i][j] = 2; //vip
 }
 
 Hall::~Hall()
@@ -134,7 +134,7 @@ void Hall::BuyTicket(int type, int& row, int& seat)
 		for (int j = 0; j < defaultZone.Cols; j++)
 			if ((HallMatrix[i][j] == type) && (HallMatrix[i][j] != 1)) 
 			{
-				HallMatrix[i][j] = 1; //место занято
+				HallMatrix[i][j] = 1; //seat taken
 				DecFreePlaces(type);
 				row = i;
 				seat = j;
