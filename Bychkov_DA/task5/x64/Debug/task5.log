@@ -1,2 +1,4 @@
 ﻿  Source.cpp
+C:\Users\Денис\mp1-2020-1\Bychkov_DA\task5\Source.cpp(481,35): warning C4244:  =: преобразование "double" в "int", возможна потеря данных
+C:\Users\Денис\mp1-2020-1\Bychkov_DA\task5\Source.cpp(577): warning C4715:  TicketOffice::Checkseats: значение возвращается не при всех путях выполнения
   task5.vcxproj -> C:\Users\Денис\mp1-2020-1\Bychkov_DA\x64\Debug\task5.exe
