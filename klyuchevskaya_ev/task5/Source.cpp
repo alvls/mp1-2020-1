@@ -79,12 +79,14 @@ public:
 	}
 	Seance& operator=(const Seance &s)
 	{
-		film = s.film;
-		day = s.day;
-		time_seance.hour = s.time_seance.hour;
-		time_seance.minute = s.time_seance.minute;
-		number_hall = s.number_hall;
-		employment = s.employment;
+		if (this != &s) {
+			film = s.film;
+			day = s.day;
+			time_seance.hour = s.time_seance.hour;
+			time_seance.minute = s.time_seance.minute;
+			number_hall = s.number_hall;
+			employment = s.employment;
+		}
 		return *this;
 	}
 	bool operator ==(const Seance &s)
@@ -96,7 +98,7 @@ public:
 	}
 	void ChangeData(string _film, int _day, time _time_seance, int _number_hall)
 	{
-		_film = _film;
+		film = _film;
 		day = _day;
 		time_seance = _time_seance;
 		number_hall = _number_hall;
@@ -259,7 +261,7 @@ public:
 			}
 			return sum;
 		}
-		if (rsrvs[a - 1].t.hour<18 && rsrvs[a - 1].t.hour>12)
+		if ((rsrvs[a - 1].t.hour<18) && (rsrvs[a - 1].t.hour>12))
 		{
 			for (size_t i = 0; i < rsrvs[a - 1].res_places.size(); i++)
 			{
@@ -332,7 +334,7 @@ int main()
 	cin >> virtime.minute;
 	while (f)
 	{
-		cout << "Выберите действия:" << endl;
+		cout << "Выберите действие:" << endl;
 		cout << "1.Добавить информацию о киносеансах" << endl;
 		cout << "2.Заказать билеты в кино" << endl;
 		cout << "3.Выйти из программы" << endl;
@@ -404,6 +406,7 @@ int main()
 				cout << "6. Отменить заказ" << endl;
 				cout << "7. Вывести информацию о билетах" << endl;
 				cout << "8. Вернуться в главное меню" << endl;
+				cout << "9. Выйти из программы" << endl;
 				cin >> a;
 				switch (a)
 				{
@@ -426,7 +429,7 @@ int main()
 						for (size_t i = 0; i < Bumbastic.AllOfSeances().size(); i++)
 						{
 							if ((Bumbastic.AllOfSeances()[i].ReturnDayOfTheSeance() - virtday) <= 3) {
-								cout << i + 1 << "." << Bumbastic.AllOfSeances()[i].ReturnNameFilm() << " , " << Bumbastic.AllOfSeances()[i].ReturnDayOfTheSeance() << " мая 2020." << endl;
+								cout << i + 1 << "." << Bumbastic.AllOfSeances()[i].ReturnNameFilm() << ". " << Bumbastic.AllOfSeances()[i].ReturnDayOfTheSeance() << " мая 2020." << endl;
 								cout << "Время сеанса: " << Bumbastic.AllOfSeances()[i].ReturnTimeOfTheSeance().hour << ":" << Bumbastic.AllOfSeances()[i].ReturnTimeOfTheSeance().minute << endl;
 								cout << "Номер зала: " << Bumbastic.AllOfSeances()[i].ReturnNumberOfHall() << endl;
 							}
@@ -498,25 +501,26 @@ int main()
 						getline(cin, s1);
 						cout << "Номер зала:";
 						cin >> c;
-						cout << "Ряд:";
-						cin >> q1.raw_;
-						cout << "Место:";
-						cin >> q1.place_;
-						cout << "VIP(1) или стандарт(2)?" << endl;
-						cin >> e;
-						if (e == 1) {
-							q1.type = true;
-						}
-						else
-						{
-							q1.type = false;
-						}
-						n1.push_back(q1);
-						cout << "Ещё одно место?" << endl;
-						cout << "1.Да" << endl;
-						cout << "2.Нет" << endl;
-						cin >> j;
-
+						do {
+							cout << "Ряд:";
+							cin >> q1.raw_;
+							cout << "Место:";
+							cin >> q1.place_;
+							cout << "VIP(1) или стандарт(2)?" << endl;
+							cin >> e;
+							if (e == 1) {
+								q1.type = true;
+							}
+							else
+							{
+								q1.type = false;
+							}
+							n1.push_back(q1);
+							cout << "Ещё одно место?" << endl;
+							cout << "1.Да" << endl;
+							cout << "2.Нет" << endl;
+							cin >> j;
+						} while (j == 1);
 						cout << "Заказ принят! Чтобы забронировать, необходимо выйти в основное меню и выбрать нужный пукнт" << endl;
 						cout << "Ваш номер заказа: " << kassa.AcceptData(d, t1, s1, c, n1) << endl;
 						n1.clear();
@@ -560,7 +564,7 @@ int main()
 					}
 					for (size_t i = 0; i < bilet.size(); i++)
 					{
-						cout << "Билет номер " << i + 1 << "." << endl;
+						cout << "Билет № " << i + 1 << "." << endl;
 						cout << "Дата: " << bilet[i].t_date << " мая 2020." << endl;
 						cout << "Время сеанса: " << bilet[i].t_time.hour << ":" << bilet[i].t_time.minute << endl;
 						cout << "Название фильма: " << bilet[i].t_name << endl;
@@ -574,6 +578,9 @@ int main()
 					y = 0;
 					break;
 				}
+				case 9:
+					y = 0;
+					f = 0;
 				}
 			}
 			break;
