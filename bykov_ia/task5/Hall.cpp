@@ -71,7 +71,7 @@ void Hall::Init()
 {
 	for (int i = 0; i < defaultZone.Rows; i++)
 		for (int j = 0; j < defaultZone.Cols; j++)
-			if ((i < (defaultZone.Rows / 2 - vipZone.Rows / 2)) || (i > (defaultZone.Rows / 2 + vipZone.Rows / 2)) //расположим вип-зону по центру
+			if ((i < (defaultZone.Rows / 2 - vipZone.Rows / 2)) || (i > (defaultZone.Rows / 2 + vipZone.Rows / 2)) //center vip-zone
 				|| (j < (defaultZone.Cols / 2 - vipZone.Cols / 2)) || (j > (defaultZone.Cols / 2 + vipZone.Cols / 2)))
 				HallMatrix[i][j] = 0; //default
 			else
