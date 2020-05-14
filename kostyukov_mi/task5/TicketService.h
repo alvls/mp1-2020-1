@@ -95,3 +95,17 @@ class TicketService
             return tickets;
         }
 };
+class GorkyRailway
+{
+    private:
+        vector<TicketService> ts;
+    public:
+        GorkyRailway(vector<TicketService> _ts)
+        {
+            ts = _ts;
+        }
+        TicketService operator[](size_t index)
+        {
+            return ts[index];
+        }   
+};

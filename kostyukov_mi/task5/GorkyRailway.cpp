@@ -49,4 +49,8 @@ int main()
         Etrain.push_back(Wagon(Eseats));
     }
     Train ExpressTrain(3, "НиНо", "Москва", Etrain);
+
+    TicketService GRTS({Lastochka, BrandedTrain, ExpressTrain});
+
+    GorkyRailway GR({GRTS});
 }
