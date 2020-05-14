@@ -31,10 +31,9 @@ class Ticket
 class Order
 {
     public:
-        string name;
         Date date;
         int trainIndex;
-        vector<pair<int, int>> seats;
+        vector<pair< string, pair< int, int > >> seats;
 
 };
 
@@ -51,7 +50,7 @@ class TicketService
         {
             for (auto seat: order.seats)
             {
-                if (!trains[order.trainIndex].getWagons()[seat.first].getSeats()[seat.second].getStatus()) 
+                if (!trains[order.trainIndex].getWagons()[seat.second.first].getSeats()[seat.second.second].getStatus()) 
                     return false;
             }
             return true;
@@ -61,7 +60,7 @@ class TicketService
             if (!checkSeats(order)) return false;
             for (auto seat: order.seats)
             {
-                trains[order.trainIndex].getWagons()[seat.first].bookSeat(seat.second);
+                trains[order.trainIndex].getWagons()[seat.second.first].bookSeat(seat.second.second);
             }
         }
         bool restoreSeats(Order order)
@@ -69,7 +68,7 @@ class TicketService
             if (!checkSeats(order)) return false;
             for (auto seat: order.seats)
             {
-                trains[order.trainIndex].getWagons()[seat.first].restoreSeat(seat.second);
+                trains[order.trainIndex].getWagons()[seat.second.first].restoreSeat(seat.second.second);
             }
             return true;
         }
@@ -78,7 +77,7 @@ class TicketService
             int total = 0;
             for (auto seat: order.seats)
             {
-                total += trains[order.trainIndex].getWagons()[seat.first].getSeats()[seat.second].getPrice();
+                total += trains[order.trainIndex].getWagons()[seat.second.first].getSeats()[seat.second.second].getPrice();
             }
             return total;
         }
@@ -90,7 +89,7 @@ class TicketService
             vector<Ticket> tickets;
             for (auto seat: order.seats)
             {
-                tickets.push_back(Ticket(order.name, order.date, trainId, seat.first+1, seat.second+1, stationFrom, stationTo));
+                tickets.push_back(Ticket(seat.first, order.date, trainId, seat.second.first+1, seat.second.second+1, stationFrom, stationTo));
             }
             return tickets;
         }
