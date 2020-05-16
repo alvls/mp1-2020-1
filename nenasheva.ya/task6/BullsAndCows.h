@@ -48,12 +48,10 @@ public:
 	bool Win_check()
 	{
 		bool check = false;
-		if (cow >= 0)
-			if (bull != length)
-				cout << "Коров: " << cow << endl;
-		if (bull >=  0)
-			if (bull != length)
-				cout << "Быков: " << bull << endl;
+		if (cow >= 0 && bull != length)
+			cout << "Коров: " << cow << endl;
+		if (bull >= 0 && bull != length)
+			cout << "Быков: " << bull << endl;
 		if (bull == length)
 		{
 			cout << "Вы выиграли!" << endl;
