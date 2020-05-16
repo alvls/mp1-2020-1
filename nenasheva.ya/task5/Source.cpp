@@ -76,6 +76,7 @@ int main(void)
 	cin >> month_persents;
 	cout << D.WidthrawPercents(month_persents) << endl;
 	cout << D.Get_SalaryAccountInfo() << endl;
+	system("pause");
 
 	if (D.CloseDeposit())
 		cout << "Срок вашего депозита истёк" << endl;
