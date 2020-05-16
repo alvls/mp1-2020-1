@@ -8,7 +8,8 @@
 int main()
 {
 	int item, i;
-	RailwayTicketOffice ticket_office;
+	GorkyRailway gorky_railway;
+	RailwayTicketOffice ticket_office(&gorky_railway);
 	Date date_flight;
 	int number_train;
 	std::string type_of_wagon = "swallow";

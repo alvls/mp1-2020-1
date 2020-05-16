@@ -722,14 +722,16 @@ std::vector<int> OneDay::GetNumderPlase(uint _number_train)
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-RailwayTicketOffice::RailwayTicketOffice(): GorkyRailway(), diffDay(0), flag(0), number_train(0), count_seating(0), count_upper_berth(0), count_lower_berth(0)
+RailwayTicketOffice::RailwayTicketOffice(GorkyRailway* _gorky_railway):  diffDay(0), flag(0), number_train(0), count_seating(0), count_upper_berth(0), count_lower_berth(0)
 {
 	type_of_wagon = " ";
-	full_names.resize(0);
+	full_names.resize(0); 
+	gorky_railway = _gorky_railway;
 }
 
-RailwayTicketOffice::RailwayTicketOffice(Date _today, Date _date_flight, uint _number_train, std::string _type_of_wagon, uint _count_seating, uint _count_upper_berth, uint _count_lower_berth, std::vector<std::string> _full_names) : GorkyRailway()
+RailwayTicketOffice::RailwayTicketOffice(Date _today, Date _date_flight, uint _number_train, std::string _type_of_wagon, uint _count_seating, uint _count_upper_berth, uint _count_lower_berth, std::vector<std::string> _full_names, GorkyRailway* _gorky_railway)
 {
+	gorky_railway = _gorky_railway;
 	SetData (_today, _date_flight, _number_train, _type_of_wagon, _count_seating, _count_upper_berth, _count_lower_berth, _full_names);
 }
 
@@ -768,7 +770,7 @@ std::string RailwayTicketOffice::CheckAvailabilityOfTickets()
 		return "Invalid date entered, enter the correct data";
 	else
 	{
-		if (monthly_train_schedule[diffDay - 1].CheckAvailabilityOfTickets(number_train, type_of_wagon, count_seating, count_upper_berth, count_lower_berth))
+		if (gorky_railway->monthly_train_schedule[diffDay - 1].CheckAvailabilityOfTickets(number_train, type_of_wagon, count_seating, count_upper_berth, count_lower_berth))
 			return "Tickets are available";
 		else
 			return "No tickets available";
@@ -781,12 +783,12 @@ void RailwayTicketOffice::ReserveOfTickets()
 		throw "Invalid date entered";
 	else
 	{
-		monthly_train_schedule[diffDay - 1].ReserveOfTickets( number_train, type_of_wagon, count_seating, count_upper_berth, count_lower_berth);
+		gorky_railway->monthly_train_schedule[diffDay - 1].ReserveOfTickets( number_train, type_of_wagon, count_seating, count_upper_berth, count_lower_berth);
 		Ticket now_ticket;
 		for (size_t i = 0; i < count_seating + count_upper_berth + count_lower_berth; i++)
 		{
-			now_ticket.SetTikcet(date_flight, number_train, monthly_train_schedule[diffDay - 1].GetNumderWagon(number_train), monthly_train_schedule[diffDay - 1].GetNumderPlase(number_train)[i], full_names[i], monthly_train_schedule[diffDay - 1].GetLineTrain(number_train)[0], monthly_train_schedule[diffDay - 1].GetLineTrain(number_train)[1]);
-			tickets.push_back(now_ticket);
+			now_ticket.SetTikcet(date_flight, number_train, gorky_railway->monthly_train_schedule[diffDay - 1].GetNumderWagon(number_train), gorky_railway->monthly_train_schedule[diffDay - 1].GetNumderPlase(number_train)[i], full_names[i], gorky_railway->monthly_train_schedule[diffDay - 1].GetLineTrain(number_train)[0], gorky_railway->monthly_train_schedule[diffDay - 1].GetLineTrain(number_train)[1]);
+			gorky_railway->tickets.push_back(now_ticket);
 		}
 	}
 }
@@ -799,10 +801,10 @@ void RailwayTicketOffice::CancelOrder()
 			throw "Invalid date entered";
 		else
 		{
-			monthly_train_schedule[diffDay - 1].CancelOrder(number_train, type_of_wagon, count_seating, count_upper_berth, count_lower_berth);
+			gorky_railway->monthly_train_schedule[diffDay - 1].CancelOrder(number_train, type_of_wagon, count_seating, count_upper_berth, count_lower_berth);
 			for (size_t i = 0; i < count_seating + count_upper_berth + count_lower_berth; i++)
 			{
-				tickets.pop_back();
+				gorky_railway->tickets.pop_back();
 			}
 			flag = 0;
 		}
@@ -816,17 +818,17 @@ double RailwayTicketOffice::CostOfTickets()
 	if (flag)
 	{
 		if (type_of_wagon == "SV")
-			return SV_prise * count_seating;
+			return gorky_railway->SV_prise * count_seating;
 		if (type_of_wagon == "swallow")
-			return swallow_price * count_seating;
+			return gorky_railway->swallow_price * count_seating;
 		if (type_of_wagon == "coupe")
 		{
 			if ((number_train = 75) || (number_train = 80))
-				return (lower_seat_price * count_lower_berth + upper_seat_price * count_upper_berth) * coefficient_coupe;
+				return (gorky_railway->lower_seat_price * count_lower_berth + gorky_railway->upper_seat_price * count_upper_berth) * gorky_railway->coefficient_coupe;
 			else
 			{
 				if ((number_train = 60) || (number_train = 64))
-					return (lower_seat_price * count_lower_berth + upper_seat_price * count_upper_berth) * coefficient_coupe * coefficient_firm_train;
+					return (gorky_railway->lower_seat_price * count_lower_berth + gorky_railway->upper_seat_price * count_upper_berth) * gorky_railway->coefficient_coupe * gorky_railway->coefficient_firm_train;
 			}
 		}
 		else
@@ -834,11 +836,11 @@ double RailwayTicketOffice::CostOfTickets()
 			if (type_of_wagon == "reserved seat")
 			{
 				if ((number_train = 75) || (number_train = 80))
-					return lower_seat_price * count_lower_berth + upper_seat_price * count_upper_berth;
+					return gorky_railway->lower_seat_price * count_lower_berth + gorky_railway->upper_seat_price * count_upper_berth;
 				else
 				{
 					if ((number_train = 60) || (number_train = 64))
-						return (lower_seat_price * count_lower_berth + upper_seat_price * count_upper_berth) * coefficient_firm_train;
+						return (gorky_railway->lower_seat_price * count_lower_berth + gorky_railway->upper_seat_price * count_upper_berth) * gorky_railway->coefficient_firm_train;
 				}
 			}
 		}
@@ -851,9 +853,9 @@ std::string RailwayTicketOffice::GetOfTickets()
 	std::string _tickets;
 	if (flag)
 	{
-		for (size_t i = tickets.size() - (count_lower_berth + count_upper_berth + count_seating); i < tickets.size(); i++)
+		for (size_t i = gorky_railway->tickets.size() - (count_lower_berth + count_upper_berth + count_seating); i < gorky_railway->tickets.size(); i++)
 		{
-			_tickets += tickets[i].GetTikcet();
+			_tickets += gorky_railway->tickets[i].GetTikcet();
 		}
 		return _tickets;
 	}

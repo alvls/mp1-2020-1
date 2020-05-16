@@ -152,7 +152,7 @@ public:
 
 class GorkyRailway
 {
-protected:
+private:
 	const uint lower_seat_price = 1500;
 	const uint upper_seat_price = 1200;
 	const uint swallow_price = 1000;
@@ -164,10 +164,11 @@ protected:
 public:
 	GorkyRailway();
 	~GorkyRailway();
+	friend class RailwayTicketOffice;
 };
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-class RailwayTicketOffice: public GorkyRailway
+class RailwayTicketOffice
 {
 private:
 	Date today;
@@ -180,9 +181,10 @@ private:
 	uint count_lower_berth;
 	uint flag; //flag = 1 данные уже введены, flag = 0 данные не введены, или заказ был отменён
 	std::vector<std::string> full_names;
+	GorkyRailway* gorky_railway;
 public:	
-	RailwayTicketOffice();
-	RailwayTicketOffice(Date _today, Date _date_flight, uint _number_train, std::string _type_of_wagon, uint _count_seating, uint _count_upper_berth, uint _count_lower_berth, std::vector<std::string> _full_name);
+	RailwayTicketOffice(GorkyRailway* gorky_railway);
+	RailwayTicketOffice(Date _today, Date _date_flight, uint _number_train, std::string _type_of_wagon, uint _count_seating, uint _count_upper_berth, uint _count_lower_berth, std::vector<std::string> _full_name, GorkyRailway* _gorky_railway);
 	~RailwayTicketOffice();
 
 	bool CheckDate();
