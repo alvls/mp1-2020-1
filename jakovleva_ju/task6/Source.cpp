@@ -25,7 +25,7 @@ public:
 
 			for (int j = 0; j < i; j++)
 			{
-				while ((Arr[j] == Arr[i]) || (Arr[0] == 0))
+				while ((Arr[j] == Arr[i]) || (Arr[0] == '0'))
 				{
 					Arr[i]++;
 					break;
