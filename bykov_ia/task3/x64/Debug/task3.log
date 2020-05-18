@@ -1,2 +1,44 @@
 ﻿  Source.cpp
-  task3.vcxproj -> D:\mp1-2020-1\bykov_ia\x64\Debug\task3.exe
+D:\mp1-2020-1\bykov_ia\task3\Source.cpp(246): error C3867: 'Contacts::compareFullname': non-standard syntax; use '&' to create a pointer to member
+D:\mp1-2020-1\bykov_ia\task3\Source.cpp(246): error C2672: 'std::lower_bound': no matching overloaded function found
+D:\mp1-2020-1\bykov_ia\task3\Source.cpp(246): error C2780: '_FwdIt std::lower_bound(_FwdIt,_FwdIt,const _Ty &)': expects 3 arguments - 4 provided
+  C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.20.27508\include\algorithm(2714): note: see declaration of 'std::lower_bound'
+D:\mp1-2020-1\bykov_ia\task3\Source.cpp(247): error C3536: 'index': cannot be used before it is initialized
+D:\mp1-2020-1\bykov_ia\task3\Source.cpp(247): error C2664: 'std::_List_iterator<std::_List_val<std::_List_simple_types<_Ty>>> std::list<_Ty,std::allocator<_Ty>>::insert(std::_List_const_iterator<std::_List_val<std::_List_simple_types<_Ty>>>,unsigned __int64,const _Ty &)': cannot convert argument 1 from 'int' to 'std::_List_const_iterator<std::_List_val<std::_List_simple_types<_Ty>>>'
+          with
+          [
+              _Ty=Contact
+          ]
+  D:\mp1-2020-1\bykov_ia\task3\Source.cpp(247): note: No constructor could take the source type, or constructor overload resolution was ambiguous
+D:\mp1-2020-1\bykov_ia\task3\Source.cpp(253): error C3867: 'Contacts::compareFullname': non-standard syntax; use '&' to create a pointer to member
+D:\mp1-2020-1\bykov_ia\task3\Source.cpp(253): error C2672: 'std::lower_bound': no matching overloaded function found
+D:\mp1-2020-1\bykov_ia\task3\Source.cpp(253): error C2780: '_FwdIt std::lower_bound(_FwdIt,_FwdIt,const _Ty &)': expects 3 arguments - 4 provided
+  C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.20.27508\include\algorithm(2714): note: see declaration of 'std::lower_bound'
+D:\mp1-2020-1\bykov_ia\task3\Source.cpp(254): error C3536: 'index': cannot be used before it is initialized
+D:\mp1-2020-1\bykov_ia\task3\Source.cpp(254): error C2100: illegal indirection
+D:\mp1-2020-1\bykov_ia\task3\Source.cpp(254): error C2446: '!=': no conversion from 'int *' to 'Contact *'
+  D:\mp1-2020-1\bykov_ia\task3\Source.cpp(254): note: Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
+D:\mp1-2020-1\bykov_ia\task3\Source.cpp(255): error C2664: 'std::_List_iterator<std::_List_val<std::_List_simple_types<_Ty>>> std::list<_Ty,std::allocator<_Ty>>::insert(std::_List_const_iterator<std::_List_val<std::_List_simple_types<_Ty>>>,unsigned __int64,const _Ty &)': cannot convert argument 1 from 'int' to 'std::_List_const_iterator<std::_List_val<std::_List_simple_types<_Ty>>>'
+          with
+          [
+              _Ty=Contact
+          ]
+  D:\mp1-2020-1\bykov_ia\task3\Source.cpp(255): note: No constructor could take the source type, or constructor overload resolution was ambiguous
+D:\mp1-2020-1\bykov_ia\task3\Source.cpp(294): error C3867: 'Contacts::compareFullname': non-standard syntax; use '&' to create a pointer to member
+D:\mp1-2020-1\bykov_ia\task3\Source.cpp(294): error C2672: 'std::lower_bound': no matching overloaded function found
+D:\mp1-2020-1\bykov_ia\task3\Source.cpp(294): error C2780: '_FwdIt std::lower_bound(_FwdIt,_FwdIt,const _Ty &)': expects 3 arguments - 4 provided
+  C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.20.27508\include\algorithm(2714): note: see declaration of 'std::lower_bound'
+D:\mp1-2020-1\bykov_ia\task3\Source.cpp(295): error C3536: 'index': cannot be used before it is initialized
+D:\mp1-2020-1\bykov_ia\task3\Source.cpp(295): error C2100: illegal indirection
+D:\mp1-2020-1\bykov_ia\task3\Source.cpp(295): error C2440: 'initializing': cannot convert from 'int' to 'Contact'
+  D:\mp1-2020-1\bykov_ia\task3\Source.cpp(295): note: No constructor could take the source type, or constructor overload resolution was ambiguous
+D:\mp1-2020-1\bykov_ia\task3\Source.cpp(307): error C3867: 'Contacts::comparePhoneNumber': non-standard syntax; use '&' to create a pointer to member
+D:\mp1-2020-1\bykov_ia\task3\Source.cpp(307): error C2672: 'std::lower_bound': no matching overloaded function found
+D:\mp1-2020-1\bykov_ia\task3\Source.cpp(307): error C2780: '_FwdIt std::lower_bound(_FwdIt,_FwdIt,const _Ty &)': expects 3 arguments - 4 provided
+  C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.20.27508\include\algorithm(2714): note: see declaration of 'std::lower_bound'
+D:\mp1-2020-1\bykov_ia\task3\Source.cpp(308): error C3536: 'index': cannot be used before it is initialized
+D:\mp1-2020-1\bykov_ia\task3\Source.cpp(308): error C2100: illegal indirection
+D:\mp1-2020-1\bykov_ia\task3\Source.cpp(308): error C2440: 'initializing': cannot convert from 'int' to 'Contact'
+  D:\mp1-2020-1\bykov_ia\task3\Source.cpp(308): note: No constructor could take the source type, or constructor overload resolution was ambiguous
+D:\mp1-2020-1\bykov_ia\task3\Source.cpp(317): warning C4138: '*/' found outside of comment
+D:\mp1-2020-1\bykov_ia\task3\Source.cpp(317): error C2059: syntax error: '/'

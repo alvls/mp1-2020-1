@@ -1,0 +1,3 @@
+﻿  Source.cpp
+D:\mp1-2020-1\bykov_ia\task4\Source.cpp(266): warning C4101: 'isFavorite': unreferenced local variable
+  task4.vcxproj -> D:\mp1-2020-1\bykov_ia\x64\Debug\task4.exe
