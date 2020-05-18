@@ -1,5 +1,5 @@
 #include "credit.h"
-#include "processingcenter.h"
+#include "processingcenterr.h"
 int main()
 {
     processingcenter Horribleloan;
@@ -26,4 +26,5 @@ int main()
     cout << l << endl;
     int dolg = mycredit.getdolg("Petia", passpetia);
     cout << dolg << endl;
+    system("pause");
 }

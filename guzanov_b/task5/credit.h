@@ -4,6 +4,199 @@
 #include "stdlib.h"
 #include <time.h>
 #include <stdio.h>
+#include "processingcenterr.h"
+using namespace std;
+
+class credit
+{
+private:
+	int year[5];
+	int limitsum[5];
+	int** procents;
+	string name;
+	string Number_count;
+	string Password;
+	processingcenter* baza;
+	void makeprocent()
+	{
+		procents = new int* [5];
+		cout << "time ";
+		for (int i = 0; i < 5; i++)
+		{
+			cout << "until " << year[i] << "     ";
+		}
+		cout << endl;
+		for (int i = 0; i < 5; i++)
+		{
+			procents[i] = new int[5];
+			cout << "< " << limitsum[i] << "    ";
+			for (int j = 0; j < 5; j++)
+			{
+
+				procents[i][j] = 10 * i + j;
+				cout << procents[i][j] << "       ";
+			}
+			cout << endl;
+
+		}
+		cout << "Your procent is " << endl;
+		//cout << procents[number - (number % 10)][number % 10] << endl;
+	}
+public:
+	credit(processingcenter* pr)
+	{
+		baza = pr;
+		Number_count = "";
+		Password = "";
+		name = "";
+		year[0] = 1;
+		year[1] = 2;
+		year[2] = 3;
+		year[3] = 5;
+		year[4] = 15;
+		limitsum[0] = 1000;
+		limitsum[1] = 100000;
+		limitsum[2] = 500000;
+		limitsum[3] = 1000000;
+		limitsum[4] = 3000000;
+		makeprocent();
+	}
+	~credit()
+	{
+		for (int i = 0; i < 5; i++)
+		{
+			delete[]procents[i];
+		}
+		delete[]procents;
+	}
+
+	credit(const credit& tmp)
+	{
+		baza = tmp.baza;
+		Number_count = tmp.Number_count;
+		Password = tmp.Password;
+		name = tmp.name;
+		makeprocent();
+	}
+	credit& operator=(const credit& tmp)
+	{
+		baza = tmp.baza;
+		Number_count = tmp.Number_count;
+		Password = tmp.Password;
+		name = tmp.name;
+		makeprocent();
+	}
+
+
+	string autorization(string NAME, string pass_, string number_accuant)
+	{
+
+		string l = "-1";
+		l = baza->serch(NAME, pass_);
+		if (l != "-1")
+		{
+			Number_count = number_accuant;
+			name = NAME;
+			Password = pass_;
+		}
+		return l;
+	}
+	int numberofvariant(int sum, int time)
+	{
+		int res = 0;
+		for (int i = 0; ((i < 5) && (res == 0)); i++)
+		{
+			if (time <= year[i])
+			{
+				res = i + 1;
+			}
+		}
+		for (int i = 0; ((i < 5) && (res < 10)); i++)
+		{
+			if (sum < limitsum[i])
+			{
+				res += 10 * (i + 1);
+			}
+		}
+		if ((res % 10 == 0) || (res / 10 == 0))
+		{
+			res = -1;
+		}
+		return res;
+	}
+	int get_procents(int sum, int time)
+	{
+		int res = 0;
+		for (int i = 0; ((i < 5) && (res == 0)); i++)
+		{
+			if (time <= year[i])
+			{
+				res = i + 1;
+			}
+		}
+		for (int i = 0; ((i < 5) && (res < 10)); i++)
+		{
+			if (sum < limitsum[i])
+			{
+				res += 10 * (i + 1);
+			}
+		}
+		if ((res % 10 == 0) || (res / 10 == 0))
+		{
+			res = -1;
+		}
+		else
+		{
+			int j = res % 10 - 1;
+			int i = res / 10 - 1;
+			res = procents[i][j];
+		}
+		return res;
+	}
+	void add_money_credit(string number_account, string passsword, int Sum)
+	{
+		baza->add_money_credit(name, passsword, Sum);
+	}
+
+
+	int is_credit(string number_account, string passsword)
+	{
+		int l = -1;
+		if ((number_account == Number_count) && (passsword == Password))
+		{
+			l = baza->is_credit(name, passsword);
+		}
+		return l;
+	}
+	int get_credit(string FIO, string Password_, int Sum_, int Time)
+	{
+		int l = -1;
+		if ((FIO == name) && (Password == Password_))
+		{
+			int pr = get_procents(Sum_, Time);
+			l = baza->serch_number(FIO, Password);
+			l = baza->issuance_of_credit(l, pr, Sum_, Time);
+		}
+		return l;
+	}
+	int getdolg(string FIO, string Password_)
+	{
+		int l = -1;
+		if ((FIO == name) && (Password == Password_))
+		{
+			l = baza->serch_number(FIO, Password_);
+			return baza->getdolg(l);
+		}
+		else
+			return 0;
+	}
+};
+/*
+#include <iostream>
+#include "string"
+#include "stdlib.h"
+#include <time.h>
+#include <stdio.h>
 using namespace std;
 class processingcenter
 {
@@ -313,3 +506,4 @@ public:
 		return money[l];
 	}
 };
+*/
