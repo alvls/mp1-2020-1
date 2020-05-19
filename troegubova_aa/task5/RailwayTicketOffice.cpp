@@ -28,7 +28,7 @@ bool Swallow::CheckAvailabilityOfTickets(uint count_tickets)
 {
 	for (uint i = 0; i < count_wagons_swallow; i++)
 	{
-		if (passengers[i].size() <= count_place_swallow - count_tickets)
+		if (int(passengers[i].size()) <= int(count_place_swallow) - int(count_tickets))
 		{
 			number_wagon = i;
 			numbers_place.resize(0);
@@ -126,7 +126,7 @@ bool FastTrain::CheckAvailabilityOfTickets(uint count_tickets_lower, uint count_
 	{
 		for (size_t i = 0; i < count_wagons_coupe * 2; i++)
 		{
-			if (passengers[i].size() <= count_place_coupe - count_tickets_lower)
+			if (int(passengers[i].size()) <= int(count_place_coupe) - int(count_tickets_lower))
 			{
 				if (passengers[i++].size() <= count_place_coupe - count_tickets_upper)
 				{
@@ -247,7 +247,7 @@ bool FirmTrain::CheckAvailabilityOfTicketsSV(uint count_tickets)
 {
 	for (size_t i = 0; i < count_wagons_SV; i++)
 	{
-		if (passengers[i].size() <= count_place_SV - count_tickets)
+		if (int(passengers[i].size()) <= int(count_place_SV) - int(count_tickets))
 		{
 			number_wagon = i;
 			numbers_place.resize(0);
@@ -287,7 +287,7 @@ bool FirmTrain::CheckAvailabilityOfTickets(uint count_tickets_lower, uint count_
 	{
 		for (size_t i = count_wagons_SV; i < count_wagons_coupe * 2; i++)
 		{
-			if (passengers[i].size() <= count_place_coupe - count_tickets_lower)
+			if (int(passengers[i].size()) <= int(count_place_coupe) - int(count_tickets_lower))
 			{
 				if (passengers[i++].size() <= count_place_coupe - count_tickets_upper)
 				{
