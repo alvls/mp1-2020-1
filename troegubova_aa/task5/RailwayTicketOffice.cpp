@@ -853,6 +853,8 @@ std::string RailwayTicketOffice::GetOfTickets()
 	std::string _tickets;
 	if (flag)
 	{
+		if (gorky_railway->tickets.size() == 0)
+			return "Tickets are not reserved yet";
 		for (size_t i = gorky_railway->tickets.size() - (count_lower_berth + count_upper_berth + count_seating); i < gorky_railway->tickets.size(); i++)
 		{
 			_tickets += gorky_railway->tickets[i].GetTikcet();
