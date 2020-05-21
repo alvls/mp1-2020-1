@@ -23,7 +23,7 @@ private:
 	int row;
 	int col;
 public:
-	Place(int _row, int _col):row(_row), col(_col) {}
+	Place(int _row, int _col) :row(_row), col(_col) {}
 
 	~Place() {}
 
@@ -68,13 +68,13 @@ private:
 	int cols;
 	int rows;
 public:
-	Hall(int _number_of_hall = 0, int _vip_price = 0, int _base_price = 0, int _cols = 0, int _rows = 0):number_of_hall(_number_of_hall), vip_price(_vip_price), base_price(_base_price),
-		cols(_cols), rows(rows)
+	Hall(int _number_of_hall = 0, int _vip_price = 0, int _base_price = 0, int _cols = 0, int _rows = 0) :number_of_hall(_number_of_hall), vip_price(_vip_price), base_price(_base_price),
+		cols(_cols), rows(_rows)
 	{}
 
 	~Hall() {}
 
-	Hall (const Hall& hall)
+	Hall(const Hall& hall)
 	{
 		number_of_hall = hall.number_of_hall;
 		vip_price = hall.vip_price;
@@ -132,11 +132,11 @@ class Seance
 private:
 	tm time;
 	string name_of_film;
-	Hall hall;
+	Hall *hall;
 	vector <Place> unavailible_place;
 public:
-	Seance(tm _time = tm(), string _name_of_film = "", Hall _hall = Hall(), vector <Place> _unavailible_place = {}) : 
-		time(_time), name_of_film(_name_of_film), hall(_hall), unavailible_place(_unavailible_place) {}
+	Seance(tm _time = tm(), string _name_of_film = "", Hall &_hall = Hall(), vector <Place> _unavailible_place = {}) :
+		time(_time), name_of_film(_name_of_film), hall(&_hall), unavailible_place(_unavailible_place) {}
 
 	~Seance() {}
 
@@ -175,7 +175,7 @@ public:
 		return name_of_film;
 	}
 
-	Hall Get_Hall()
+	Hall* Get_Hall()
 	{
 		return hall;
 	}
@@ -208,7 +208,7 @@ public:
 	void Show_Seance()
 	{
 		cout << "Дата: " << time.tm_mday << "." << time.tm_mon << "." << time.tm_year << endl << "Время: " << time.tm_hour << ":" << time.tm_min << endl << "Название фильма:" << name_of_film << endl;
-		cout << "Номер зала: " << hall.Get_Number_Of_Hall() << endl;
+		cout << "Номер зала: " << (*hall).Get_Number_Of_Hall() << endl;
 	}
 };
 
@@ -219,6 +219,7 @@ private:
 	vector <Hall> halls;
 public:
 	Cinema() {}
+
 	~Cinema() {}
 
 	void Add_Seance(Seance& seance)
@@ -252,16 +253,21 @@ public:
 	{
 		seances[j].Delete_Unavailible_Place(place);
 	}
+
+	Seance& Get_Seance_On_Number(int i)
+	{
+		return seances[i];
+	}
 };
 
 class Order
 {
 private:
-	Seance seance;
+	Seance *seance;
 	vector <Place> places;
 	bool type;
 public:
-	Order(Seance _seance = Seance(), vector <Place> _places = {}, bool _type = false) : seance(_seance), places(_places), type(_type) {}
+	Order(Seance &_seance = Seance(), vector <Place> _places = {}, bool _type = false) : seance(&_seance), places(_places), type(_type) {}
 
 	~Order() {}
 
@@ -280,7 +286,7 @@ public:
 		return *this;
 	}
 
-	Seance Get_Seance()
+	Seance* Get_Seance()
 	{
 		return seance;
 	}
@@ -305,7 +311,7 @@ public:
 		for (int i = 0; i < places.size(); i++)
 		{
 			cout << "Билет" << endl;
-			seance.Show_Seance();
+			(*seance).Show_Seance();
 			cout << "Ряд: " << places[i].Get_Row() << endl << "Место: " << places[i].Get_Col() << endl;
 		}
 	}
@@ -314,9 +320,9 @@ public:
 class TicketOffice
 {
 private:
-	Cinema cinema;
+	Cinema *cinema;
 public:
-	TicketOffice(Cinema _cinema = Cinema()): cinema(_cinema) {}
+	TicketOffice(Cinema &_cinema = Cinema()) : cinema(&_cinema) {}
 
 	~TicketOffice() {}
 
@@ -331,15 +337,16 @@ public:
 		return *this;
 	}
 
-	Cinema Get_Cinema()
+	Cinema* Get_Cinema()
 	{
 		return cinema;
 	}
 
 	Order Accept_Data(int day, int month, int year, int hour, int min, string name_of_film, int number_of_hall, bool type, vector <Place> places)
 	{
-		vector <Seance> seances = cinema.Get_Seances();
-		Hall hall;
+		vector <Seance> seances = (*cinema).Get_Seances();
+		Hall *hall;
+		Order order;
 		tm time;
 		time.tm_mday = day;
 		time.tm_mon = month;
@@ -350,22 +357,21 @@ public:
 		for (i = 0; i < seances.size(); i++)
 		{
 			hall = seances[i].Get_Hall();
-			if ((Compare_Time(seances[i].Get_Time(), time) == true) && (seances[i].Get_Name_Of_Film() == name_of_film) && (hall.Get_Number_Of_Hall() == number_of_hall))
+			if ((Compare_Time(seances[i].Get_Time(), time) == true) && (seances[i].Get_Name_Of_Film() == name_of_film) && ((*hall).Get_Number_Of_Hall() == number_of_hall))
 				break;
 		}
-		Order order = Order(seances[i], places, type);
-		return order;
+		return order = Order((*cinema).Get_Seance_On_Number(i), places, type);
 	}
 
 	bool Check_Free_Place(Order &order)
 	{
 		bool flag = true;
-		Seance seance = order.Get_Seance();
+		Seance *seance = order.Get_Seance();
 		vector <Place> places = order.Get_Places();
-		Hall hall = seance.Get_Hall();
+		Hall *hall = (*seance).Get_Hall();
 		for (int i = 0; i < places.size(); i++)
 		{
-			vector <Place> unavailible_place = seance.Get_Unavailible_Place();
+			vector <Place> unavailible_place = (*seance).Get_Unavailible_Place();
 			for (int j = 0; j < unavailible_place.size(); j++)
 			{
 				if (places[i] == unavailible_place[j])
@@ -381,11 +387,11 @@ public:
 	void Reserve_Places(Order &order)
 	{
 		vector <Place> places = order.Get_Places();
-		Seance seance = order.Get_Seance();
-		int j = cinema.Find_Number_Of_Seance(seance);
+		Seance *seance = order.Get_Seance();
+		int j = (*cinema).Find_Number_Of_Seance(*seance);
 		time_t now;
 		time(&now);
-		tm _time = seance.Get_Time();
+		tm _time = (*seance).Get_Time();
 		_time.tm_year -= 1900;
 		_time.tm_mon -= 1;
 		_time.tm_sec = 0;
@@ -402,7 +408,7 @@ public:
 				_time.tm_min = 0;
 				if (difftime(mktime(&_time), now) < 345600)
 					for (int i = 0; i < places.size(); i++)
-						cinema.Add_Unavailible_Place(places[i], j);
+						(*cinema).Add_Unavailible_Place(places[i], j);
 
 				else
 					cout << "Продажа билетов еще не началась!" << endl;
@@ -416,17 +422,17 @@ public:
 
 	double Calculate_Sum(Order &order)
 	{
-		Seance seance = order.Get_Seance();
-		Hall hall = seance.Get_Hall();
+		Seance *seance = order.Get_Seance();
+		Hall *hall = (*seance).Get_Hall();
 		double price;
-		tm time = seance.Get_Time();
+		tm time = (*seance).Get_Time();
 		bool type = order.Get_Type();
 		if (type == true)
-			price = hall.Get_Vip_Price();
+			price = (*hall).Get_Vip_Price();
 		else
-			price = hall.Get_Base_Price();
+			price = (*hall).Get_Base_Price();
 		float koef = 1;
-		if ( time.tm_hour < 12)
+		if (time.tm_hour < 12)
 			koef = 0.75;
 		if (time.tm_hour > 18)
 			koef = 1.5;
@@ -435,14 +441,14 @@ public:
 
 	void Cancel_Place(Order &order)
 	{
-		Seance seance = order.Get_Seance();
+		Seance *seance = order.Get_Seance();
 		vector <Place> places = order.Get_Places();
-			int j = cinema.Find_Number_Of_Seance(seance);
-			for (int i = 0; i < places.size(); i++)
-				cinema.Delete_Unavailible_Place(places[i], j);
+		int j = (*cinema).Find_Number_Of_Seance(*seance);
+		for (int i = 0; i < places.size(); i++)
+			(*cinema).Delete_Unavailible_Place(places[i], j);
 	}
 
-	void Show_Ticket (Order &order)
+	void Show_Ticket(Order &order)
 	{
 		order.Show_Order();
 	}
@@ -456,17 +462,17 @@ void main()
 	cinema.Add_Hall(hall);
 	tm time;
 	time.tm_year = 2020;
-	time.tm_mon = 4;
-	time.tm_mday = 30;
-	time.tm_hour = 13;
+	time.tm_mon = 5;
+	time.tm_mday = 22;
+	time.tm_hour = 18;
 	time.tm_min = 30;
 	Seance seance = Seance(time, "The Lion King", hall);
 	cinema.Add_Seance(seance);
 	TicketOffice ticket_office = TicketOffice(cinema);
-	Order order1 = ticket_office.Accept_Data(30, 4, 2020, 13, 30, "The Lion King", hall.Get_Number_Of_Hall(), 0, { Place(15, 10) });
+	Order order1 = ticket_office.Accept_Data(22, 5, 2020, 18, 30, "The Lion King", hall.Get_Number_Of_Hall(), 0, { Place(15, 10) });
 	ticket_office.Reserve_Places(order1);
 	ticket_office.Cancel_Place(order1);
-	Order order2 = ticket_office.Accept_Data(30, 4, 2020, 13, 30, "The Lion King", hall.Get_Number_Of_Hall(), 0, { Place(15, 10), Place(15, 9) });
+	Order order2 = ticket_office.Accept_Data(22, 5, 2020, 18, 30, "The Lion King", hall.Get_Number_Of_Hall(), 0, { Place(15, 10), Place(15, 9) });
 	if (ticket_office.Check_Free_Place(order2))
 		cout << "Места свободны" << endl;
 	else
