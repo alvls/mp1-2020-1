@@ -5,7 +5,6 @@ int main(void)
 {
 	setlocale(LC_ALL, "Rus");
 
-	srand(time(NULL));
 	BullsAndCows BC;
 
 	cout << "Добро пожаловать в игру 'Быки и коровы'" << endl;
