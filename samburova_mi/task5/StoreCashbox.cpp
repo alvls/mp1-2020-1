@@ -149,7 +149,6 @@ size_t& container::operator[](const Product& product)
 			if (quantitys[i].first == product) break;
 		if (i == size) emplace(product, 0);
 		return quantitys[i].second;
-
 	}
 }
 

@@ -69,7 +69,7 @@ public:
 	container get_products();
 protected:
 	container products;
-};
+}; 
 
 
 class Cashbox
