@@ -8,7 +8,6 @@ class Game
 {
 private:
 	int n;
-	int* digits;
 public:
 	Game(int _n);
 	~Game();

@@ -5,16 +5,16 @@ int* Game::setRandomNumber()
 {
 	int* Digits = new int[n];
 	srand(time(0));
-	for (int i = 0; i < n; i++)
+	Digits[0] = 1 + rand() % 9;
+	for (int i = 1; i < n; i++)
 	{
-		Digits[i] = 1 + rand() % 10;
+		Digits[i] = rand() % 10;
 		for (int j = 0; j < i; j++)
 			if (Digits[i] == Digits[j])
 			{
 				i--; break;
 			}
 	}
-
 	return Digits;
 }
 
@@ -27,7 +27,7 @@ int* Game::setUserNumber(int number)
 		Digits[i] = number % 10;
 		number = number / 10;
 		for (int j = i + 1; j < n; j++)
-			if (Digits[i] == Digits[j])
+			if (Digits[i] == Digits[j] || Digits[0] == 0)
 			{
 				return nullptr;
 			}
@@ -35,16 +35,12 @@ int* Game::setUserNumber(int number)
 	return Digits;
 };
 
-
 Game::Game(int _n)
 {
 	n = _n;
-	digits = new int[n];
 };
 Game::~Game()
-{
-	delete digits;
-};
+{};
 
 
 pair<int, int> Game::getBullsCows(int* _machine, int* _human)
@@ -77,7 +73,8 @@ unsigned int Game::run()
 		{
 			cout << "Enter number" << endl;
 			cin >> number;
-			if ((human = setUserNumber(number)) == nullptr) cout << "The number does not satisfy the given conditions:\n it contains repeating digits or\n its length does not match the entered one. Try again." << endl;
+			if (setUserNumber(number)==nullptr)
+			cout << "The number contains repeating digits or\n the first digit of the number is zero. Try again." << endl;
 		} while ((human = setUserNumber(number)) == nullptr);
 		k++;
 		if (getBullsCows(machine, human).first == n) break;
