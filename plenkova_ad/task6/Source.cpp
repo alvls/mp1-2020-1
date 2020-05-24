@@ -72,7 +72,7 @@ public:
 
 	unsigned int PlayGame()
 	{
-		vector <int> Person = { 0,0,0 };
+		vector <int> Person(length);
 		vector <int> Computer = RandomNumber();
 		int attempts = 0;
 		while (getBulls(Computer, Person) != length)
