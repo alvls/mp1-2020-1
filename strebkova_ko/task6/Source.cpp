@@ -442,7 +442,7 @@ public:
 
 	bool Winner()
 	{
-		if (My_Field.Get_Count_Of_CellShips() > 0)
+		if (C_Field.Get_Count_Of_CellShips() == 0)
 			return true;
 		return false;
 	}
@@ -500,17 +500,17 @@ void main()
 			cin >> x;
 			cin >> y;
 			flag = game.My_Shoot(x, y);
-			flag = !game.Check_End();
+			if (flag)
+				flag = !game.Check_End();
 			system("cls");
 			game.Show_Fields();
 			cout << endl;
 		} while (flag);
-		if (flag)
-			game.C_Shoot();
+		game.C_Shoot();
 		cout << endl;
-	} while (flag);
+	} while (!game.Check_End());
 	if (game.Winner())
-		cout << "Вы победили!";
-	else cout << "Вы проиграли :(";
+		cout << "Вы победили!" << endl;
+	else cout << "Вы проиграли :(" << endl;
 	system("pause");
 }
