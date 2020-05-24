@@ -1,2 +1,5 @@
 ﻿  Source.cpp
+C:\Users\Денис\mp1-2020-1\Bychkov_DA\task6\Source.cpp(198): warning C4715:  Field::FillDouble: значение возвращается не при всех путях выполнения
+C:\Users\Денис\mp1-2020-1\Bychkov_DA\task6\Source.cpp(340): warning C4715:  Field::FillQuad: значение возвращается не при всех путях выполнения
+C:\Users\Денис\mp1-2020-1\Bychkov_DA\task6\Source.cpp(271): warning C4715:  Field::FillTriple: значение возвращается не при всех путях выполнения
   task6.vcxproj -> C:\Users\Денис\mp1-2020-1\Bychkov_DA\x64\Debug\task6.exe
