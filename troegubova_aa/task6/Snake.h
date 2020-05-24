@@ -61,6 +61,7 @@ class Snake
 	const int max_size = 200;
 	bool continuation;
 	std::string dir; //клавиша
+	int difficulty;
 public:
 	friend class Game;
 	Snake();
@@ -82,14 +83,17 @@ class Game
 	Food food;
 	Snake *snake;
 	
-public:
-	Game(Snake *_snake); 
-	~Game(); 
 	void Increase();
-	bool CheckFood();
+	bool CheckFood(); 
 	void Move();
 	void WriteSize();
+	void Customization();
 	void DrawFood();
 	void GameStart();
 	void GameOver();
+public:
+	Game(Snake *_snake); 
+	~Game(); 
+	void game();
+	
 };

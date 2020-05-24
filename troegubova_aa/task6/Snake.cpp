@@ -35,8 +35,8 @@ void Food::RandFood()
 	bool check = false;
 	while (!check)
 	{
-		x1 = rand() % ((40 + 66 * SIZE_CELL) - 55) + 55;
-		y1 = rand() % ((40 + 33 * SIZE_CELL) - 55) + 55;
+		x1 = rand() % ((115 + 61 * SIZE_CELL) - 130) + 130;
+		y1 = rand() % ((115 + 28 * SIZE_CELL) - 130) + 130;
 		check = Check();
 	}	
 }
@@ -147,10 +147,10 @@ void Line:: DrawColor(std::vector <int> _color)
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Barrier::Barrier(): Line(40, 40, 40 + 67 * SIZE_CELL, 40, { 207, 25, 179 })
+Barrier::Barrier(): Line(115, 115, 115 + 62 * SIZE_CELL, 115, { 207, 25, 179 })
 {
-	width = 67 * SIZE_CELL;//ширина(68 клеток)
-	height = 34 * SIZE_CELL;//высота(35 клетки)
+	width = 62 * SIZE_CELL;//ширина(68 клеток)
+	height = 29 * SIZE_CELL;//высота(35 клетки)
 }
 
 Barrier::~Barrier()
@@ -159,20 +159,20 @@ Barrier::~Barrier()
 void::Barrier::Draw()
 {
 	Line::Draw();
-	x2 = 40;
+	x2 = 115;
 	y2 += height;
 	Line::Draw();
 	y1 += height;
 	x2 += width;
 	Line::Draw();
 	x1 += width;
-	y1 = 40;
+	y1 = 115;
 	Line::Draw();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Snake::Snake(): size(5)
+Snake::Snake(): size(5), difficulty(100)
 {
 	snake.resize(0);
 	snake.push_back(Line(805, 325, 730, 325, { 46, 149, 232 }));
@@ -249,11 +249,11 @@ bool Snake::CheckYourself()
 bool Snake::CheckBarrier()
 {
 	
-	if ((head.GetY1() == 40) || (head.GetY1() == 550))
+	if ((head.GetY1() == 115) || (head.GetY1() == 550))
 	{
 		return false;
 	}
-	if ((head.GetX1() == 40) || (head.GetX1() == 1045))
+	if ((head.GetX1() == 115) || (head.GetX1() == 1045))
 	{
 		return false;
 	}
@@ -266,7 +266,7 @@ void Snake::Continuation()
 	if (CheckYourself() && CheckBarrier())
 	{
 		Draw();
-		Sleep(100);
+		Sleep(difficulty);
 	}
 	else
 	{
@@ -679,6 +679,7 @@ void Game::WriteSize()
 
 void Game::GameStart()
 {
+	system("cls");
 	WriteSize();
 	barrier.Draw();
 	snake->Draw();//начальное положение
@@ -694,5 +695,48 @@ void Game::GameOver()
 	snake->dir = "left";
 	snake->continuation = true;
 	snake->size = 5;
-	barrier.SetLine(40, 40, 40 + 67 * SIZE_CELL, 40);
+	barrier.SetLine(115, 115, 115 + 62 * SIZE_CELL, 115);
+}
+
+void Game:: game()
+{
+	while (true)
+	{
+		system("cls");
+		int act;
+		std::cout << "1)Start the game\n2)Customization\n3)Leave the game\n";
+		std::cin >> act;
+		if (act == 1)
+		{
+			GameStart();
+			GameOver();
+		}
+		else
+			if (act == 2)
+			{
+				Customization();
+			}
+			else
+				break;
+	}
+}
+
+void Game::Customization()
+{
+	int i;
+	std::cout << "1)easy\n2)average\n3)difficult\nChoose the difficulty level: ";
+	std::cin >> i;
+	switch (i)
+	{
+	case 1: 
+		snake->difficulty = 300;
+		break;
+	case 2: snake->difficulty = 200;
+		break;
+	case 3: 
+		snake->difficulty = 100;
+		break;
+	default:
+		break;
+	}
 }
