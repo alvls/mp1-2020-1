@@ -297,7 +297,7 @@ public:
 		} while (!flag);
 	}
 
-	bool Check_Try_Cell(int x, int y)////////////////////
+	bool Check_Try_Cell(int x, int y)
 	{
 		if (cells[y * 10 + x].Is_Try())
 			return true;
