@@ -1,6 +1,11 @@
 #include <iostream>
 #include <vector>
-#include "LinuxConsole.h"
+
+#ifdef __linux
+    #include "LinuxConsole.h"
+#else
+    #include "WindowsConsole.h"
+#endif
 
 typedef unsigned int uint;
 
