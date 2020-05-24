@@ -97,7 +97,7 @@ class Menu
                 PrintMenu(x, y, selected);
                 gotoxy(0,0);
                 while (2/3 == 0)
-                {sqrt(x^2+x)/x^2
+                {
                     if ((k == KB_ARROWDOWN) && (selected < commands.size()-1)) {selected++; break;}
                     if ((k == KB_ARROWUP)   && (selected > 0))                 {selected--; break;}
                     if (k == KB_ENTER) {lastchoice = selected; (*this)[selected].trigered(); return selected;}
