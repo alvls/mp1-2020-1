@@ -5,11 +5,6 @@
 
 #define SIZE_CELL 15
 
-//	std::vector <int> pink = { 207, 25, 179 };
-//	std::vector <int> blue = { 26, 237, 209 };
-//	std::vector <int> dark_blue = { 422, 23, 209 };
-//	std::vector <int> read = { 245, 17, 97 };
-
 class Line
 {
 protected:
@@ -63,7 +58,7 @@ class Snake
 	std::vector<Line> snake;
 	Line head;// голова
 	int size;//текущий размер
-	const int max_size = 50;
+	const int max_size = 200;
 	bool continuation;
 	std::string dir; //клавиша
 public:
@@ -75,6 +70,7 @@ public:
 	void MoveUp();
 	void MoveDown();
 	void Draw();
+	void Continuation();
 	bool CheckYourself();
 	bool CheckBarrier();
 	void DrawColor(std::vector<int> _color);
@@ -95,4 +91,5 @@ public:
 	void WriteSize();
 	void DrawFood();
 	void GameStart();
+	void GameOver();
 };

@@ -1,11 +1,10 @@
-#include"Snake.h"
+п»ї#include"Snake.h"
 #include<iostream>
 #include<vector>
 #include<string>
 #include<conio.h>
 #include<time.h>
 #include <windows.h>
-
 
 Food::Food(): Line()
 {
@@ -88,6 +87,8 @@ void Line::Draw()
 
 	MoveToEx(hDC, x1, y1, &p);
 	LineTo(hDC, x2, y2);
+	ReleaseDC(hWnd, hDC);
+	DeleteObject(cP);
 }
 
 int Line::GetX1()
@@ -148,8 +149,8 @@ void Line:: DrawColor(std::vector <int> _color)
 
 Barrier::Barrier(): Line(40, 40, 40 + 67 * SIZE_CELL, 40, { 207, 25, 179 })
 {
-	width = 67 * SIZE_CELL;//ширина(68 клеток)
-	height = 34 * SIZE_CELL;//высота(35 клетки)
+	width = 67 * SIZE_CELL;//С€РёСЂРёРЅР°(68 РєР»РµС‚РѕРє)
+	height = 34 * SIZE_CELL;//РІС‹СЃРѕС‚Р°(35 РєР»РµС‚РєРё)
 }
 
 Barrier::~Barrier()
@@ -198,7 +199,7 @@ void Snake::DrawColor(std::vector<int> _color)
 	{
 		snake[i].DrawColor(_color);
 	}
-	head.DrawColor({ 207, 25, 179 });
+	head.DrawColor(_color);
 }
 
 bool Snake::CheckYourself()
@@ -260,6 +261,28 @@ bool Snake::CheckBarrier()
 
 }
 
+void Snake::Continuation()
+{
+	if (CheckYourself() && CheckBarrier())
+	{
+		Draw();
+		Sleep(100);
+	}
+	else
+	{
+		if (!CheckYourself())
+		{
+			DrawColor({ 12, 12, 12 });
+		}
+		else
+		{
+			DrawColor({ 12, 12, 12 });
+			head.DrawColor({ 207, 25, 179 });
+		}
+		continuation = false;
+	}
+}
+
 void Snake:: MoveLeft()
 {
 	if (dir == "right")
@@ -291,6 +314,7 @@ void Snake:: MoveLeft()
 			}
 		}
 		else
+		{
 			if ((snake[0].GetX1() != snake[0].GetX2()) && (snake.size() > 1))
 			{
 				snake[snake.size() - 1].SetX2(snake[snake.size() - 1].GetX2() - SIZE_CELL);
@@ -307,23 +331,13 @@ void Snake:: MoveLeft()
 			}
 			else
 			{
-
 				snake[snake.size() - 1].SetX1(snake[snake.size() - 1].GetX1() - SIZE_CELL);
 				snake[snake.size() - 1].SetX2(snake[snake.size() - 1].GetX2() - SIZE_CELL);
 				head.SetX1(head.GetX1() - SIZE_CELL);
 				head.SetX2(head.GetX2() - SIZE_CELL);
-
 			}
-		if (CheckYourself() && CheckBarrier())
-		{
-			Draw();
-			Sleep(100);
 		}
-		else
-		{
-			DrawColor({ 10, 10, 10 });
-			continuation = false;
-		}
+		Continuation();
 	}
 }
 
@@ -381,16 +395,7 @@ void Snake::MoveRight()
 				head.SetX1(head.GetX1() + SIZE_CELL);
 				head.SetX2(head.GetX2() + SIZE_CELL);
 			}
-		if (CheckYourself() && CheckBarrier())
-		{
-			Draw();
-			Sleep(100);
-		}
-		else
-		{
-			DrawColor({ 10, 10, 10 });
-			continuation = false;
-		}
+		Continuation();
 	}
 }
 
@@ -448,16 +453,7 @@ void Snake::MoveUp()
 				head.SetY2(head.GetY2() - SIZE_CELL);
 			}
 
-		if (CheckYourself() && CheckBarrier())
-		{
-			Draw();
-			Sleep(100);
-		}
-		else
-		{
-			DrawColor({ 10, 10, 10 });
-			continuation = false;
-		}
+		Continuation();
 	}
 }
 
@@ -511,20 +507,11 @@ void Snake::MoveDown()
 				head.SetY1(head.GetY1() + SIZE_CELL);
 				head.SetY2(head.GetY2() + SIZE_CELL);
 			}
-		if (CheckYourself() && CheckBarrier())
-		{
-			Draw();
-			Sleep(100);
-		}
-		else
-		{
-			DrawColor({ 10, 10, 10 });
-			continuation = false;
-		}
+		Continuation();
 	}
 }
 
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------С‹
 
 Game::Game(Snake * _snake)
 {
@@ -533,7 +520,7 @@ Game::Game(Snake * _snake)
 
 Game::~Game() {}
 
-bool Game::CheckFood()//проверка на правильность еды
+bool Game::CheckFood()//РїСЂРѕРІРµСЂРєР° РЅР° РїСЂР°РІРёР»СЊРЅРѕСЃС‚СЊ РµРґС‹
 {
 	
 	for (int i = 0; i < snake->snake.size(); i++)
@@ -575,18 +562,18 @@ bool Game::CheckFood()//проверка на правильность еды
 	return true;
 }
 
-void Game::DrawFood()//рисуется еда с учётом положения змейки
+void Game::DrawFood()//СЂРёСЃСѓРµС‚СЃСЏ РµРґР° СЃ СѓС‡С‘С‚РѕРј РїРѕР»РѕР¶РµРЅРёСЏ Р·РјРµР№РєРё
 {
 	bool check = false;
 	while (!check)
 	{
-		food.RandFood();//задались координады в нужном диапазоне
+		food.RandFood();//Р·Р°РґР°Р»РёСЃСЊ РєРѕРѕСЂРґРёРЅР°РґС‹ РІ РЅСѓР¶РЅРѕРј РґРёР°РїР°Р·РѕРЅРµ
 		check = CheckFood();
 	}
 	food.Draw();
 }
 
-void Game::Increase()//увеличение
+void Game::Increase()//СѓРІРµР»РёС‡РµРЅРёРµ
 {
 	if (snake->snake[0].GetX1() == snake->snake[0].GetX2())
 	{
@@ -608,7 +595,6 @@ void Game::Increase()//увеличение
 
 void Game::Move()
 {
-	int act;
 	while ((snake->continuation)&&(snake->size < snake->max_size))
 	{
 		while (!_kbhit() && (snake->continuation))
@@ -621,10 +607,9 @@ void Game::Move()
 				DrawFood();
 			}
 		}
-		act = _getch();
-		switch (act)
+		switch (_getch())
 		{
-		case 72://вверх
+		case 72:
 			while ((!_kbhit())&&(snake->continuation))
 			{
 				snake->MoveUp();
@@ -677,7 +662,7 @@ void Game::Move()
 		}
 	}
 	if (snake->max_size == snake->size)
-		std::cout << " You won!!!";
+		std::cout << " You won!!! ";
 	else
 	{
 		std::cout << " Game over.";	
@@ -686,7 +671,7 @@ void Game::Move()
 
 void Game::WriteSize()
 {
-	COORD position = { 0,0 }; //позиция x и y
+	COORD position = { 0,0 }; //РїРѕР·РёС†РёСЏ x Рё y
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleCursorPosition(hConsole, position);
 	std::cout << "Snake size: " << snake->size;
@@ -694,9 +679,20 @@ void Game::WriteSize()
 
 void Game::GameStart()
 {
-	barrier.Draw();
-	snake->Draw();//начальное положение
-	DrawFood();
 	WriteSize();
+	barrier.Draw();
+	snake->Draw();//РЅР°С‡Р°Р»СЊРЅРѕРµ РїРѕР»РѕР¶РµРЅРёРµ
+	DrawFood();
 	Move();
+}
+
+void Game::GameOver()
+{
+	snake->snake.clear();
+	snake->snake.push_back(Line(805, 325, 730, 325, { 46, 149, 232 }));
+	snake->head = Line(730, 325, 730, 325, { 72, 219, 116 });
+	snake->dir = "left";
+	snake->continuation = true;
+	snake->size = 5;
+	barrier.SetLine(40, 40, 40 + 67 * SIZE_CELL, 40);
 }
