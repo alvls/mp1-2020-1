@@ -40,17 +40,17 @@ class Order
 class TicketService
 {
     private:
-        vector<Train> trains;
+        GorkyRailway& railway = * new GorkyRailway;
     public:
-        TicketService(vector<Train> _trains)
+        TicketService(GorkyRailway& _railway)
         {
-            trains = _trains;
+            railway = _railway;
         }
         bool checkSeats(Order order)
         {
             for (auto seat: order.seats)
             {
-                if (!trains[order.trainIndex].getWagons()[seat.second.first].getSeats()[seat.second.second].getStatus()) 
+                if (!railway[order.trainIndex].getWagons()[seat.second.first].getSeats()[seat.second.second].getStatus()) 
                     return false;
             }
             return true;
@@ -60,7 +60,7 @@ class TicketService
             if (!checkSeats(order)) return false;
             for (auto seat: order.seats)
             {
-                trains[order.trainIndex].getWagons()[seat.second.first].bookSeat(seat.second.second);
+                railway[order.trainIndex].getWagons()[seat.second.first].bookSeat(seat.second.second);
             }
         }
         bool restoreSeats(Order order)
@@ -68,7 +68,7 @@ class TicketService
             if (!checkSeats(order)) return false;
             for (auto seat: order.seats)
             {
-                trains[order.trainIndex].getWagons()[seat.second.first].restoreSeat(seat.second.second);
+                railway[order.trainIndex].getWagons()[seat.second.first].restoreSeat(seat.second.second);
             }
             return true;
         }
@@ -77,15 +77,15 @@ class TicketService
             int total = 0;
             for (auto seat: order.seats)
             {
-                total += trains[order.trainIndex].getWagons()[seat.second.first].getSeats()[seat.second.second].getPrice();
+                total += railway[order.trainIndex].getWagons()[seat.second.first].getSeats()[seat.second.second].getPrice();
             }
             return total;
         }
         vector<Ticket> processOrder(Order order)
         {
-            int trainId = trains[order.trainIndex].getId();
-            string stationFrom = trains[order.trainIndex].getStationFrom();
-            string stationTo = trains[order.trainIndex].getStationTo();
+            int trainId = railway[order.trainIndex].getId();
+            string stationFrom = railway[order.trainIndex].getStationFrom();
+            string stationTo = railway[order.trainIndex].getStationTo();
             vector<Ticket> tickets;
             for (auto seat: order.seats)
             {
@@ -97,14 +97,14 @@ class TicketService
 class GorkyRailway
 {
     private:
-        vector<TicketService> ts;
+        vector<Train> trains;
     public:
-        GorkyRailway(vector<TicketService> _ts)
+        GorkyRailway(vector<Train> _trains)
         {
-            ts = _ts;
+            trains = _trains;
         }
         TicketService operator[](size_t index)
         {
-            return ts[index];
+            return trains[index];
         }   
 };

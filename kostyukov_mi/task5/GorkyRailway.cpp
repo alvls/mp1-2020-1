@@ -50,7 +50,7 @@ int main()
     }
     Train ExpressTrain(3, "НиНо", "Москва", Etrain);
 
-    TicketService GRTS({Lastochka, BrandedTrain, ExpressTrain});
+    GorkyRailway GR({Lastochka, BrandedTrain, ExpressTrain});
 
-    GorkyRailway GR({GRTS});
+    TicketService GRTS(GR);
 }
