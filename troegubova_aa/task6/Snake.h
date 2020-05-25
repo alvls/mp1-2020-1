@@ -42,7 +42,6 @@ public:
 
 class Barrier: public Line
 {
-	std::vector <int> pink = { 207, 25, 179 };
 	int width;//ширина
 	int height;//высота
 
@@ -62,6 +61,9 @@ class Snake
 	bool continuation;
 	std::string dir; //клавиша
 	int difficulty;
+	void Continuation();
+	bool CheckYourself();
+	bool CheckBarrier();
 public:
 	friend class Game;
 	Snake();
@@ -71,9 +73,6 @@ public:
 	void MoveUp();
 	void MoveDown();
 	void Draw();
-	void Continuation();
-	bool CheckYourself();
-	bool CheckBarrier();
 	void DrawColor(std::vector<int> _color);
 };
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

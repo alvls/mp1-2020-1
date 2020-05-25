@@ -147,14 +147,12 @@ void Line:: DrawColor(std::vector <int> _color)
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Barrier::Barrier(): Line(115, 115, 115 + 62 * SIZE_CELL, 115, { 207, 25, 179 })
-{
-	width = 62 * SIZE_CELL;//ширина(68 клеток)
-	height = 29 * SIZE_CELL;//высота(35 клетки)
-}
+Barrier::Barrier():width(62 * SIZE_CELL), height(29 * SIZE_CELL), Line(115, 115, 115 + 62 * SIZE_CELL, 115, { 207, 25, 179 })
+{}
 
 Barrier::~Barrier()
 {}
+
 
 void::Barrier::Draw()
 {
@@ -238,10 +236,8 @@ bool Snake::CheckYourself()
 					if ((head.GetY1() <= snake[i].GetY1()) && (head.GetY1() >= snake[i].GetY2()))
 						return false;
 				}
-
 			}
 		}
-		
 	}
 	return true;
 }
