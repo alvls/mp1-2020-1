@@ -386,11 +386,6 @@ public:
 			C_Field.Add_Dead_Cell(x, y);
 			return true;
 		}
-		else
-		{
-			C_Field.Set_Try(x, y);
-			return false;
-		}
 	}
 
 	void C_Shoot()
@@ -408,7 +403,11 @@ public:
 			} while (My_Field.Check_Try_Cell(x, y));
 			flag = My_Field.Shoot(x, y);
 			if (flag)
+			{
 				My_Field.Add_Dead_Cell(x, y);
+				My_Field.Set_Try(x, y);
+			}
+				
 		} while (flag);
 	}
 
@@ -444,16 +443,15 @@ public:
 	{
 		if (C_Field.Get_Count_Of_CellShips() == 0)
 			return true;
-		return false;
+		if (My_Field.Get_Count_Of_CellShips() == 0)
+			return false;
 	}
 };
 
 void main()
 {
 	setlocale(LC_ALL, "Rus");
-	vector <Cell> cells;
-	Field My_Field = Field(cells, 0);
-	cells = My_Field.Get_Field();
+	Field My_Field = Field();
 	int x, y;
 	bool direction;
 	cout << "Введите координаты начальной точки и направление четырёхпалубного корабля (1 - вертикальное, 0 -горизонтальное)" << endl;
@@ -471,7 +469,7 @@ void main()
 	}
 	for (int i = 0; i < 3; i++)
 	{
-		cout << "Введите координаты начальной точки и направление двуххпалубного корабля (1 - вертикальное, 0 -горизонтальное)" << endl;
+		cout << "Введите координаты начальной точки и направление двухпалубного корабля (1 - вертикальное, 0 -горизонтальное)" << endl;
 		cin >> x;
 		cin >> y;
 		cin >> direction;
@@ -479,7 +477,7 @@ void main()
 	}
 	for (int i = 0; i < 4; i++)
 	{
-		cout << "Введите координаты начальной точки однопалубного корабля" << endl;
+		cout << "Введите координаты однопалубного корабля" << endl;
 		cin >> x;
 		cin >> y;
 		My_Field.Add_Cellships(Ship(Cell(x, y), true, 1));
@@ -506,7 +504,8 @@ void main()
 			game.Show_Fields();
 			cout << endl;
 		} while (flag);
-		game.C_Shoot();
+		if (!game.Check_End())
+			game.C_Shoot();
 		cout << endl;
 	} while (!game.Check_End());
 	if (game.Winner())
