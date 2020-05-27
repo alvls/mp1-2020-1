@@ -161,7 +161,7 @@ public:
 			{
 				Gameover = true;
 				cls(hConsole);
-				cout << "YOU LOSE!";//(╮°-°)╮┳━━┳ ( ╯°□°)╯ ┻━━┻
+				cout << "YOU LOSE!" << endl;//(╮°-°)╮┳━━┳ ( ╯°□°)╯ ┻━━┻
 			}
 		}
 		for (int i = 1; i < n; i++)
@@ -170,7 +170,7 @@ public:
 			{
 				Gameover = true;
 				cls(hConsole);
-				cout << "YOU LOSE!";//(╮°-°)╮┳━━┳ ( ╯°□°)╯ ┻━━┻
+				cout << "YOU LOSE!" << endl;//(╮°-°)╮┳━━┳ ( ╯°□°)╯ ┻━━┻
 			}
 		}
 		for (int i = 1; i < m; i++)
@@ -179,14 +179,14 @@ public:
 			{
 				Gameover = true;
 				cls(hConsole);
-				cout << "YOU LOSE!";//(╮°-°)╮┳━━┳ ( ╯°□°)╯ ┻━━┻
+				cout << "YOU LOSE!" << endl;//(╮°-°)╮┳━━┳ ( ╯°□°)╯ ┻━━┻
 			}
 		}
 		if (tail == maxtail)
 		{
 			Gameover = true;
 			cls(hConsole);
-			cout << "YOU WIN!";//(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
+			cout << "YOU WIN!" << endl;//(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
 		}
 	}
 	friend class Food;
@@ -289,22 +289,22 @@ int main()
 	int foodcolor;
 	do
 	{
-		cout << "Please, select the color of the Map: \n1)Blue, \n2)Green, \n3)Cyan, \n4)Red, \n5)Magenta, \n6)Brown, \n7)LightGray, \n8)DarkGray, \n9)LightBlue, \n10)LightGreen, \n11)LightCyan, \n12)LightRed, \n13)LightMagenta, \n14)Yellow, \n15)White" << endl;
+		cout << "Please, select the color of the Map: \n1)Blue \n2)Green \n3)Cyan \n4)Red \n5)Magenta \n6)Brown \n7)LightGray \n8)DarkGray \n9)LightBlue \n10)LightGreen \n11)LightCyan \n12)LightRed \n13)LightMagenta \n14)Yellow \n15)White" << endl;
 		cin >> color;
 	} while ((color < 1) || (color > 15));
 	do
 	{
-		cout << "Please, select the color of the Snake's head: \n1)Blue, \n2)Green, \n3)Cyan, \n4)Red, \n5)Magenta, \n6)Brown, \n7)LightGray, \n8)DarkGray, \n9)LightBlue, \n10)LightGreen, \n11)LightCyan, \n12)LightRed, \n13)LightMagenta, \n14)Yellow, \n15)White" << endl;
+		cout << "Please, select the color of the Snake's head: \n1)Blue \n2)Green \n3)Cyan \n4)Red \n5)Magenta \n6)Brown \n7)LightGray \n8)DarkGray \n9)LightBlue \n10)LightGreen \n11)LightCyan \n12)LightRed \n13)LightMagenta \n14)Yellow \n15)White" << endl;
 		cin >> headcolor;
 	} while ((headcolor < 1) || (headcolor > 15));
 	do
 	{
-		cout << "Please, select the color of the Snake's body: \n1)Blue, \n2)Green, \n3)Cyan, \n4)Red, \n5)Magenta, \n6)Brown, \n7)LightGray, \n8)DarkGray, \n9)LightBlue, \n10)LightGreen, \n11)LightCyan, \n12)LightRed, \n13)LightMagenta, \n14)Yellow, \n15)White" << endl;
+		cout << "Please, select the color of the Snake's body: \n1)Blue \n2)Green \n3)Cyan \n4)Red \n5)Magenta \n6)Brown \n7)LightGray \n8)DarkGray \n9)LightBlue \n10)LightGreen \n11)LightCyan \n12)LightRed \n13)LightMagenta \n14)Yellow \n15)White" << endl;
 		cin >> bodycolor;
 	} while ((bodycolor < 1) || (bodycolor > 15));
 	do
 	{
-		cout << "Please, select the color of the Food: \n1)Blue, \n2)Green, \n3)Cyan, \n4)Red, \n5)Magenta, \n6)Brown, \n7)LightGray, \n8)DarkGray, \n9)LightBlue, \n10)LightGreen, \n11)LightCyan, \n12)LightRed, \n13)LightMagenta, \n14)Yellow, \n15)White" << endl;
+		cout << "Please, select the color of the Food: \n1)Blue \n2)Green \n3)Cyan \n4)Red \n5)Magenta \n6)Brown \n7)LightGray \n8)DarkGray \n9)LightBlue \n10)LightGreen \n11)LightCyan \n12)LightRed \n13)LightMagenta \n14)Yellow \n15)White" << endl;
 		cin >> foodcolor;
 	} while ((foodcolor < 1) || (foodcolor > 15));
 	do
