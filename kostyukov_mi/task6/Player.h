@@ -6,7 +6,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <unistd.h>
+
+#ifdef __linux
+    #include <unistd.h>
+#else
+    #include <io.h>
+#endif
 
 #include <sys/socket.h>
 #include <sys/types.h>
@@ -327,7 +332,7 @@ public:
         char buffer[256];
         bzero(buffer, 256);
 
-        read(enemysockfd, buffer, 255);
+        recv(enemysockfd, buffer, 255, 0);
 
         std::stringstream request(buffer);
         
@@ -369,11 +374,11 @@ public:
 
         std::string request = "SeaBattle "+playerNick;
 
-        write(sockfd, request.c_str(), request.length());
+        send(sockfd, request.c_str(), request.length(), 0);
     
         char buffer[256];
         bzero(buffer, 256);
-        read(sockfd, buffer, 255);
+        recv(sockfd, buffer, 255, 0);
 
         std::stringstream response(buffer);
         std::string r;
@@ -396,7 +401,7 @@ public:
             {
                 bzero(buffer, 256);
             }
-            while (!read(enemysockfd, buffer, 255));
+            while (!recv(enemysockfd, buffer, 255, 0));
 
         }while(std::string(buffer) != "SeaBattle move");
 
@@ -405,13 +410,13 @@ public:
     {
         char buffer[256];
 
-        write(enemysockfd, "SeaBattle move", 14);
+        send(enemysockfd, "SeaBattle move", 14, 0);
 
         do
         {
             bzero(buffer, 256);
         }
-        while (!read(enemysockfd, buffer, 255));
+        while (!recv(enemysockfd, buffer, 255, 0));
 
         std::stringstream response(buffer);
 
@@ -434,7 +439,7 @@ public:
         {
             request << " " << x << " " << y;
         }
-        write(enemysockfd, request.str().c_str(), request.str().length());
+        send(enemysockfd, request.str().c_str(), request.str().length(), 0);
     }
     char getEnemyMove(int x, int y)
     {
@@ -443,7 +448,7 @@ public:
 
         std::stringstream request;
         request << "SeaBattle " << x << " " << y;
-        write(enemysockfd, request.str().c_str(), request.str().length());
+        send(enemysockfd, request.str().c_str(), request.str().length(), 0);
 
         char buffer[256];
 
@@ -451,7 +456,7 @@ public:
         {
             bzero(buffer, 256);
         }
-        while (!read(enemysockfd, buffer, 255));
+        while (!recv(enemysockfd, buffer, 255, 0));
 
         std::stringstream response(buffer);
 
