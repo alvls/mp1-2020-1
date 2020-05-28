@@ -13,11 +13,11 @@
     #include <io.h>
 #endif
 
-#include <sys/socket.h>
-#include <sys/types.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <netdb.h>
+// #include <sys/socket.h>
+// #include <sys/types.h>
+// #include <netinet/in.h>
+// #include <arpa/inet.h>
+// #include <netdb.h>
 #include <strings.h>
 #include <sstream>
 #include <string>
@@ -293,207 +293,207 @@ public:
 
 };
 
-class NetworkEnemy:public Player
-{
-private:
-    int PORT = 5000;
-    
-    struct hostent *server;
-    int sockfd;
-    int enemysockfd;
-    struct sockaddr_in serv_addr, cli_addr;
-public:
-    bool isServer;
-    NetworkEnemy(BattleMap _battlemap):Player(_battlemap)
-    {
-
-    }
-    bool createGame(std::string playerNick)
-    {
-        isServer = true;
-
-        sockfd = socket(AF_INET, SOCK_STREAM, 0);
-
-        bzero((char *) &serv_addr, sizeof(serv_addr));
-
-        serv_addr.sin_family = AF_INET;
-        serv_addr.sin_addr.s_addr = INADDR_ANY;
-        serv_addr.sin_port = htons(PORT);
-
-        if ( bind(sockfd, (struct sockaddr* ) &serv_addr, sizeof(serv_addr)) < 0 )
-            return 0;
-
-        listen(sockfd, 1);
-
-        socklen_t clilen = sizeof(cli_addr);
-
-        enemysockfd = accept(sockfd, (struct sockaddr *) &cli_addr, &clilen);
-
-        char buffer[256];
-        bzero(buffer, 256);
-
-        recv(enemysockfd, buffer, 255, 0);
-
-        std::stringstream request(buffer);
+    // class NetworkEnemy:public Player
+    // {
+    // private:
+    //     int PORT = 5000;
         
-        std::string req;
-        request >> req;
-        if (req == "SeaBattle")
-        {
-            request >> nickname;
-        }
-        else
-        {
-            return 0;
-        }
+    //     struct hostent *server;
+    //     int sockfd;
+    //     int enemysockfd;
+    //     struct sockaddr_in serv_addr, cli_addr;
+    // public:
+    //     bool isServer;
+    //     NetworkEnemy(BattleMap _battlemap):Player(_battlemap)
+    //     {
+
+    //     }
+    //     bool createGame(std::string playerNick)
+    //     {
+    //         isServer = true;
+
+    //         sockfd = socket(AF_INET, SOCK_STREAM, 0);
+
+    //         bzero((char *) &serv_addr, sizeof(serv_addr));
+
+    //         serv_addr.sin_family = AF_INET;
+    //         serv_addr.sin_addr.s_addr = INADDR_ANY;
+    //         serv_addr.sin_port = htons(PORT);
+
+    //         if ( bind(sockfd, (struct sockaddr* ) &serv_addr, sizeof(serv_addr)) < 0 )
+    //             return 0;
+
+    //         listen(sockfd, 1);
+
+    //         socklen_t clilen = sizeof(cli_addr);
+
+    //         enemysockfd = accept(sockfd, (struct sockaddr *) &cli_addr, &clilen);
+
+    //         char buffer[256];
+    //         bzero(buffer, 256);
+
+    //         recv(enemysockfd, buffer, 255, 0);
+
+    //         std::stringstream request(buffer);
+            
+    //         std::string req;
+    //         request >> req;
+    //         if (req == "SeaBattle")
+    //         {
+    //             request >> nickname;
+    //         }
+    //         else
+    //         {
+    //             return 0;
+    //         }
+            
+
+    //         std::string response = "SeaBattle "+playerNick;
+    //         send(enemysockfd, response.c_str(), response.length(), 0);
+
+    //         return 1;
+    //     }
+    //     bool connectToGame(std::string playerNick, std::string adress)
+    //     {
+    //         isServer = false;
+
+    //         sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    //         server = gethostbyname(adress.c_str());
+    //         bzero((char *) &serv_addr, sizeof(serv_addr));
+    //         serv_addr.sin_family = AF_INET;
+
+    //         bcopy((char *)server->h_addr, 
+    //             (char *)&serv_addr.sin_addr.s_addr,
+    //             server->h_length);
+    //         serv_addr.sin_port = htons(PORT);
+
+    //         if (connect(sockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0) 
+    //             return 0;
+
+    //         enemysockfd = sockfd;
+
+    //         std::string request = "SeaBattle "+playerNick;
+
+    //         send(sockfd, request.c_str(), request.length(), 0);
         
+    //         char buffer[256];
+    //         bzero(buffer, 256);
+    //         recv(sockfd, buffer, 255, 0);
 
-        std::string response = "SeaBattle "+playerNick;
-        send(enemysockfd, response.c_str(), response.length(), 0);
+    //         std::stringstream response(buffer);
+    //         std::string r;
+    //         response >> r;
+    //         if (r == "SeaBattle")
+    //             response >> nickname;
+    //         else
+    //         {
+    //             return 0;
+    //         }
+            
+    //         return 1;
+    //     }
+    //     void waitForPlayer()
+    //     {
+    //         char buffer[256];
+    //         do
+    //         {
+    //             do
+    //             {
+    //                 bzero(buffer, 256);
+    //             }
+    //             while (!recv(enemysockfd, buffer, 255, 0));
 
-        return 1;
-    }
-    bool connectToGame(std::string playerNick, std::string adress)
-    {
-        isServer = false;
+    //         }while(std::string(buffer) != "SeaBattle move");
 
-        sockfd = socket(AF_INET, SOCK_STREAM, 0);
-        server = gethostbyname(adress.c_str());
-        bzero((char *) &serv_addr, sizeof(serv_addr));
-        serv_addr.sin_family = AF_INET;
+    //     }
+    //     std::pair<int, int> move()
+    //     {
+    //         char buffer[256];
 
-        bcopy((char *)server->h_addr, 
-            (char *)&serv_addr.sin_addr.s_addr,
-            server->h_length);
-        serv_addr.sin_port = htons(PORT);
+    //         send(enemysockfd, "SeaBattle move", 14, 0);
 
-        if (connect(sockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0) 
-            return 0;
+    //         do
+    //         {
+    //             bzero(buffer, 256);
+    //         }
+    //         while (!recv(enemysockfd, buffer, 255, 0));
 
-        enemysockfd = sockfd;
+    //         std::stringstream response(buffer);
 
-        std::string request = "SeaBattle "+playerNick;
+    //         int x;
+    //         int y;
 
-        send(sockfd, request.c_str(), request.length(), 0);
-    
-        char buffer[256];
-        bzero(buffer, 256);
-        recv(sockfd, buffer, 255, 0);
+    //         std::string r;
+    //         response >> r;
 
-        std::stringstream response(buffer);
-        std::string r;
-        response >> r;
-        if (r == "SeaBattle")
-            response >> nickname;
-        else
-        {
-            return 0;
-        }
-        
-        return 1;
-    }
-    void waitForPlayer()
-    {
-        char buffer[256];
-        do
-        {
-            do
-            {
-                bzero(buffer, 256);
-            }
-            while (!recv(enemysockfd, buffer, 255, 0));
+    //         if (r == "SeaBattle")
+    //             response >> x >> y;
 
-        }while(std::string(buffer) != "SeaBattle move");
+    //         return std::pair<int, int>(x,y);
+    //     }
+    //     void sendMoveResult(char res, uint x=0, uint y=0)
+    //     {
+    //         std::stringstream request;
+    //         request << "SeaBattle " << res;
+    //         if (res != 0 && res != 1)
+    //         {
+    //             request << " " << x << " " << y;
+    //         }
+    //         send(enemysockfd, request.str().c_str(), request.str().length(), 0);
+    //     }
+    //     char getEnemyMove(int x, int y)
+    //     {
+    //         if (battlemap.map[y*10+x] < 0)
+    //             return battlemap.map[y*10+x];
 
-    }
-    std::pair<int, int> move()
-    {
-        char buffer[256];
+    //         std::stringstream request;
+    //         request << "SeaBattle " << x << " " << y;
+    //         send(enemysockfd, request.str().c_str(), request.str().length(), 0);
 
-        send(enemysockfd, "SeaBattle move", 14, 0);
+    //         char buffer[256];
 
-        do
-        {
-            bzero(buffer, 256);
-        }
-        while (!recv(enemysockfd, buffer, 255, 0));
+    //         do
+    //         {
+    //             bzero(buffer, 256);
+    //         }
+    //         while (!recv(enemysockfd, buffer, 255, 0));
 
-        std::stringstream response(buffer);
+    //         std::stringstream response(buffer);
 
-        int x;
-        int y;
+    //         std::string r;
+    //         char res;
 
-        std::string r;
-        response >> r;
+    //         response >> r;
 
-        if (r == "SeaBattle")
-            response >> x >> y;
+    //         if (r == "SeaBattle")
+    //             response >> res;
+            
+    //         gotoxy(0,40);
+    //         std::cout<<res;
 
-        return std::pair<int, int>(x,y);
-    }
-    void sendMoveResult(char res, uint x=0, uint y=0)
-    {
-        std::stringstream request;
-        request << "SeaBattle " << res;
-        if (res != 0 && res != 1)
-        {
-            request << " " << x << " " << y;
-        }
-        send(enemysockfd, request.str().c_str(), request.str().length(), 0);
-    }
-    char getEnemyMove(int x, int y)
-    {
-        if (battlemap.map[y*10+x] < 0)
-            return battlemap.map[y*10+x];
-
-        std::stringstream request;
-        request << "SeaBattle " << x << " " << y;
-        send(enemysockfd, request.str().c_str(), request.str().length(), 0);
-
-        char buffer[256];
-
-        do
-        {
-            bzero(buffer, 256);
-        }
-        while (!recv(enemysockfd, buffer, 255, 0));
-
-        std::stringstream response(buffer);
-
-        std::string r;
-        char res;
-
-        response >> r;
-
-        if (r == "SeaBattle")
-            response >> res;
-        
-        gotoxy(0,40);
-        std::cout<<res;
-
-        if (res == 0)
-        {
-            battlemap.map[y*10 + x] = -1;
-            return 0;
-        }
-        if (res == 1)
-        {
-            battlemap.map[y*10 + x] = -2;
-        }
-        else
-        {
-            response >> x >> y;
-            bool vert = 0;
-            if (res < 0){vert = 1; res = (-1)*res;}
-            res-=1;
-            battlemap.map[y*10 + x] = -2;
-            battlemap.boatKilled(x, y, res, vert);
-        }
-        return res;
-    }
-    ~NetworkEnemy()
-    {
-        close(sockfd);
-        close(enemysockfd);    
-    }
-};
+    //         if (res == 0)
+    //         {
+    //             battlemap.map[y*10 + x] = -1;
+    //             return 0;
+    //         }
+    //         if (res == 1)
+    //         {
+    //             battlemap.map[y*10 + x] = -2;
+    //         }
+    //         else
+    //         {
+    //             response >> x >> y;
+    //             bool vert = 0;
+    //             if (res < 0){vert = 1; res = (-1)*res;}
+    //             res-=1;
+    //             battlemap.map[y*10 + x] = -2;
+    //             battlemap.boatKilled(x, y, res, vert);
+    //         }
+    //         return res;
+    //     }
+    //     ~NetworkEnemy()
+    //     {
+    //         close(sockfd);
+    //         close(enemysockfd);    
+    //     }
+    // };
