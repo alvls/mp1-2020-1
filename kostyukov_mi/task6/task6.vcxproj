@@ -110,10 +110,10 @@
   <ItemGroup>
     <ClInclude Include="Game.h" />
     <ClInclude Include="Player.h" />
-    <ClCompile Include="Source.cpp" />
     <ClInclude Include="LinuxConsole.h" />
     <ClInclude Include="WindowsConsole.h" />
     <ClCompile Include="OnlineGame.cpp" />
+    <ClCompile Include="GameWithBot.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

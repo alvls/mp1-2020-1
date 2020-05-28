@@ -20,8 +20,15 @@ int main()
     Player player("Player", BattleMap(1,1));
     BotEnemy enemy("Bot", BattleMap(40,1, 1));
 
-    enemy.placeBoats();
+    gotoxy(0,25);
+    cout << "Arrows - move boat" << endl;
+    cout << "Space - rotate boat" << endl;
+    cout << "Enter - place boat";
     player.placeBoats();
+
+    clrscr();
+    player.getBattlemap().draw();
+    enemy.getBattlemap().draw();
 
     while (true)
     {
