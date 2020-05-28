@@ -29,6 +29,7 @@ int* Game::setUserNumber(int number)
 		for (int j = i + 1; j < n; j++)
 			if (Digits[i] == Digits[j] || Digits[0] == 0)
 			{
+				delete[] Digits;
 				return nullptr;
 			}
 	}
@@ -43,10 +44,8 @@ Game::~Game()
 {};
 
 
-pair<int, int> Game::getBullsCows(int* _machine, int* _human)
+pair<int, int> Game::getBullsCows(int* machine, int* human)
 {
-	int* machine = _machine;
-	int* human = _human;
 	pair<int, int> BullsCows;
 	for (int i = 0; i < n; i++)
 	{
@@ -64,7 +63,7 @@ pair<int, int> Game::getBullsCows(int* _machine, int* _human)
 unsigned int Game::run()
 {
 	int number;
-	int* human;
+	int* human=nullptr;
 	int* machine = setRandomNumber();
 	unsigned int k = 0;
 	while (true)
@@ -73,14 +72,18 @@ unsigned int Game::run()
 		{
 			cout << "Enter number" << endl;
 			cin >> number;
-			if (setUserNumber(number)==nullptr)
-			cout << "The number contains repeating digits or\n the first digit of the number is zero. Try again." << endl;
+			delete[] human;
+			if (setUserNumber(number) == nullptr)
+				cout << "The number contains repeating digits or\n the first digit of the number is zero. Try again." << endl;
 		} while ((human = setUserNumber(number)) == nullptr);
 		k++;
 		if (getBullsCows(machine, human).first == n) break;
 		cout << "Bulls are " << getBullsCows(machine, human).first << ", Cows are " << getBullsCows(machine, human).second << ". You are almost there!" << endl;
 	}
+	delete[] human;
+	delete[] machine;
 	return k;
+	
 };
 
 
