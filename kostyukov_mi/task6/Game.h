@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <cmath>
 
 #ifdef __linux
     #include "LinuxConsole.h"
@@ -78,7 +79,14 @@ public:
         if (map[y*10 + x] == -1) return " *";
         if (map[y*10 + x] == -2) return " X";
     }
-    
+    std::pair<int, int> getBoatCoords(uint x, uint y)
+    {
+        uint i = map[y*10+x];
+        if (i > 0)
+        {
+            return std::pair<int, int>(boats[i-1].x, boats[i-1].y);
+        }
+    }
     char hit(uint x, uint y)
     {
         uint i = map[y*10+x];
@@ -97,7 +105,7 @@ public:
         }
         if (i > 0)
         {
-            // * в клетку;
+            // x в клетку;
             map[y*10+x] = -2;
 
             Boat& boat = boats[i-1];
@@ -129,11 +137,38 @@ public:
                     if (boat.y > 0)              map[(boat.y-1)*10 + boat.x] = -1;
                     if (boat.y + boat.size < 10) map[(boat.y+boat.size)*10 + boat.x] = -1;
                 }
-                return 2;
+                return (boat.size+1)*std::pow(-1, boat.horizontal);
             }
             return 1;
         }
-    } 
+    }
+    void boatKilled(uint x, uint y, size_t size, bool horizontal)
+    {
+        if (horizontal)
+        {
+            for (int i=0;i<size+2; i++)
+            {
+                if ((x == 0) && (i == 0)) i++;
+                if (x+i == 11) break; 
+                if (y>0) map[(y-1)*10+x+i-1] = -1;
+                if (y<9) map[(y+1)*10+x+i-1] = -1;
+            }
+            if (x > 0)         map[(y)*10 + x-1] = -1;
+            if (x + size < 10) map[(y)*10 + x+size] = -1;
+        }
+        else
+        {
+            for (int i=0;i<size+2; i++)
+            {
+                if ((y == 0) && (i == 0)) i++;
+                if (y+i == 11) break;
+                if (x>0) map[(y+i-1)*10+x-1] = -1;
+                if (x<9) map[(y+i-1)*10+x+1] = -1;
+            }
+            if (y > 0)         map[(y-1)*10 + x] = -1;
+            if (y + size < 10) map[(y+size)*10 + x] = -1;
+        }
+    }
     void draw()
     {
         for (int i=0; i<10; i++)

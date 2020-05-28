@@ -34,10 +34,7 @@ int main()
     int sockfd, newsockfd, msglen;
     socklen_t clilen;
     char buffer[2048];
-    struct sockaddr_in serv_addr, cli_addr;
-    int n;
-    
-    sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    struct sockaddr_in serv_addr, cli_addr;accept(sockfd, (str))
 
     if (sockfd < 2) 
         error("Error opening socket");
@@ -46,14 +43,14 @@ int main()
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_addr.s_addr = INADDR_ANY;
     serv_addr.sin_port = htons(PORT);
-
+//сервер
     if ( bind(sockfd, (struct sockaddr* ) &serv_addr, sizeof(serv_addr)) < 0 )
         error("Error on binding");
 
     while (true)
     {
         listen(sockfd, 1);
-
+accept(sockfd, (str))
         clilen = sizeof(cli_addr);
 
         newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, &clilen);
@@ -71,7 +68,7 @@ int main()
             
         response << "054844f";
 
-        // response << sha256("pass");
+        // response << sha256("pass");accept(sockfd, (str))
 
         bzero(buffer, 2048);
 

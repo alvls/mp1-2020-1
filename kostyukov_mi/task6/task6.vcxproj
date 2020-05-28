@@ -113,6 +113,7 @@
     <ClCompile Include="Source.cpp" />
     <ClInclude Include="LinuxConsole.h" />
     <ClInclude Include="WindowsConsole.h" />
+    <ClCompile Include="OnlineGame.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
