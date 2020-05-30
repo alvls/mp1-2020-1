@@ -12,7 +12,12 @@ public:
 		count = count_;
 		size = size_;
 		mem = new element[size];
-		    mem[0].seti(i_);
+		for (int i = 0; i < count; i++)
+		{
+			mem[i].seti(i_);
+			mem[i].setj(j_++);
+		}
+		   /* mem[0].seti(i_);
 		    mem[0].setj(j_++);
 			mem[1].seti(i_++);
 			mem[1].setj(j_ );
@@ -22,6 +27,7 @@ public:
 			mem[3].setj(j_++);
 			mem[4].seti(i_);
 			mem[4].setj(j_);
+			*/
 		if (count == 1)
 		{
 			mem[0].setpriznak(4);
