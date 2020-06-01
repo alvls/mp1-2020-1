@@ -6,12 +6,6 @@ using namespace std;
 
 int main()
 {
-
-    BattleMap battlemap(1,1);
-    NetworkEnemy player(battlemap);
-
-    player.createGame("Max");
-
     clrscr();
 
     char winner = 0;    

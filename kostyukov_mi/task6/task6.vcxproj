@@ -112,7 +112,6 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="LinuxConsole.h" />
     <ClInclude Include="WindowsConsole.h" />
-    <ClCompile Include="OnlineGame.cpp" />
     <ClCompile Include="GameWithBot.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
