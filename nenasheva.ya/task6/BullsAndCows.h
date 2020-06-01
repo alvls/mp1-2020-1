@@ -9,14 +9,11 @@ private:
 	int length;
 	vector<int> digits;
 public:
-	void Guessing()
+	void Guessing(int num)
 	{
 		bull = 0;
 		cow = 0;
-		int num;
 		vector<int> correct_digits(length);
-		cout << "Введите число из " << length << " знаков: ";
-		cin >> num;
 		for (int i = length - 1; i >= 0; i--)
 		{
 			correct_digits[i] = num % 10;

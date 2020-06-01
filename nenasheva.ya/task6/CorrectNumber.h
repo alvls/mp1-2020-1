@@ -10,6 +10,7 @@ class CorrectNumber
 public:
 	static vector<int> Generate(int length)
 	{
+		srand(time(NULL));
 		vector<int> digits(length);
 		int numeral;
 		digits[0] = 1 + rand() % 9;
