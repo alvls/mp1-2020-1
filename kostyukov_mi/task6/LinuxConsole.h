@@ -57,7 +57,7 @@ char getKey()
     ch = getch();
     if (ch != 91) return KB_DEFAULT;
     ch = getch();
-    
+
     switch (ch)
     {
         case 65:
@@ -66,7 +66,8 @@ char getKey()
             return KB_ARROWDOWN;
         case 67:
             return KB_ARROWRIGHT;
-        case 68: //grab old terminal i/o settings_ARROWLEFT;
+        case 68: 
+            return KB_ARROWLEFT;
         default:
             return KB_DEFAULT;
     }   
